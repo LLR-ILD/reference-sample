@@ -1,0 +1,1287 @@
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/MarlinDD4hep/v00-06/lib/libMarlinDD4hep.so.0.6.0 (libMarlinDD4hep.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/DDMarlinPandora/v00-10/lib/libDDMarlinPandora.so.0.10.0 (libDDMarlinPandora.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/MarlinReco/v01-25/lib/libMarlinReco.so.1.25.0 (libMarlinReco.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/PandoraAnalysis/v02-00-00/lib/libPandoraAnalysis.so.02.00.00 (libPandoraAnalysis.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/LCFIVertex/v00-07-04/lib/libLCFIVertexProcessors.so.0.7.4 (libLCFIVertexProcessors.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/CEDViewer/v01-16/lib/libCEDViewer.so.1.16.0 (libCEDViewer.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/Overlay/v00-21/lib/libOverlay.so.0.21.0 (libOverlay.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/MarlinFastJet/v00-05-01/lib/libMarlinFastJet.so.0.5.1 (libMarlinFastJet.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/LCTuple/v01-11/lib/libLCTuple.so.1.11.0 (libLCTuple.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/MarlinKinfit/v00-06/lib/libMarlinKinfit.so.0.6.0 (libMarlinKinfit.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/MarlinTrkProcessors/v02-10/lib/libMarlinTrkProcessors.so.2.10.0 (libMarlinTrkProcessors.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/MarlinKinfitProcessors/v00-04/lib/libMarlinKinfitProcessors.so.0.4.0 (libMarlinKinfitProcessors.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/ILDPerformance/v01-06/lib/libILDPerformance.so.1.6.0 (libILDPerformance.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/Clupatra/v01-03/lib/libClupatra.so.1.3.0 (libClupatra.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/Physsim/v00-04-01/lib/libPhyssim.so.0.4.1 (libPhyssim.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/LCFIPlus/v00-06-09/lib/libLCFIPlus.so.0.6.9 (libLCFIPlus.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/FCalClusterer/v01-00/lib/libFCalClusterer.so (libFCalClusterer.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/ForwardTracking/v01-13/lib/libForwardTracking.so.1.13.0 (libForwardTracking.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/ConformalTracking/v01-07/lib/libConformalTracking.so.1.7.0 (libConformalTracking.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/LICH/v00-01/lib/libLICH.so.0.1.0 (libLICH.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/MarlinTPC/v01-04/lib/libMarlinTPC.so.1.4.0 (libMarlinTPC.so)-->
+<!-- Loading shared library : /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/Garlic/v03-01/lib/libGarlic.so.3.1.0 (libGarlic.so)-->
+<!-- Loading shared library : /home/kunath/reference-sample/lib/libreference-sample.so.1.0.0 (libreference-sample.so)-->
+
+XMLParser::parse : no <constants/> section found in ./steering/mc_as_reconstructed.xml
+Info in <TGeoManager::TGeoManager>: Geometry ,  created
+Info in <TGeoManager::SetTopVolume>: Top volume is WorldLogical. Master volume is WorldLogical
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
+Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
+Info in <TGeoManager::CloseGeometry>: Counting nodes...
+Info in <TGeoManager::Voxelize>: Voxelizing...
+Info in <TGeoManager::CloseGeometry>: Building cache...
+Info in <TGeoManager::CountLevels>: max level = 6, max placements = 1679
+Info in <TGeoManager::CloseGeometry>: 394351 nodes/ 277 volume UID's in 
+Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+[ MESSAGE "Marlin"]  ---- instantiated  GEAR from file  /home/kunath/ILD/gear_ILD_o1_v05.xml
+[ MESSAGE "Marlin"]  ----------------------------------------------------- 
+[ MESSAGE "Marlin"]               GearMgr :                                
+[ MESSAGE "Marlin"]  ----------------------------------------------------- 
+[ MESSAGE "Marlin"]    ----  DetectorName   ----   
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]          ILD_o1_v05
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    -----------   BField   ------- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]        field vector at origin :   Bx = 0 , By = 0 , Bz = 3.5 [Tesla] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    ----  VXD    ---- 
+[ MESSAGE "Marlin"]      --- ZPlanarParameters: 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]   type :  HYBRID 
+[ MESSAGE "Marlin"]  Shell innerR : 65 outerR : 65.4939
+[ MESSAGE "Marlin"]        length : 145 gap 0
+[ MESSAGE "Marlin"]  Layers : 6
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]  layer parameters (note: ladder length (l) are half lengths ! )
+[ MESSAGE "Marlin"]   |------------------------------------------------------------------------------------|
+[ MESSAGE "Marlin"]   |      |       ladder:                        |       sensitive part:                |
+[ MESSAGE "Marlin"]   |  #   |    d    |    w    |    l    |   t    |    d    |    w    |    l    |    t   | 
+[ MESSAGE "Marlin"]   |------------------------------------------------------------------------------------|
+[ MESSAGE "Marlin"]   |  10  |  16.00  |  11.50  |  62.50  |  1.00  |  15.95  |  11.00  |  62.50  |  0.05  |
+[ MESSAGE "Marlin"]   |  10  |  17.00  |  11.50  |  62.50  |  1.00  |  18.00  |  11.00  |  62.50  |  0.05  |
+[ MESSAGE "Marlin"]   |  11  |  37.00  |  22.50  |  125.00  |  1.00  |  36.95  |  22.00  |  125.00  |  0.05  |
+[ MESSAGE "Marlin"]   |  11  |  38.00  |  22.50  |  125.00  |  1.00  |  39.00  |  22.00  |  125.00  |  0.05  |
+[ MESSAGE "Marlin"]   |  17  |  58.00  |  22.50  |  125.00  |  1.00  |  57.95  |  22.00  |  125.00  |  0.05  |
+[ MESSAGE "Marlin"]   |  17  |  59.00  |  22.50  |  125.00  |  1.00  |  60.00  |  22.00  |  125.00  |  0.05  |
+[ MESSAGE "Marlin"]   |------------------------------------------------------------------------------------|
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    -----------   FTDParameters  ------- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    strip_angle_deg 	 5
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    strip_length_mm 	 250
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    strip_pitch_mm 	 0.01
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    strip_width_mm 	 0.001
+[ MESSAGE "Marlin"]  Layers : 7
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]  layer parameters (note: ladder length (l) are half lengths ! )
+[ MESSAGE "Marlin"]   |------------------------------------------------------------------------------------|
+[ MESSAGE "Marlin"]   |      |         support:                      |       sensitive part:                |
+[ MESSAGE "Marlin"]   |  #   |    x    |    X    |    y    |   t    |    x    |    X    |    y    |    t   | 
+[ MESSAGE "Marlin"]   |------------------------------------------------------------------------------------|
+[ MESSAGE "Marlin"]   |  16  |  29.21  |  72.00  |  107.57  |  1.00  |  29.21  |  72.00  |  107.57  |  0.02  |
+[ MESSAGE "Marlin"]   |  16  |  33.45  |  72.00  |  96.90  |  1.00  |  33.45  |  72.00  |  96.90  |  0.02  |
+[ MESSAGE "Marlin"]   |  16  |  34.39  |  122.49  |  221.45  |  2.00  |  34.39  |  122.49  |  221.45  |  0.20  |
+[ MESSAGE "Marlin"]   |  16  |  42.18  |  122.49  |  201.88  |  2.00  |  42.18  |  122.49  |  201.88  |  0.20  |
+[ MESSAGE "Marlin"]   |  16  |  54.07  |  122.49  |  171.99  |  2.00  |  54.07  |  122.49  |  171.99  |  0.20  |
+[ MESSAGE "Marlin"]   |  16  |  65.96  |  122.49  |  142.11  |  2.00  |  65.96  |  122.49  |  142.11  |  0.20  |
+[ MESSAGE "Marlin"]   |  16  |  77.85  |  122.49  |  112.20  |  2.00  |  77.85  |  122.49  |  112.20  |  0.20  |
+[ MESSAGE "Marlin"]   |------------------------------------------------------------------------------------|
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    ----  SIT    ---- 
+[ MESSAGE "Marlin"]      --- ZPlanarParameters: 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    sensor_length_mm 	 92
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    strip_angle_deg 	 7
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    strip_length_mm 	 92
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    strip_pitch_mm 	 0.05
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    strip_width_mm 	 0.0125
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [IntVec]    n_sensors_per_ladder 	 8 , 8 , 14 , 14 , 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]   type :  CCD 
+[ MESSAGE "Marlin"]  Shell innerR : 0 outerR : 0
+[ MESSAGE "Marlin"]        length : 0 gap 0
+[ MESSAGE "Marlin"]  Layers : 4
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]  layer parameters (note: ladder length (l) are half lengths ! )
+[ MESSAGE "Marlin"]   |------------------------------------------------------------------------------------|
+[ MESSAGE "Marlin"]   |      |       ladder:                        |       sensitive part:                |
+[ MESSAGE "Marlin"]   |  #   |    d    |    w    |    l    |   t    |    d    |    w    |    l    |    t   | 
+[ MESSAGE "Marlin"]   |------------------------------------------------------------------------------------|
+[ MESSAGE "Marlin"]   |  10  |  153.10  |  99.16  |  368.00  |  1.00  |  152.90  |  99.16  |  368.00  |  0.20  |
+[ MESSAGE "Marlin"]   |  10  |  154.40  |  100.14  |  368.00  |  1.00  |  155.40  |  100.14  |  368.00  |  0.20  |
+[ MESSAGE "Marlin"]   |  19  |  300.10  |  99.89  |  644.00  |  1.00  |  299.90  |  99.89  |  644.00  |  0.20  |
+[ MESSAGE "Marlin"]   |  19  |  301.40  |  100.39  |  644.00  |  1.00  |  302.40  |  100.39  |  644.00  |  0.20  |
+[ MESSAGE "Marlin"]   |------------------------------------------------------------------------------------|
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    ----  SET    ---- 
+[ MESSAGE "Marlin"]      --- ZPlanarParameters: 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    sensor_length_mm 	 92
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    strip_angle_deg 	 7
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    strip_length_mm 	 92
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    strip_pitch_mm 	 0.05
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    strip_width_mm 	 0.0125
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [IntVec]    n_sensors_per_ladder 	 50 , 50 , 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]   type :  CCD 
+[ MESSAGE "Marlin"]  Shell innerR : 0 outerR : 0
+[ MESSAGE "Marlin"]        length : 0 gap 0
+[ MESSAGE "Marlin"]  Layers : 2
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]  layer parameters (note: ladder length (l) are half lengths ! )
+[ MESSAGE "Marlin"]   |------------------------------------------------------------------------------------|
+[ MESSAGE "Marlin"]   |      |       ladder:                        |       sensitive part:                |
+[ MESSAGE "Marlin"]   |  #   |    d    |    w    |    l    |   t    |    d    |    w    |    l    |    t   | 
+[ MESSAGE "Marlin"]   |------------------------------------------------------------------------------------|
+[ MESSAGE "Marlin"]   |  24  |  1811.10  |  476.62  |  2300.00  |  1.00  |  1810.90  |  476.62  |  2300.00  |  0.20  |
+[ MESSAGE "Marlin"]   |  24  |  1812.40  |  477.01  |  2300.00  |  1.00  |  1813.40  |  477.01  |  2300.00  |  0.20  |
+[ MESSAGE "Marlin"]   |------------------------------------------------------------------------------------|
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]      --- ZPlanarParameters: 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    sensor_length_mm 	 92
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    strip_angle_deg 	 7
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    strip_length_mm 	 92
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    strip_pitch_mm 	 0.05
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    strip_width_mm 	 0.0125
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [IntVec]    n_sensors_per_ladder 	 8 , 8 , 14 , 14 , 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]   type :  CCD 
+[ MESSAGE "Marlin"]  Shell innerR : 0 outerR : 0
+[ MESSAGE "Marlin"]        length : 0 gap 0
+[ MESSAGE "Marlin"]  Layers : 4
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]  layer parameters (note: ladder length (l) are half lengths ! )
+[ MESSAGE "Marlin"]   |------------------------------------------------------------------------------------|
+[ MESSAGE "Marlin"]   |      |       ladder:                        |       sensitive part:                |
+[ MESSAGE "Marlin"]   |  #   |    d    |    w    |    l    |   t    |    d    |    w    |    l    |    t   | 
+[ MESSAGE "Marlin"]   |------------------------------------------------------------------------------------|
+[ MESSAGE "Marlin"]   |  10  |  153.10  |  99.16  |  368.00  |  1.00  |  152.90  |  99.16  |  368.00  |  0.20  |
+[ MESSAGE "Marlin"]   |  10  |  154.40  |  100.14  |  368.00  |  1.00  |  155.40  |  100.14  |  368.00  |  0.20  |
+[ MESSAGE "Marlin"]   |  19  |  300.10  |  99.89  |  644.00  |  1.00  |  299.90  |  99.89  |  644.00  |  0.20  |
+[ MESSAGE "Marlin"]   |  19  |  301.40  |  100.39  |  644.00  |  1.00  |  302.40  |  100.39  |  644.00  |  0.20  |
+[ MESSAGE "Marlin"]   |------------------------------------------------------------------------------------|
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]      --- ZPlanarParameters: 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    sensor_length_mm 	 92
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    strip_angle_deg 	 7
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    strip_length_mm 	 92
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    strip_pitch_mm 	 0.05
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    strip_width_mm 	 0.0125
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [IntVec]    n_sensors_per_ladder 	 50 , 50 , 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]   type :  CCD 
+[ MESSAGE "Marlin"]  Shell innerR : 0 outerR : 0
+[ MESSAGE "Marlin"]        length : 0 gap 0
+[ MESSAGE "Marlin"]  Layers : 2
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]  layer parameters (note: ladder length (l) are half lengths ! )
+[ MESSAGE "Marlin"]   |------------------------------------------------------------------------------------|
+[ MESSAGE "Marlin"]   |      |       ladder:                        |       sensitive part:                |
+[ MESSAGE "Marlin"]   |  #   |    d    |    w    |    l    |   t    |    d    |    w    |    l    |    t   | 
+[ MESSAGE "Marlin"]   |------------------------------------------------------------------------------------|
+[ MESSAGE "Marlin"]   |  24  |  1811.10  |  476.62  |  2300.00  |  1.00  |  1810.90  |  476.62  |  2300.00  |  0.20  |
+[ MESSAGE "Marlin"]   |  24  |  1812.40  |  477.01  |  2300.00  |  1.00  |  1813.40  |  477.01  |  2300.00  |  0.20  |
+[ MESSAGE "Marlin"]   |------------------------------------------------------------------------------------|
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    -----------   TPCParameters  ------- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    TPCGasProperties_RadLen 	 115521
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    TPCGasProperties_dEdx 	 2.66818e-07
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    TPCInnerWallProperties_RadLen 	 4897.36
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    TPCInnerWallProperties_dEdx 	 1.33702e-05
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    TPCOuterWallProperties_RadLen 	 11577.1
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    TPCOuterWallProperties_dEdx 	 5.70058e-06
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    TPCWallProperties_RadLen 	 4897.36
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    TPCWallProperties_dEdx 	 1.33702e-05
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    tpcInnerRadius 	 329
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    tpcInnerWallThickness 	 25
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    tpcOuterRadius 	 1808
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    tpcOuterWallThickness 	 60
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    tpcZAnode 	 4600
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]   maxDriftLength :      2225
+[ MESSAGE "Marlin"]   coordinateType :      polar
+[ MESSAGE "Marlin"]   Number of modules :   1
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]      -----------   TPCModule  ------- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]   Readout frequency :   0
+[ MESSAGE "Marlin"]   Type :                 polar
+[ MESSAGE "Marlin"]   Number of pads :      1464499
+[ MESSAGE "Marlin"]   Number of Rows :      222
+[ MESSAGE "Marlin"]   Offset :              0  ;  0 no z Position set 
+[ MESSAGE "Marlin"]   Angle :               0
+[ MESSAGE "Marlin"]          extent (global):    [384,1716,0,6.28319]
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    ----  Ecal barrel    ---- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]   calorimeter type:  barrel  
+[ MESSAGE "Marlin"]    symmetry order:  8
+[ MESSAGE "Marlin"]    phi0:            0
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    dimensions :  
+[ MESSAGE "Marlin"]          rMin:      1847.42
+[ MESSAGE "Marlin"]          rMax:      2019.62
+[ MESSAGE "Marlin"]          zMin:      0
+[ MESSAGE "Marlin"]          zMax:      2350
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    layers    :    #total 29
+[ MESSAGE "Marlin"]        id: 0 thickness: 5.25 absorber thickness: 2.1 distance: 1847.42 cellsize-0: 5.08333 cellsize-1: 5.08333
+[ MESSAGE "Marlin"]        id: 19 thickness: 6.3 absorber thickness: 2.1 distance: 1947.17 cellsize-0: 5.08333 cellsize-1: 5.08333
+[ MESSAGE "Marlin"]        id: 20 thickness: 7.35 absorber thickness: 4.2 distance: 1953.47 cellsize-0: 5.08333 cellsize-1: 5.08333
+[ MESSAGE "Marlin"]        id: 28 thickness: 7.35 absorber thickness: 4.2 distance: 2012.27 cellsize-0: 5.08333 cellsize-1: 5.08333
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    ----  Ecal endcap   ---- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]   calorimeter type:  endcap  
+[ MESSAGE "Marlin"]    symmetry order:  2
+[ MESSAGE "Marlin"]    phi0:            0
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    dimensions :  
+[ MESSAGE "Marlin"]          rMin:      400
+[ MESSAGE "Marlin"]          rMax:      2088.8
+[ MESSAGE "Marlin"]          zMin:      2450
+[ MESSAGE "Marlin"]          zMax:      2622.2
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    layers    :    #total 29
+[ MESSAGE "Marlin"]        id: 0 thickness: 5.25 absorber thickness: 2.1 distance: 2450 cellsize-0: 5.08333 cellsize-1: 5.08333
+[ MESSAGE "Marlin"]        id: 19 thickness: 6.3 absorber thickness: 2.1 distance: 2549.75 cellsize-0: 5.08333 cellsize-1: 5.08333
+[ MESSAGE "Marlin"]        id: 20 thickness: 7.35 absorber thickness: 4.2 distance: 2556.05 cellsize-0: 5.08333 cellsize-1: 5.08333
+[ MESSAGE "Marlin"]        id: 28 thickness: 7.35 absorber thickness: 4.2 distance: 2614.85 cellsize-0: 5.08333 cellsize-1: 5.08333
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    ----  Ecal plug   ---- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]   calorimeter type:  endcap  
+[ MESSAGE "Marlin"]    symmetry order:  2
+[ MESSAGE "Marlin"]    phi0:            0
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    dimensions :  
+[ MESSAGE "Marlin"]          rMin:      250
+[ MESSAGE "Marlin"]          rMax:      400
+[ MESSAGE "Marlin"]          zMin:      2450
+[ MESSAGE "Marlin"]          zMax:      2622.2
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    layers    :    #total 29
+[ MESSAGE "Marlin"]        id: 0 thickness: 5.25 absorber thickness: 2.1 distance: 2450 cellsize-0: 5.08333 cellsize-1: 5.08333
+[ MESSAGE "Marlin"]        id: 19 thickness: 6.3 absorber thickness: 2.1 distance: 2549.75 cellsize-0: 5.08333 cellsize-1: 5.08333
+[ MESSAGE "Marlin"]        id: 20 thickness: 7.35 absorber thickness: 4.2 distance: 2556.05 cellsize-0: 5.08333 cellsize-1: 5.08333
+[ MESSAGE "Marlin"]        id: 28 thickness: 7.35 absorber thickness: 4.2 distance: 2614.85 cellsize-0: 5.08333 cellsize-1: 5.08333
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    ----  Yoke barrel    ---- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]   calorimeter type:  barrel  
+[ MESSAGE "Marlin"]    symmetry order:  12
+[ MESSAGE "Marlin"]    phi0:            0
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    dimensions :  
+[ MESSAGE "Marlin"]          rMin:      4424.96
+[ MESSAGE "Marlin"]          rMax:      7664.96
+[ MESSAGE "Marlin"]          zMin:      0
+[ MESSAGE "Marlin"]          zMax:      4072
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    layers    :    #total 14
+[ MESSAGE "Marlin"]        id: 0 thickness: 40 absorber thickness: 0 distance: 4424.96 cellsize-0: 30 cellsize-1: 30
+[ MESSAGE "Marlin"]        id: 1 thickness: 140 absorber thickness: 100 distance: 4464.96 cellsize-0: 30 cellsize-1: 30
+[ MESSAGE "Marlin"]        id: 11 thickness: 600 absorber thickness: 560 distance: 5864.96 cellsize-0: 30 cellsize-1: 30
+[ MESSAGE "Marlin"]        id: 13 thickness: 600 absorber thickness: 560 distance: 7064.96 cellsize-0: 30 cellsize-1: 30
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    ----  Yoke endcap   ---- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]   calorimeter type:  endcap  
+[ MESSAGE "Marlin"]    symmetry order:  2
+[ MESSAGE "Marlin"]    phi0:            0
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    dimensions :  
+[ MESSAGE "Marlin"]          rMin:      300
+[ MESSAGE "Marlin"]          rMax:      7665.96
+[ MESSAGE "Marlin"]          zMin:      4072
+[ MESSAGE "Marlin"]          zMax:      6672
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    layers    :    #total 12
+[ MESSAGE "Marlin"]        id: 0 thickness: 140 absorber thickness: 100 distance: 4072 cellsize-0: 30 cellsize-1: 30
+[ MESSAGE "Marlin"]        id: 10 thickness: 600 absorber thickness: 560 distance: 5472 cellsize-0: 30 cellsize-1: 30
+[ MESSAGE "Marlin"]        id: 11 thickness: 600 absorber thickness: 560 distance: 6072 cellsize-0: 30 cellsize-1: 30
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    ----  Yoke plug   ---- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    YokePlugThickness 	 90
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]   calorimeter type:  endcap  
+[ MESSAGE "Marlin"]    symmetry order:  2
+[ MESSAGE "Marlin"]    phi0:            0
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    dimensions :  
+[ MESSAGE "Marlin"]          rMin:      300
+[ MESSAGE "Marlin"]          rMax:      3076.72
+[ MESSAGE "Marlin"]          zMin:      3982
+[ MESSAGE "Marlin"]          zMax:      3982
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    layers    :    #total 0
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    ----  Hcal barrel    ---- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [int]       Hcal_barrel_end_module_type 	 1
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [int]       Hcal_outer_polygon_order 	 16
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [int]       Hcal_outer_polygon_phi0 	 0
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_Cu_thickness 	 0.1
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_PCB_thickness 	 0.7
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_back_plate_thickness 	 15
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_lateral_structure_thickness 	 15
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_layer_air_gap 	 2
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_middle_stave_gaps 	 10
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_modules_gap 	 0
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_scintillator_thickness 	 3
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_stave_gaps 	 10
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_virtual_cell_size 	 30
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    TPC_Ecal_Hcal_barrel_halfZ 	 2350
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]   calorimeter type:  barrel  
+[ MESSAGE "Marlin"]    symmetry order:  8
+[ MESSAGE "Marlin"]    phi0:            0
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    dimensions :  
+[ MESSAGE "Marlin"]          rMin:      2058
+[ MESSAGE "Marlin"]          rMax:      3330
+[ MESSAGE "Marlin"]          zMin:      0
+[ MESSAGE "Marlin"]          zMax:      2350
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    layers    :    #total 48
+[ MESSAGE "Marlin"]        id: 0 thickness: 26.5 absorber thickness: 20 distance: 2058 cellsize-0: 30.3247 cellsize-1: 30
+[ MESSAGE "Marlin"]        id: 47 thickness: 26.5 absorber thickness: 20 distance: 3303.5 cellsize-0: 30.3247 cellsize-1: 30
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    ----  Hcal endcap    ---- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_Cu_thickness 	 0.1
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_PCB_thickness 	 0.7
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_endcap_lateral_structure_thickness 	 5
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_endcap_layer_air_gap 	 2.5
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_endcap_module_width 	 375
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_endcap_sensitive_center_box 	 0
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_scintillator_thickness 	 3
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_stave_gaps 	 10
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_steel_cassette_thickness 	 0.5
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_virtual_cell_size 	 30
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]   calorimeter type:  endcap  
+[ MESSAGE "Marlin"]    symmetry order:  2
+[ MESSAGE "Marlin"]    phi0:            0
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    dimensions :  
+[ MESSAGE "Marlin"]          rMin:      350
+[ MESSAGE "Marlin"]          rMax:      3246.93
+[ MESSAGE "Marlin"]          zMin:      2650
+[ MESSAGE "Marlin"]          zMax:      3922
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    layers    :    #total 48
+[ MESSAGE "Marlin"]        id: 0 thickness: 26.5 absorber thickness: 20 distance: 2650 cellsize-0: 30 cellsize-1: 30
+[ MESSAGE "Marlin"]        id: 47 thickness: 26.5 absorber thickness: 20 distance: 3895.5 cellsize-0: 30 cellsize-1: 30
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    ----  Hcal ring    ---- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_Cu_thickness 	 0.1
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_PCB_thickness 	 0.7
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_lateral_structure_thickness 	 15
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_scintillator_thickness 	 3
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_stave_gaps 	 10
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_steel_cassette_thickness 	 0.5
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Hcal_virtual_cell_size 	 30
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]   calorimeter type:  endcap  
+[ MESSAGE "Marlin"]    symmetry order:  2
+[ MESSAGE "Marlin"]    phi0:            0
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    dimensions :  
+[ MESSAGE "Marlin"]          rMin:      2138.8
+[ MESSAGE "Marlin"]          rMax:      3137
+[ MESSAGE "Marlin"]          zMin:      2450
+[ MESSAGE "Marlin"]          zMax:      2609
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    layers    :    #total 6
+[ MESSAGE "Marlin"]        id: 0 thickness: 26.5 absorber thickness: 22.2 distance: 2450 cellsize-0: 30 cellsize-1: 30
+[ MESSAGE "Marlin"]        id: 5 thickness: 26.5 absorber thickness: 22.2 distance: 2582.5 cellsize-0: 30 cellsize-1: 30
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    ----  Lcal   ---- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    beam_crossing_angle 	 14
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]   calorimeter type:  endcap  
+[ MESSAGE "Marlin"]    symmetry order:  1
+[ MESSAGE "Marlin"]    phi0:            0
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    dimensions :  
+[ MESSAGE "Marlin"]          rMin:      84.0221
+[ MESSAGE "Marlin"]          rMax:      194
+[ MESSAGE "Marlin"]          zMin:      2506.9
+[ MESSAGE "Marlin"]          zMax:      2635.6
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    layers    :    #total 30
+[ MESSAGE "Marlin"]        id: 0 thickness: 4.29 absorber thickness: 3.5 distance: 2506.9 cellsize-0: 1.7184 cellsize-1: 0.1309
+[ MESSAGE "Marlin"]        id: 29 thickness: 4.29 absorber thickness: 3.5 distance: 2631.31 cellsize-0: 1.7184 cellsize-1: 0.1309
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    ----  LHcal   ---- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    beam_crossing_angle 	 14
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]   calorimeter type:  endcap  
+[ MESSAGE "Marlin"]    symmetry order:  2
+[ MESSAGE "Marlin"]    phi0:            0
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    dimensions :  
+[ MESSAGE "Marlin"]          rMin:      93
+[ MESSAGE "Marlin"]          rMax:      330.6
+[ MESSAGE "Marlin"]          zMin:      2680
+[ MESSAGE "Marlin"]          zMax:      3205
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    layers    :    #total 40
+[ MESSAGE "Marlin"]        id: 0 thickness: 13.125 absorber thickness: 10 distance: 2680 cellsize-0: 10 cellsize-1: 10
+[ MESSAGE "Marlin"]        id: 39 thickness: 13.125 absorber thickness: 10 distance: 3191.88 cellsize-0: 10 cellsize-1: 10
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    ----  BeamCal   ---- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    beam_crossing_angle 	 14
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    cylinder_spanning_phi 	 5.58505
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    cylinder_starting_phi 	 3.49066
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    dead_area_outer_r 	 65.8888
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    pairsMonitorZ 	 3485.85
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [DoubleVec] phi_segmentation 	 0.232711 , 0.232711 , 0.174533 , 0.139626 , 0.139626 , 0.116355 , 0.0997331 , 0.0872665 , 0.0872665 , 0.0775702 , 0.0698132 , 0.0698132 , 0.0634665 , 0.0581776 , 0.0581776 , 0.0537024 , 0.0498666 , 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]   calorimeter type:  endcap  
+[ MESSAGE "Marlin"]    symmetry order:  2
+[ MESSAGE "Marlin"]    phi0:            0
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    dimensions :  
+[ MESSAGE "Marlin"]          rMin:      20.01
+[ MESSAGE "Marlin"]          rMax:      150
+[ MESSAGE "Marlin"]          zMin:      3485.7
+[ MESSAGE "Marlin"]          zMax:      3605.72
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    layers    :    #total 30
+[ MESSAGE "Marlin"]        id: 0 thickness: 4.0008 absorber thickness: 3.5 distance: 3485.7 cellsize-0: 7.64647 cellsize-1: 1
+[ MESSAGE "Marlin"]        id: 29 thickness: 4.0008 absorber thickness: 3.5 distance: 3601.72 cellsize-0: 7.64647 cellsize-1: 1
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    parameter sections (detectors) :  
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    ------  name : BeamPipe ------- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    BeamPipeHalfZ 	 1360.5
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    BeamPipeProperties_RadLen 	 352.76
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    BeamPipeProperties_dEdx 	 0.00029418
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    BeamPipeRadius 	 14.5
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    BeamPipeThickness 	 0.5
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [DoubleVec] RInner 	 14.5 , 14.5 , 23 , 23 , 23 , 23 , 34.476 , 56.706 , 89.274 , 121.843 , 154.452 , 183 , 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [DoubleVec] ROuter 	 15 , 15 , 24 , 23.67 , 25 , 25.007 , 36.483 , 59.475 , 91.461 , 123.388 , 155.676 , 183.993 , 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [DoubleVec] Z 	 0 , 80 , 150 , 175 , 220 , 230 , 535.8 , 809.5 , 1210.5 , 1611.5 , 2013 , 2364.5 , 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    ------  name : CoilParameters ------- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_c_modules_half_z 	 1224
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_c_modules_inner_radius 	 3599.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_c_modules_outer_radius 	 3984.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_half_z 	 3872
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_inner_cyl_half_z 	 3872
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_inner_cyl_inner_radius 	 3424.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_inner_cyl_outer_radius 	 4214.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_inner_radius 	 3424.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_mandrel_half_z 	 3675
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_mandrel_inner_radius 	 3984.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_mandrel_outer_radius 	 4059.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_modules_half_z 	 796
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_modules_inner_radius 	 3599.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_modules_outer_radius 	 3984.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_outer_cyl_half_z 	 3872
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_outer_cyl_inner_radius 	 4144.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_outer_cyl_outer_radius 	 4174.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_outer_radius 	 4174.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_scint1_inner_radius 	 3514.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_scint1_outer_radius 	 3524.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_scint1_zposend 	 3972
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_scint1_zposin 	 3772
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_scint2_inner_radius 	 3529.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_scint2_outer_radius 	 3539.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_scint2_zposend 	 3972
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_scint2_zposin 	 3772
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_scint3_inner_radius 	 4084.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_scint3_outer_radius 	 4094.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_scint3_zposend 	 3972
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_scint3_zposin 	 3772
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_scint4_inner_radius 	 4069.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_scint4_outer_radius 	 4079.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_scint4_zposend 	 3972
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_scint4_zposin 	 3772
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_side_l_half_z 	 25
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_side_l_inner_radius 	 3464.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_side_l_outer_radius 	 4144.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_side_r_half_z 	 25
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_side_r_inner_radius 	 3464.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Coil_cryostat_side_r_outer_radius 	 4144.96
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Coil_material_c_modules 	 aluminium
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Coil_material_inner_cyl 	 aluminium
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Coil_material_mandrel 	 aluminium
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Coil_material_modules 	 aluminium
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Coil_material_outer_cyl 	 aluminium
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Coil_material_scint1 	 polystyrene
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Coil_material_scint2 	 polystyrene
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Coil_material_scint3 	 polystyrene
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Coil_material_scint4 	 polystyrene
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Coil_material_side_l 	 aluminium
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Coil_material_side_r 	 aluminium
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    ------  name : MokkaParameters ------- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Ecal_endcap_outer_radius 	 2088.8
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Ecal_endcap_plug_rmin 	 250
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Ecal_endcap_zmax 	 2635
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Ecal_endcap_zmin 	 2450
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Ecal_outer_radius 	 2028
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Hcal_R_max 	 3395.46
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Hcal_endcap_zmin 	 2650
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    LHcal_zend 	 3205
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Lcal_z_begin 	 2506.9
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Lcal_z_thickness 	 128.1
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    MokkaModel 	 ILD_o1_v05
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    MokkaVersion 	 trunk
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    SIT1_Half_Length_Z 	 368
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    SIT1_Radius 	 152.9
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    SIT2_Half_Length_Z 	 644
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    SIT2_Radius 	 299.9
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    TPC_Ecal_Hcal_barrel_halfZ 	 2350
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    TUBE_IPOuterBulge_end_radius 	 183.993
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    TUBE_IPOuterBulge_end_z 	 2364.5
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    TUBE_IPOuterTube_end_radius 	 25
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    TUBE_IPOuterTube_end_z 	 230
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    TUBE_IPOuterTube_start_radius 	 25
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    TUBE_IPOuterTube_start_z 	 220
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Yoke_Z_start_endcaps 	 4072
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    Yoke_barrel_inner_radius 	 4424.9599609375
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    calorimeter_region_rmax 	 3395.46
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    calorimeter_region_zmax 	 3937
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    tracker_region_rmax 	 1842.9
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [string]    tracker_region_zmax 	 2350
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]    ------  name : VXDInfra ------- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    ActiveLayerProperties_dEdx 	 0.000387016
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    BeSupportEndplateThickness 	 2
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    BeSupport_dEdx 	 0.00029418
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    CryostatAlHalfZ 	 176.6
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    CryostatAlInnerR 	 24.2
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    CryostatAlRadius 	 100
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    CryostatAlThickness 	 0.5
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    CryostatAlZEndCap 	 176.85
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Cryostat_RadLen 	 88.9632
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    Cryostat_dEdx 	 0.000435019
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    ElectronicEndLength 	 10
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    ElectronicEndThickness 	 0.1
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    StripLineBeamPipeRadius 	 24.3
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    VXDEndPlateInnerRadius 	 30
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [double]    VXDSupport_dEdx 	 4.81863e-05
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [DoubleVec] LadderGaps 	 0 , 0 , 0 , 0 , 0 , 0 , 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]     [DoubleVec] StripLineFinalZ 	 150 , 150 , 150 , 150 , 150 , 150 , 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]  ------------------------------------------------------------------ 
+[ MESSAGE "Marlin"]    materials :  
+[ MESSAGE "Marlin"]     VXDSupportMaterial, A= +2.07586516e+01, Z= +1.03938312e+01, density [kg/m3]= +2.76590000e+02, radiation length [mm]= +1.01426242e+03, interaction length [mm]= +3.34138806e+03
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]  ------------------------------------------------------------------ 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "InitDD4hep"]  -------------------------------------
+[ MESSAGE "InitDD4hep"]  ---- Initializing DD4hep from file  /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/ILD_l5_o1_v05.xml ... 
+PersistencyIO    INFO  +++ Set Streamer to dd4hep::OpaqueDataBlock
+PersistencyIO    INFO  +++ Patching TGeoVolume.fUserExtension to persistent
+PersistencyIO    INFO  +++ Patching TGeoNode.fUserExtension to persistent
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/ILD_l5_o1_v05.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/ILD_l5_o1_v05.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/ILD_l5_o1_v05.xml succesfully parsed with TinyXML .....
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/top_defs_ILD_l5_v02.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/top_defs_ILD_l5_v02.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/top_defs_ILD_l5_v02.xml succesfully parsed with TinyXML .....
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/top_defs_common_v02.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/top_defs_common_v02.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/top_defs_common_v02.xml succesfully parsed with TinyXML .....
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/basic_defs.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/basic_defs.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/basic_defs.xml succesfully parsed with TinyXML .....
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/envelope_defs.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/envelope_defs.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/envelope_defs.xml succesfully parsed with TinyXML .....
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/tube_defs.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/tube_defs.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/tube_defs.xml succesfully parsed with TinyXML .....
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/misc_defs.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/misc_defs.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/misc_defs.xml succesfully parsed with TinyXML .....
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/tracker_defs.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/tracker_defs.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/tracker_defs.xml succesfully parsed with TinyXML .....
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/fcal_defs.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/fcal_defs.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/fcal_defs.xml succesfully parsed with TinyXML .....
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/ecal_hybrid_defs.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/ecal_hybrid_defs.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/ecal_hybrid_defs.xml succesfully parsed with TinyXML .....
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/hcal_defs.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/hcal_defs.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/hcal_defs.xml succesfully parsed with TinyXML .....
+Detector         WARN  +++ Object 'Hcal_endcap_zmin' is already defined and new one will be ignored
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/yoke_defs.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/yoke_defs.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/yoke_defs.xml succesfully parsed with TinyXML .....
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/services_defs.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/services_defs.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/services_defs.xml succesfully parsed with TinyXML .....
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/DD4hep/v01-07-02/DDDetectors/compact/detector_types.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/DD4hep/v01-07-02/DDDetectors/compact/detector_types.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/DD4hep/v01-07-02/DDDetectors/compact/detector_types.xml succesfully parsed with TinyXML .....
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/limits.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/limits.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/limits.xml succesfully parsed with TinyXML .....
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/elements.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/elements.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/elements.xml succesfully parsed with TinyXML .....
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/materials.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/materials.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/materials.xml succesfully parsed with TinyXML .....
+Detector         INFO   *********** created World volume with size :    1500    1500    1500
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/display.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/display.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/display.xml succesfully parsed with TinyXML .....
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/Beampipe_o1_v01_01.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/Beampipe_o1_v01_01.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/Beampipe_o1_v01_01.xml succesfully parsed with TinyXML .....
+DD4hep_Beampipe  INFO         0      80    13.5    13.5      14      14     0.5       0                   tube_IPInnerTube          G4_Be
+DD4hep_Beampipe  INFO        80     150    13.5      24 14.2584 24.75840.758391       0                  tube_IPInnerBulge          G4_Be
+DD4hep_Beampipe  INFO       150     230      24      24   24.75   24.75    0.75       0                   tube_IPOuterTube          G4_Be
+DD4hep_Beampipe  INFO       230 644.906      24 54.7082 26.7148  57.423 2.71479       0                   tube_IPOuterTubeBeampipeBeCableMix
+DD4hep_Beampipe  INFO   644.906 1046.12 54.7082 84.4027  57.423 87.1175 2.71479       0                   tube_IPOuterTubeBeampipeBeCableMix
+DD4hep_Beampipe  INFO   1046.12 1447.33 84.4027 114.097 87.1175 116.812 2.71479       0                   tube_IPOuterTubeBeampipeBeCableMix
+DD4hep_Beampipe  INFO   1447.33  2391.8 114.097     184 116.812 186.715 2.71479       0                   tube_IPOuterTubeBeampipeBeCableMix
+DD4hep_Beampipe  INFO    2391.8  2393.8       0      78   186.7   186.7   186.7       3                  tube_LumiCalFront          G4_Be
+DD4hep_Beampipe  INFO    2393.8    3110      78      78      79      79       1       7                  tube_LumiCalInnerstainless_steel
+DD4hep_Beampipe  INFO      3110    3111      14      16      79      79      65       5                  tube_BeamCalFrontstainless_steel
+DD4hep_Beampipe  INFO      3111 3315.02      14      14      15      15       1      12           tube_BeamCalLinkUpstreamstainless_steel
+DD4hep_Beampipe  INFO   3315.02 3335.02      14     9.5      15    11.5       1       1      tube_BeamCalLinkUpstreamTransstainless_steel
+DD4hep_Beampipe  INFO   3335.02    4080     9.5     9.5    11.5    11.5       2       1          tube_BeamCalToQD0Upstreamstainless_steel
+DD4hep_Beampipe  INFO      4080    4100     9.5       8    11.5      10       2       1     tube_BeamCalToQD0UpstreamTransstainless_steel
+DD4hep_Beampipe  INFO      4100    6300       8       8      28      28      20       1               tube_QD0CryoUpstreamstainless_steel
+DD4hep_Beampipe  INFO      6300   10000       8       8      10      10       2       1             tube_BeyondQD0Upstreamstainless_steel
+DD4hep_Beampipe  INFO      3111 3315.02      16      16      17      17       1       2           tube_BeamCalLinkDnstreamstainless_steel
+DD4hep_Beampipe  INFO   3315.02 3335.02      16      12      17      14       1       2      tube_BeamCalLinkDnstreamTransstainless_steel
+DD4hep_Beampipe  INFO   3335.02    5500      12      12      14      14       2       2       tube_BeamCalToQDEX1ADnstreamstainless_steel
+DD4hep_Beampipe  INFO      5500    7050      12      12      32      32      20       2                        tube_QDEX1Astainless_steel
+DD4hep_Beampipe  INFO      7050   10000      12      12      14      14       2       2             tube_BeyondQD0Dnstreamstainless_steel
+Compact          INFO  ++ Converted subdetector:Tube of type DD4hep_Beampipe_o1_v01 
+Compact          INFO  ++ Converted subdetector:QD0_cryostat of type TubeSupport_o1_v01 
+Compact          INFO  ++ Converted subdetector:QD0_support of type BoxSupport_o1_v01 
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/vxd07.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/vxd07.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/vxd07.xml succesfully parsed with TinyXML .....
+[ VERBOSE "InitDD4hep"]  ############## layer : 0 number of ladders : 10
+[ VERBOSE "InitDD4hep"]   ***** place cabling for KaptonLines_00
+[ VERBOSE "InitDD4hep"]  layer 0 length of the cone 8.36061 opening angle 0.166196
+[ VERBOSE "InitDD4hep"]  kapton:layer 0 v phi 0 o phi 0
+[ VERBOSE "InitDD4hep"]  metal:layer 0 v phi 0 o phi 0
+[ VERBOSE "InitDD4hep"]  ############## layer : 1 number of ladders : 10
+[ VERBOSE "InitDD4hep"] ############## thetaTube = 0.159898
+[ VERBOSE "InitDD4hep"]   ***** place ladder 0 for SiActiveLayer_01
+[ VERBOSE "InitDD4hep"]   ***** place ladder 1 for SiActiveLayer_01
+[ VERBOSE "InitDD4hep"]   ***** place ladder 2 for SiActiveLayer_01
+[ VERBOSE "InitDD4hep"]   ***** place ladder 3 for SiActiveLayer_01
+[ VERBOSE "InitDD4hep"]   ***** place ladder 4 for SiActiveLayer_01
+[ VERBOSE "InitDD4hep"]   ***** place ladder 5 for SiActiveLayer_01
+[ VERBOSE "InitDD4hep"]   ***** place ladder 6 for SiActiveLayer_01
+[ VERBOSE "InitDD4hep"]   ***** place ladder 7 for SiActiveLayer_01
+[ VERBOSE "InitDD4hep"]   ***** place ladder 8 for SiActiveLayer_01
+[ VERBOSE "InitDD4hep"]   ***** place ladder 9 for SiActiveLayer_01
+[ VERBOSE "InitDD4hep"]  ############## layer : 2 number of ladders : 11
+[ VERBOSE "InitDD4hep"]   ***** place cabling for KaptonLines_02
+[ VERBOSE "InitDD4hep"]  layer 2 length of the cone 1.96 opening angle 0.33614
+[ VERBOSE "InitDD4hep"]  ############## layer : 3 number of ladders : 11
+[ VERBOSE "InitDD4hep"]  ############## layer : 4 number of ladders : 17
+[ VERBOSE "InitDD4hep"]   ***** place cabling for KaptonLines_04
+[ VERBOSE "InitDD4hep"]  layer 4 length of the cone 1.96 opening angle 0.953449
+[ VERBOSE "InitDD4hep"]  ############## layer : 5 number of ladders : 17
+Compact          INFO  ++ Converted subdetector:VXD of type VXD04 [tracker]
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/ftd_simple_staggered_02.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/ftd_simple_staggered_02.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/ftd_simple_staggered_02.xml succesfully parsed with TinyXML .....
+[ VERBOSE "InitDD4hep"] FTD_Simple_Staggered:	 inner support thickness = 0.1	 cables thickness = 0.008	 2 x cable shield thickness = 0.02	 beamTubeClearance = 1.5
+[ VERBOSE "InitDD4hep"] FTD_Simple_Staggered: Disk:1	 z = 22	 inner rad = 3.975	 outer rad = 15.2	 beamtube rad = 2.475	 free space = 1.322
+[ VERBOSE "InitDD4hep"] FTD_Simple_Staggered: Disk:2	 z = 37.1309	 inner rad = 5.0307	 outer rad = 15.2	 beamtube rad = 3.5307	 free space = 1.322
+[ VERBOSE "InitDD4hep"] FTD_Simple_Staggered: Disk:3	 z = 64.4906	 inner rad = 7.05131	 outer rad = 29.89	 beamtube rad = 5.55131	 free space = 1.322
+[ VERBOSE "InitDD4hep"] FTD_Simple_Staggered: Disk:4	 z = 104.612	 inner rad = 10.0069	 outer rad = 30.9	 beamtube rad = 8.50685	 free space = 1.322
+[ VERBOSE "InitDD4hep"] FTD_Simple_Staggered: Disk:5	 z = 144.733	 inner rad = 12.9624	 outer rad = 30.9	 beamtube rad = 11.4624	 free space = 1.322
+[ VERBOSE "InitDD4hep"] FTD_Simple_Staggered: Disk:6	 z = 184.854	 inner rad = 15.9179	 outer rad = 30.9	 beamtube rad = 14.4179	 free space = 1.322
+[ VERBOSE "InitDD4hep"] FTD_Simple_Staggered: Disk:7	 z = 221.18	 inner rad = 18.5939	 outer rad = 30.9	 beamtube rad = 17.0939	 free space = 1.322
+Compact          INFO  ++ Converted subdetector:FTD of type FTD_Simple_Staggered [tracker]
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/sit_simple_pixel_sensors_01.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/sit_simple_pixel_sensors_01.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/sit_simple_pixel_sensors_01.xml succesfully parsed with TinyXML .....
+[ VERBOSE "InitDD4hep"] SIT_Simple_Pixel: Layer:0	 half length = 36.8	 sensor length = 9.2	 n sensors per ladder = 8	 min r sensitive = 15.29	 min r support = 15.31	 n ladders = 10	 ladder width = 9.91604	 ladder clearance = 0.01	 ladder dphi = 0.628319	 sensitive mat = G4_Si	 support mat = G4_C	 faces_IP = 1	 is_SIT1 = 1	 is_SIT2 = 0
+[ VERBOSE "InitDD4hep"] SIT_Simple_Pixel: Layer:1	 half length = 36.8	 sensor length = 9.2	 n sensors per ladder = 8	 min r sensitive = 15.54	 min r support = 15.44	 n ladders = 10	 ladder width = 10.0135	 ladder clearance = 0.01	 ladder dphi = 0.628319	 sensitive mat = G4_Si	 support mat = G4_C	 faces_IP = 0	 is_SIT1 = 0	 is_SIT2 = 0
+[ VERBOSE "InitDD4hep"] SIT_Simple_Pixel: Layer:2	 half length = 64.4	 sensor length = 9.2	 n sensors per ladder = 14	 min r sensitive = 29.99	 min r support = 30.01	 n ladders = 19	 ladder width = 9.98889	 ladder clearance = 0.01	 ladder dphi = 0.330694	 sensitive mat = G4_Si	 support mat = G4_C	 faces_IP = 1	 is_SIT1 = 0	 is_SIT2 = 1
+[ VERBOSE "InitDD4hep"] SIT_Simple_Pixel: Layer:3	 half length = 64.4	 sensor length = 9.2	 n sensors per ladder = 14	 min r sensitive = 30.24	 min r support = 30.14	 n ladders = 19	 ladder width = 10.039	 ladder clearance = 0.01	 ladder dphi = 0.330694	 sensitive mat = G4_Si	 support mat = G4_C	 faces_IP = 0	 is_SIT1 = 0	 is_SIT2 = 0
+[ VERBOSE "InitDD4hep"] SIT_Simple_Pixel done.
+[ VERBOSE "InitDD4hep"] 
+Compact          INFO  ++ Converted subdetector:SIT of type SIT_Simple_Pixel [tracker]
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/tpc10_01.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/tpc10_01.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/tpc10_01.xml succesfully parsed with TinyXML .....
+[ VERBOSE "InitDD4hep"]  ** building TPC10_geo in lcgeo v00-05
+[ VERBOSE "InitDD4hep"]  Cathode Grip Ring Material: SiC_foam : Rad length = 1342.56 mm.
+[ VERBOSE "InitDD4hep"] Endplate material mix Density   = 0.000933671 g/cm3
+[ VERBOSE "InitDD4hep"] Endplate material mix Radlength = 562.6 mm
+[ VERBOSE "InitDD4hep"] TPC10: Inner radius of the gas volume is  354 mm.
+[ VERBOSE "InitDD4hep"] TPC10: Outer radius of the gas volume is 1714.8 mm.
+[ VERBOSE "InitDD4hep"] TPC10: Inner wall thickness is   25 mm.
+[ VERBOSE "InitDD4hep"] TPC10: Outer wall thickness is   55 mm.
+[ VERBOSE "InitDD4hep"] TPC10: Outer wall thickness is   55 mm.
+[ VERBOSE "InitDD4hep"] TPC10: Inner radius of the sensitive volume is 372.1 mm.
+[ VERBOSE "InitDD4hep"] TPC10: Outer radius of the sensitive volume is 1696.7 mm.
+[ VERBOSE "InitDD4hep"] TPC10: Number of Pad Rows in the TPC   220
+[ VERBOSE "InitDD4hep"] TPC10: Limiting the step length in the TPC to     5 mm.
+[ VERBOSE "InitDD4hep"] TPC10: Total Gas material corresponds to 0.117959% of a radiation length.
+[ VERBOSE "InitDD4hep"] TPC10: Add Material to Inner Wall: dr =  0.07 mm. Material = G4_Cu X0 = 1.43516  0.00487752% X0
+[ VERBOSE "InitDD4hep"] TPC10: Add Material to Inner Wall: dr =  0.05 mm. Material = G4_KAPTON X0 = 28.4095  0.000175997% X0
+[ VERBOSE "InitDD4hep"] TPC10: Add Material to Inner Wall: dr =   0.3 mm. Material = g10 X0 = 16.1475  0.00185787% X0
+[ VERBOSE "InitDD4hep"] TPC10: Add Material to Inner Wall: dr =  24.22 mm. Material = G4_AIR X0 = 30275.3  7.99993e-05% X0
+[ VERBOSE "InitDD4hep"] TPC10: Add Material to Inner Wall: dr =   0.3 mm. Material = g10 X0 = 16.1475  0.00185787% X0
+[ VERBOSE "InitDD4hep"] TPC10: Add Material to Inner Wall: dr =  0.05 mm. Material = G4_KAPTON X0 = 28.4095  0.000175997% X0
+[ VERBOSE "InitDD4hep"] TPC10: Add Material to Inner Wall: dr =  0.01 mm. Material = G4_Al X0 = 8.87889  0.000112627% X0
+[ VERBOSE "InitDD4hep"] TPC10: Inner wall material corresponds to 0.9% of a radiation length.
+[ VERBOSE "InitDD4hep"] TPC10: Inner wall effective X0 = 273.586
+[ VERBOSE "InitDD4hep"] TPC10: Add Material to Outer Wall: dr =  0.03 mm. Material = G4_Al X0 = 8.87889  0.00033788% X0
+[ VERBOSE "InitDD4hep"] TPC10: Add Material to Outer Wall: dr =  0.15 mm. Material = G4_KAPTON X0 = 28.4095  0.000527992% X0
+[ VERBOSE "InitDD4hep"] TPC10: Add Material to Outer Wall: dr =   0.9 mm. Material = g10 X0 = 16.1475  0.00557361% X0
+[ VERBOSE "InitDD4hep"] TPC10: Add Material to Outer Wall: dr =  52.66 mm. Material = G4_AIR X0 = 30275.3  0.000173937% X0
+[ VERBOSE "InitDD4hep"] TPC10: Add Material to Outer Wall: dr =   0.9 mm. Material = g10 X0 = 16.1475  0.00557361% X0
+[ VERBOSE "InitDD4hep"] TPC10: Add Material to Outer Wall: dr =  0.15 mm. Material = G4_KAPTON X0 = 28.4095  0.000527992% X0
+[ VERBOSE "InitDD4hep"] TPC10: Add Material to Outer Wall: dr =  0.21 mm. Material = G4_Cu X0 = 1.43516  0.0146326% X0
+[ VERBOSE "InitDD4hep"] TPC10: Outer wall material corresponds to 2.7% of a radiation length.
+[ VERBOSE "InitDD4hep"] TPC10: Outer wall effective X0 = 201.115
+[ VERBOSE "InitDD4hep"] Cathode dz = 0.0046
+[ VERBOSE "InitDD4hep"] Place cathode +z at 0.0023
+[ VERBOSE "InitDD4hep"] Place cathode -z at -0.0023
+[ VERBOSE "InitDD4hep"] TPC10: Readout material corresponds to 6.9% of a radiation length.
+[ VERBOSE "InitDD4hep"] TPC10: Total Endplate material corresponds to 8.72168% of a radiation length.
+Compact          INFO  ++ Converted subdetector:TPC of type TPC10 [tracker]
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/set_simple_planar_sensors_01.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/set_simple_planar_sensors_01.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/set_simple_planar_sensors_01.xml succesfully parsed with TinyXML .....
+[ VERBOSE "InitDD4hep"] SET_Simple_Planar: Layer:0	 half length = 230	 sensor length = 9.2	 n sensors per ladder = 50	 min r sensitive = 177.27	 min r support = 177.29	 n ladders = 24	 ladder width = 46.6561	 ladder clearance = 0.01	 ladder dphi = 0.261799	 sensitive mat = G4_Si	 support mat = G4_C	 faces_IP = 1
+[ VERBOSE "InitDD4hep"] SET_Simple_Planar: Layer:1	 half length = 230	 sensor length = 9.2	 n sensors per ladder = 50	 min r sensitive = 177.52	 min r support = 177.42	 n ladders = 24	 ladder width = 46.6956	 ladder clearance = 0.01	 ladder dphi = 0.261799	 sensitive mat = G4_Si	 support mat = G4_C	 faces_IP = 0
+[ VERBOSE "InitDD4hep"] SET_Simple_Planar done.
+[ VERBOSE "InitDD4hep"] 
+Compact          INFO  ++ Converted subdetector:SET of type SET_Simple_Planar [tracker]
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SEcal06_hybrid_Barrel.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SEcal06_hybrid_Barrel.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SEcal06_hybrid_Barrel.xml succesfully parsed with TinyXML .....
+[ VERBOSE "InitDD4hep"] -----------------------
+[ VERBOSE "InitDD4hep"] creating SEcal06_Barrel
+[ VERBOSE "InitDD4hep"] -----------------------
+[ VERBOSE "InitDD4hep"] SEcal06_Barrel: Preshower ? 0
+[ VERBOSE "InitDD4hep"] SEcal06_Barrel: absorber layers 20*2.1 mm + 10*4.2 mm + 0*0 mm 
+[ VERBOSE "InitDD4hep"] SEcal06_Barrel : module thickness = 22.32
+[ VERBOSE "InitDD4hep"] SEcal06_Barrel : layer config: 0 
+[ VERBOSE "InitDD4hep"] SEcal06_Barrel : width of module, alveolus = 94 18.736
+Compact          INFO  ++ Converted subdetector:EcalBarrel of type SEcal06_Barrel [calorimeter]
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+EcalBarrel       INFO  +++ Processing SurfaceInstaller for subdetector: 'EcalBarrel'
+DD4hep_CaloFaceBarrelSurfacePlugin INFO  install tracking surfaces for :  EcalBarrel 
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SEcal06_hybrid_Endcaps.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SEcal06_hybrid_Endcaps.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SEcal06_hybrid_Endcaps.xml succesfully parsed with TinyXML .....
+[ VERBOSE "InitDD4hep"] ------------------------
+[ VERBOSE "InitDD4hep"] creating SEcal06_Endcaps
+[ VERBOSE "InitDD4hep"] ------------------------
+[ VERBOSE "InitDD4hep"] Preshower ? 0
+[ VERBOSE "InitDD4hep"] absorber layers 20*0.21mm + 10*0.42mm + 0*0mm 
+[ VERBOSE "InitDD4hep"] module thickness = 22.32
+[ VERBOSE "InitDD4hep"] layer config: 0 
+[ VERBOSE "InitDD4hep"] ECAL endcap tower configuration 3 3 3 : 3 3 3 
+[ VERBOSE "InitDD4hep"] alveolus width = 18.736
+Compact          INFO  ++ Converted subdetector:EcalEndcap of type SEcal06_Endcaps [calorimeter]
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+EcalEndcap       INFO  +++ Processing SurfaceInstaller for subdetector: 'EcalEndcap'
+DD4hep_CaloFaceEndcapSurfacePlugin INFO  install tracking surfaces for :  EcalEndcap 
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SEcal05_siw_ECRing.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SEcal05_siw_ECRing.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SEcal05_siw_ECRing.xml succesfully parsed with TinyXML .....
+[ VERBOSE "InitDD4hep"] ---------------------------------
+[ VERBOSE "InitDD4hep"]  creating Ecal ECRing ( SEcal05_ECRing ) 
+[ VERBOSE "InitDD4hep"] ---------------------------------
+Compact          INFO  ++ Converted subdetector:EcalPlug of type SEcal05_ECRing [calorimeter]
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SHcalSc04_Barrel_v04.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SHcalSc04_Barrel_v04.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SHcalSc04_Barrel_v04.xml succesfully parsed with TinyXML .....
+[ VERBOSE "InitDD4hep"]  ######### dd4hep::DDSegmentation::TiledLayerGridXY() 
+Compact          INFO  ++ Converted subdetector:HcalBarrel of type SHcalSc04_Barrel_v04 [calorimeter]
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SHcalSc04_Endcaps_v01_LARGE.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SHcalSc04_Endcaps_v01_LARGE.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SHcalSc04_Endcaps_v01_LARGE.xml succesfully parsed with TinyXML .....
+[ VERBOSE "InitDD4hep"] 
+[ VERBOSE "InitDD4hep"]  HcalEndcap_inner_radius = 350 mm
+[ VERBOSE "InitDD4hep"]  HcalEndcap_outer_radius = 3225.54 mm
+[ VERBOSE "InitDD4hep"]  HcalEndcap_min_z = 2650 mm
+[ VERBOSE "InitDD4hep"]  HcalEndcap_max_z = 3937 mm
+Compact          INFO  ++ Converted subdetector:HcalEndcap of type SHcalSc04_Endcaps_v01 [calorimeter]
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SHcalSc04_EndcapRing_v01.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SHcalSc04_EndcapRing_v01.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SHcalSc04_EndcapRing_v01.xml succesfully parsed with TinyXML .....
+[ VERBOSE "InitDD4hep"]  
+[ VERBOSE "InitDD4hep"] 
+[ VERBOSE "InitDD4hep"] 
+[ VERBOSE "InitDD4hep"]  CREATE DETECTOR: SHcalSC04_EndcapRing_v01
+[ VERBOSE "InitDD4hep"]     HCAL endcap rings: HcalEndcapRing_inner_radius: 214.584
+[ VERBOSE "InitDD4hep"]     HCAL endcap rings: HcalEndcapRing_outer_radius: 298.001
+[ VERBOSE "InitDD4hep"]     HCAL endcap rings: HcalEndcapRing_min_z:  241.18
+[ VERBOSE "InitDD4hep"]     HCAL endcap rings: HcalEndcapRing_max_z:  263.5
+[ VERBOSE "InitDD4hep"]     HCAL endcap rings: SpaceForLayers:  20.82
+[ VERBOSE "InitDD4hep"]     HCAL endcap rings will have 7 layers.
+Compact          INFO  ++ Converted subdetector:HcalRing of type SHcalSc04_EndcapRing_v01 [calorimeter]
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/Yoke05_Barrel.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/Yoke05_Barrel.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/Yoke05_Barrel.xml succesfully parsed with TinyXML .....
+[ VERBOSE "InitDD4hep"]  Build the yoke within this dimension 
+[ VERBOSE "InitDD4hep"]   ...Yoke  db: symmetry             12
+[ VERBOSE "InitDD4hep"]   ...Yoke  db: rInnerBarrel         447.504
+[ VERBOSE "InitDD4hep"]   ...Yoke  db: zStartEndcap         407.2
+[ VERBOSE "InitDD4hep"]   ...Muon  db: iron_thickness       10
+[ VERBOSE "InitDD4hep"]   ...Muon  db: gap_thickness        4
+[ VERBOSE "InitDD4hep"]   ...Muon  db: number_of_layers     10
+[ VERBOSE "InitDD4hep"]   ...Muon par: yokeBarrelThickness  324.1
+[ VERBOSE "InitDD4hep"]   ...Muon par: Barrel_half_z        404.7
+Compact          INFO  ++ Converted subdetector:YokeBarrel of type Yoke05_Barrel [calorimeter]
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/Yoke06_Endcaps.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/Yoke06_Endcaps.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/Yoke06_Endcaps.xml succesfully parsed with TinyXML .....
+[ VERBOSE "InitDD4hep"]  Build the yoke within this dimension 
+[ VERBOSE "InitDD4hep"]   ...Yoke  db: symmetry             12
+[ VERBOSE "InitDD4hep"]   ...Yoke  db: rInnerEndcap         35
+[ VERBOSE "InitDD4hep"]   ...Yoke  db: rOuterEndcap         771.604
+[ VERBOSE "InitDD4hep"]   ...Yoke  db: zStartEndcap         407.2
+[ VERBOSE "InitDD4hep"]   ...Muon  db: iron_thickness       10
+[ VERBOSE "InitDD4hep"]   ...Muon  db: gap_thickness        4
+[ VERBOSE "InitDD4hep"]   ...Muon  db: number_of_layers     10
+[ VERBOSE "InitDD4hep"]   ...Muon par: yokeEndcapThickness  264
+[ VERBOSE "InitDD4hep"]   ...Muon par: Barrel_half_z        404.7
+[ VERBOSE "InitDD4hep"]   ...Plug par: build_plug is true, there is space to build yoke plug
+[ VERBOSE "InitDD4hep"]   ...Plug par: HCAL_half_z          393.7
+[ VERBOSE "InitDD4hep"]   ...Plug par: HCAL_Plug_Gap        4.5
+[ VERBOSE "InitDD4hep"]   ...Plug par: Plug Thickness       9
+[ VERBOSE "InitDD4hep"]   ...Plug par: Plug Radius          339.554
+Compact          INFO  ++ Converted subdetector:YokeEndcap of type Yoke06_Endcaps [calorimeter]
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/LumiCal.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/LumiCal.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/LumiCal.xml succesfully parsed with TinyXML .....
+[ VERBOSE "InitDD4hep"] dd4hep::Ref_t create_detector(dd4hep::Detector&, xml_h, dd4hep::SensitiveDetector)
+[ VERBOSE "InitDD4hep"] 
+[ VERBOSE "InitDD4hep"]  Here is my LumiCal_o1_v03 :
+[ VERBOSE "InitDD4hep"] ----------------------------
+[ VERBOSE "InitDD4hep"]  The crossing angle is:  0.014 radian
+[ VERBOSE "InitDD4hep"]      Lcal z-begin : 2411.8 mm
+[ VERBOSE "InitDD4hep"]      Lcal z-end   : 2540.5 mm
+[ VERBOSE "InitDD4hep"]    (x,y,z)-center : ( 17.3333,0 ,+- 2476.15 ) mm
+[ VERBOSE "InitDD4hep"]      sensorInnerR : 84.0221 mm
+[ VERBOSE "InitDD4hep"]      sensorouterR : 194 mm
+[ VERBOSE "InitDD4hep"]         thickness : 128.7 mm
+[ VERBOSE "InitDD4hep"]           cell_dR : 1.71841 mm
+[ VERBOSE "InitDD4hep"]         cell_dPhi : 0.1309  radian
+[ VERBOSE "InitDD4hep"]        offset Phi : 3.75 deg
+[ VERBOSE "InitDD4hep"]     stagger angle : 3.75 deg
+[ VERBOSE "InitDD4hep"]     tile gap size : 2.4 mm
+[ VERBOSE "InitDD4hep"]     tile span phi : 30 deg
+[ VERBOSE "InitDD4hep"]    services space : 46.914 mm
+[ VERBOSE "InitDD4hep"]   Layer thickness : 4.29   ( rad. length X0:  0.898435 )
+[ VERBOSE "InitDD4hep"]    LumiCal length : 128.7 ( rad. length X0: 26.953   )
+[ VERBOSE "InitDD4hep"] -----------------------------------------------------------------
+[ VERBOSE "InitDD4hep"] 
+Compact          INFO  ++ Converted subdetector:Lcal of type LumiCal_o1_v03 [calorimeter]
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/LHCal01.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/LHCal01.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/LHCal01.xml succesfully parsed with TinyXML .....
+[ VERBOSE "InitDD4hep"] dd4hep::Ref_t create_detector(dd4hep::Detector&, xml_h, dd4hep::SensitiveDetector)
+[ VERBOSE "InitDD4hep"] Here is my LHCal_v01
+[ VERBOSE "InitDD4hep"]  --------------------------------------------------------------------------
+[ VERBOSE "InitDD4hep"]  Building detector: LHCal
+[ VERBOSE "InitDD4hep"]  - Main crossing angle: 0.014 radian
+[ VERBOSE "InitDD4hep"]  - LHCal begin Z         2680 mm
+[ VERBOSE "InitDD4hep"]  - LHCal end Z           3160 mm
+[ VERBOSE "InitDD4hep"]  - LHCal center (X,Y,Z)  ( 20.4403,0 ,2920 ) mm
+[ VERBOSE "InitDD4hep"]  - LHCal inner R         130 mm
+[ VERBOSE "InitDD4hep"]  - LHCal thickness       480 mm
+[ VERBOSE "InitDD4hep"]  - Layer Thickness 16 mm
+[ VERBOSE "InitDD4hep"]  -            Total Length: 480 mm
+[ VERBOSE "InitDD4hep"]  - Total Interacion Length: 3.78997
+[ VERBOSE "InitDD4hep"]  --------------------------------------------------------------------------
+Compact          INFO  ++ Converted subdetector:LHCal of type LHCal_v01 [calorimeter]
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/BeamCal08.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/BeamCal08.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/BeamCal08.xml succesfully parsed with TinyXML .....
+[ VERBOSE "InitDD4hep"] This is the BeamCal
+[ VERBOSE "InitDD4hep"] Building all.
+[ VERBOSE "InitDD4hep"]  The crossing angle is: 0.014 radian
+[ VERBOSE "InitDD4hep"] bcalCutOutSpan  785.398 mrad
+[ VERBOSE "InitDD4hep"] bcalCutOutSpan  45 degree
+[ VERBOSE "InitDD4hep"] bcalCutOutStart 2.74889 Radian
+[ VERBOSE "InitDD4hep"] bcalCutOutEnd   3.53429 Radian
+[ VERBOSE "InitDD4hep"] incommingBeamPipeRadius: 1.6 cm
+[ VERBOSE "InitDD4hep"] cutOutRadius: 6.45257 cm 
+[ VERBOSE "InitDD4hep"] Total Length 20.0024 cm
+[ VERBOSE "InitDD4hep"] Layer Thickness 8.40008 cm
+[ VERBOSE "InitDD4hep"] Total Length 20.0024 cm
+[ VERBOSE "InitDD4hep"] Layer Thickness 0.40008 cm
+Compact          INFO  ++ Converted subdetector:BeamCal of type BeamCal_o1_v02 [calorimeter]
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/coil03.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/coil03.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/coil03.xml succesfully parsed with TinyXML .....
+[ VERBOSE "InitDD4hep"] 
+[ VERBOSE "InitDD4hep"] Building Coil...
+[ VERBOSE "InitDD4hep"] 
+[ VERBOSE "InitDD4hep"] ... cryostat inner_radius 342.514
+[ VERBOSE "InitDD4hep"] ... cryostat outer_radius 417.494
+[ VERBOSE "InitDD4hep"] ... cryostat half_z       387.19
+[ VERBOSE "InitDD4hep"]  ... for the time being simply use a tube of aluminum ...
+[ VERBOSE "InitDD4hep"] SCoil02 done.
+[ VERBOSE "InitDD4hep"] 
+Compact          INFO  ++ Converted subdetector:Coil of type SCoil02 
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SServices00.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SServices00.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/SServices00.xml succesfully parsed with TinyXML .....
+[ VERBOSE "InitDD4hep"] 
+[ VERBOSE "InitDD4hep"] Building SServices00
+[ VERBOSE "InitDD4hep"] 
+[ VERBOSE "InitDD4hep"]  Ecal_inner_radius: 180.48
+[ VERBOSE "InitDD4hep"]  Ecal_outer_radius: 202.8
+[ VERBOSE "InitDD4hep"]   module_thickness: 22.32
+[ VERBOSE "InitDD4hep"]       bottom_dim_x: 181.08
+[ VERBOSE "InitDD4hep"]          top_dim_x: 136.44
+[ VERBOSE "InitDD4hep"]         RailHeight: 3
+[ VERBOSE "InitDD4hep"] 
+[ VERBOSE "InitDD4hep"] 
+[ VERBOSE "InitDD4hep"]    - HcalServicesModule_InnerServicesWidth = 20
+[ VERBOSE "InitDD4hep"]    - HcalServicesModule_ZMinus_Cu_Thickness = 0.82
+[ VERBOSE "InitDD4hep"]    - HcalServicesModule_ZMinus_PE_Thickness = 2.75
+[ VERBOSE "InitDD4hep"]    - HcalServicesModule_ZMinus_StainlessSteel_Thickness = 1.5
+[ VERBOSE "InitDD4hep"]    - HcalServicesModule_ZPlus_Cu_Thickness = 0.74
+[ VERBOSE "InitDD4hep"]    - HcalServicesModule_ZPlus_PE_Thickness = 2.56
+[ VERBOSE "InitDD4hep"]    - HcalServicesModule_ZPlus_StainlessSteel_Thickness = 1.5
+[ VERBOSE "InitDD4hep"]    - HcalServices_outer_Cu_thickness = 0.04
+[ VERBOSE "InitDD4hep"]    - HcalServices_outer_FR4_thickness = 0.28
+[ VERBOSE "InitDD4hep"]    - Hcal_R_max = 339.554
+[ VERBOSE "InitDD4hep"]    - Hcal_back_plate_thickness = 1.5
+[ VERBOSE "InitDD4hep"]    - Hcal_nlayers = 48
+[ VERBOSE "InitDD4hep"]    - Hcal_radiator_thickness = 2
+[ VERBOSE "InitDD4hep"]    - Hcal_stave_gaps = 1
+[ VERBOSE "InitDD4hep"]    - Hcal_steel_cassette_thickness = 0.05
+[ VERBOSE "InitDD4hep"]    - BuildHcalElectronicsInterface = true 
+[ VERBOSE "InitDD4hep"] 
+[ VERBOSE "InitDD4hep"]    - SIT Cone Cable services: 
+[ VERBOSE "InitDD4hep"]    - zPlane[0] = 37.401
+[ VERBOSE "InitDD4hep"]    - zPlane[1] = 63.9506
+[ VERBOSE "InitDD4hep"]    - rInner[0] = 15.3
+[ VERBOSE "InitDD4hep"]    - rInner[1] = 29.89
+[ VERBOSE "InitDD4hep"]    - rOuter[0] = 15.304
+[ VERBOSE "InitDD4hep"]    - rOuter[1] = 29.892
+[ VERBOSE "InitDD4hep"] 
+[ VERBOSE "InitDD4hep"]    - SIT12_cable_thickness = 0.0063
+[ VERBOSE "InitDD4hep"]    - SIT1_Radius = 15.3
+[ VERBOSE "InitDD4hep"]    - SIT2_Radius = 29.99
+[ VERBOSE "InitDD4hep"]    - SServices_FTD2_cone_thickness = 0.004
+[ VERBOSE "InitDD4hep"]    - SServices_FTD3_cone_thickness = 0.002
+[ VERBOSE "InitDD4hep"]    - TUBE_IPOuterBulge_end_z = 239.18
+[ VERBOSE "InitDD4hep"]    - SServices_FTD7_cables_thickness = 0.085
+[ VERBOSE "InitDD4hep"] 
+[ VERBOSE "InitDD4hep"]    - VXD_cable_cross_section_area = 25 mm^2
+[ VERBOSE "InitDD4hep"]    - VXD_cable_inner1_radius = 30 mm
+[ VERBOSE "InitDD4hep"]    - VXD_cable_inner2_radius = 27 mm
+[ VERBOSE "InitDD4hep"]    - VXD_cable_cone_middle_thickness = 0.139269 mm
+[ VERBOSE "InitDD4hep"]    - VXD_cable_outer1_radius = 30.1393 mm
+[ VERBOSE "InitDD4hep"]    - VXD_cable_outer2_radius = 27.1393 mm
+[ VERBOSE "InitDD4hep"]    - VXD_cable_z_start = 177.7 mm
+[ VERBOSE "InitDD4hep"]    - VXD_cable_z_end = 230 mm
+Compact          INFO  ++ Converted subdetector:SServices00 of type SServices00 
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/Field_Solenoid_Map_l_3.5T.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/Field_Solenoid_Map_l_3.5T.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/Field_Solenoid_Map_l_3.5T.xml succesfully parsed with TinyXML .....
+[ VERBOSE "InitDD4hep"] 
+[ VERBOSE "InitDD4hep"] Ntuple name:   ntuple
+[ VERBOSE "InitDD4hep"] rho  Var name: rho_mm
+[ VERBOSE "InitDD4hep"] z    Var name: z_mm
+[ VERBOSE "InitDD4hep"] Brho Var name: Brho
+[ VERBOSE "InitDD4hep"] Bz   Var name: Bz
+[ VERBOSE "InitDD4hep"] 
+[ VERBOSE "InitDD4hep"] rScale                  1
+[ VERBOSE "InitDD4hep"] zScale                  1
+[ VERBOSE "InitDD4hep"] bScale                  1
+[ VERBOSE "InitDD4hep"] rhoMin                  0 cm
+[ VERBOSE "InitDD4hep"] rhoMax                800 cm
+[ VERBOSE "InitDD4hep"] rhoStep                10 cm
+[ VERBOSE "InitDD4hep"] nRho                   81
+[ VERBOSE "InitDD4hep"] rhoOrdering   low-to-high
+[ VERBOSE "InitDD4hep"] zMin                    0 cm
+[ VERBOSE "InitDD4hep"] zMax                  700 cm
+[ VERBOSE "InitDD4hep"] zStep                  10 cm
+[ VERBOSE "InitDD4hep"] nZ                     71
+[ VERBOSE "InitDD4hep"] zOrdering     low-to-high
+[ VERBOSE "InitDD4hep"] CoorsOrder             RZ
+[ VERBOSE "InitDD4hep"] coorUnits             0.1 cm
+[ VERBOSE "InitDD4hep"] BfieldUnits             1 tesla
+Compact          INFO  ++ Converted field: Successfully created field SolenoidMap [FieldBrBz]
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/Field_AntiDID_Map_l.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/Field_AntiDID_Map_l.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/Field_AntiDID_Map_l.xml succesfully parsed with TinyXML .....
+[ VERBOSE "InitDD4hep"] 
+[ VERBOSE "InitDD4hep"] Ntuple name: ntuple
+[ VERBOSE "InitDD4hep"] x  Var name: x_mm
+[ VERBOSE "InitDD4hep"] y  Var name: y_mm
+[ VERBOSE "InitDD4hep"] z  Var name: z_mm
+[ VERBOSE "InitDD4hep"] Bx Var name: Bx
+[ VERBOSE "InitDD4hep"] By Var name: By
+[ VERBOSE "InitDD4hep"] Bz Var name: Bz
+[ VERBOSE "InitDD4hep"] 
+[ VERBOSE "InitDD4hep"] xScale                  1
+[ VERBOSE "InitDD4hep"] zScale                  1
+[ VERBOSE "InitDD4hep"] zScale                  1
+[ VERBOSE "InitDD4hep"] bScale                  1
+[ VERBOSE "InitDD4hep"] xMin                 -200 cm
+[ VERBOSE "InitDD4hep"] xMax                  200 cm
+[ VERBOSE "InitDD4hep"] xStep                  10 cm
+[ VERBOSE "InitDD4hep"] nX                     41
+[ VERBOSE "InitDD4hep"] xOrdering     low-to-high
+[ VERBOSE "InitDD4hep"] yMin                 -200 cm
+[ VERBOSE "InitDD4hep"] yMax                  200 cm
+[ VERBOSE "InitDD4hep"] yStep                  10 cm
+[ VERBOSE "InitDD4hep"] nY                     41
+[ VERBOSE "InitDD4hep"] yOrdering     low-to-high
+[ VERBOSE "InitDD4hep"] zMin                 -400 cm
+[ VERBOSE "InitDD4hep"] zMax                  400 cm
+[ VERBOSE "InitDD4hep"] zStep                  10 cm
+[ VERBOSE "InitDD4hep"] nZ                     81
+[ VERBOSE "InitDD4hep"] zOrdering     low-to-high
+[ VERBOSE "InitDD4hep"] CoorsOrder            XYZ
+[ VERBOSE "InitDD4hep"] coorUnits             0.1 cm
+[ VERBOSE "InitDD4hep"] BfieldUnits             1 tesla
+Compact          INFO  ++ Converted field: Successfully created field AntiDIDMap [FieldXYZ]
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+DocumentHandler  INFO  +++ Loading document URI: /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/Field_FwdMagnets_Ideal_250GeV.xml [Resolved:'/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/Field_FwdMagnets_Ideal_250GeV.xml']
+DocumentHandler  INFO  +++ Document /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/lcgeo/v00-16-03/ILD/compact/ILD_l5_o1_v05/../ILD_common_v02/Field_FwdMagnets_Ideal_250GeV.xml succesfully parsed with TinyXML .....
+Compact          INFO  ++ Converted field: Successfully created field QD0_ZPlus_GlobalMultipole [MultipoleMagnet]
+Compact          INFO  ++ Converted field: Successfully created field QD0_ZMinus_GlobalMultipole [MultipoleMagnet]
+Compact          INFO  ++ Converted field: Successfully created field QDEX1A_ZPlus_GlobalMultipole [MultipoleMagnet]
+Compact          INFO  ++ Converted field: Successfully created field QDEX1A_ZMinus_GlobalMultipole [MultipoleMagnet]
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+Detector         WARN  +++ Object 'compact_checksum' is already defined and new one will be ignored
+DD4hepVolumeManager INFO  **** running plugin DD4hepVolumeManager ! 
+VolumeManager    INFO   - populating volume ids - be patient ...
+VolumeManager    INFO   - populating volume ids - done. 623843 nodes.
+VolumeManager    INFO  +++ Volume manager populated and loaded.
+InstallSurfaceManager INFO  **** running plugin InstallSurfaceManager ! 
+InstallSurfaceManager INFO  --------  SurfaceManager contains the following maps : --------- 
+---------------------------------------------------------------- 
+
+[ MESSAGE "InitDD4hep"]  ---- instantiated  geometry for detector ILD_l5_o1_v05
+[ MESSAGE "InitDD4hep"]  -------------------------------------
+[ MESSAGE "MyReconstructed"] 
+[ MESSAGE "MyReconstructed"] ---- MyReconstructed -  parameters: 
+[ MESSAGE "MyReconstructed"] 	ImitateDetectorAcceptance:  true
+[ MESSAGE "MyReconstructed"] 	KeepOnlyVisible:  true
+[ MESSAGE "MyReconstructed"] 	MCInCollection:  MCParticlesSkimmed
+[ MESSAGE "MyReconstructed"] 	MCRecLinkCollectionName:  MCRecLink
+[ MESSAGE "MyReconstructed"] 	MaxCosTheta:  0.995
+[ MESSAGE "MyReconstructed"] 	NeutralHCALCut:  0.5
+[ MESSAGE "MyReconstructed"] 	PhotonECALCut:  0.2
+[ MESSAGE "MyReconstructed"] 	RPOutCollection:  MCParticlesNowRP
+[ MESSAGE "MyReconstructed"] 	chargedMinPT:  0.105
+[ MESSAGE "MyReconstructed"] -------------------------------------------------
+[ WARNING "Marlin"]  --- Marlin.cc - will skip first 1523 event(s)
+[ WARNING "Marlin"] 
+[ DEBUG "MyReconstructed"] Processing event no 1523 - run 1523
+[ DEBUG "MyReconstructed"] Processing event no 1524 - run 1524
+[ DEBUG "MyReconstructed"] Processing event no 1525 - run 1525
+[ MESSAGE "MyReconstructed"] end
+[ MESSAGE "Marlin"]  --------------------------------------------------------- 
+[ MESSAGE "Marlin"]   Events skipped by processors : 
+[ MESSAGE "Marlin"]   Total: 0
+[ MESSAGE "Marlin"]  --------------------------------------------------------- 
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"]  --------------------------------------------------------- 
+[ MESSAGE "Marlin"]       Time used by processors ( in processEvent() ) :      
+[ MESSAGE "Marlin"] 
+[ MESSAGE "Marlin"] InitDD4hep                           0.000000e+00 s in            3 events  ==> 0.000000e+00 [ s/evt.] 
+[ MESSAGE "Marlin"] MyReconstructed                      0.000000e+00 s in            3 events  ==> 0.000000e+00 [ s/evt.] 
+[ MESSAGE "Marlin"]             Total:                   0.000000e+00 s in            3 events  ==> 0.000000e+00 [ s/evt.] 
+[ MESSAGE "Marlin"]  --------------------------------------------------------- 

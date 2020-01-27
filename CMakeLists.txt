@@ -50,8 +50,13 @@ ENDMACRO()
 # -----------------------------------------------------------------------------
 # Add the packages you want to compile here.
 ADD_PROCESSOR( ./processors/shared_functionality )
+ADD_PROCESSOR( ./processors/check_isolated_lepton_tagging )
+ADD_PROCESSOR( ./processors/check_relation )
 ADD_PROCESSOR( ./processors/example )
 ADD_PROCESSOR( ./processors/draft )
+ADD_PROCESSOR( ./processors/mc_as_reconstructed )
+ADD_PROCESSOR( ./processors/skip_empty_events )
+ADD_PROCESSOR( ./processors/slcio_to_root )
 
 # Build the project library.
 ADD_SHARED_LIBRARY( ${PROJECT_NAME} ${project_cxx_srcs} )
