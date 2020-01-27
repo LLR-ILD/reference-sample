@@ -1,10 +1,11 @@
 PROJECT_DIR=$HOME/reference-sample
+INIT_ILCSOFT=/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/init_ilcsoft.sh
 
 marlin_build() {
     OLD_DIR=$PWD
     cd $PROJECT_DIR
     unset MARLIN_DLL
-    source /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/init_ilcsoft.sh
+    source $INIT_ILCSOFT
 
     mkdir -p build
     cd build
@@ -15,10 +16,27 @@ marlin_build() {
     cd ${OLD_DIR}
 }
 
-if [[  $# > 0 ]]  ; then
+marlin_run() {
+    OLD_DIR=$PWD
+    cd $PROJECT_DIR
+    unset MARLIN_DLL
+    source $INIT_ILCSOFT
+    export MARLIN_DLL=$MARLIN_DLL${PROJECT_DIR}/lib/libreference-sample.so:
+    cd build; make install; cd ..
+    Marlin ./steering/mc_as_reconstructed.xml > log.txt 2>&1
+    cd ${OLD_DIR}
+}
+
+if [[  $1 == "build" ]]  ; then
     marlin_build
+fi
+if [[  $1 == "run" ]]  ; then
+    marlin_run
 fi
 
 sl6_build() {
-    singularity exec -B /cvmfs  ~/ui_sl6.simg /bin/sh $PROJECT_DIR/.aliases ac
+    singularity exec -B /cvmfs  ~/ui_sl6.simg /bin/sh $PROJECT_DIR/.aliases build
+}
+sl6_run() {
+    singularity exec -B /cvmfs  ~/ui_sl6.simg /bin/sh $PROJECT_DIR/.aliases run
 }

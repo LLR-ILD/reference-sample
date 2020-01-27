@@ -128,7 +128,7 @@ void DraftProcessor::printCollectionInfo(EVENT::LCEvent* event) {
   try {
     vertex_collection = event->getCollection(vertex_collection_name);
   } catch (DataNotAvailableException &e) {
-    streamlog_out(MESSAGE) << "Vertex collection " << vertex_collection_name
+    streamlog_out(ERROR) << "Vertex collection " << vertex_collection_name
       << " is not available!" << std::endl;
     throw marlin::StopProcessingException(this);
   }
