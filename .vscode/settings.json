@@ -71,6 +71,11 @@
         "thread": "cpp",
         "typeindex": "cpp",
         "typeinfo": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "*.icc": "cpp",
+        "back_area": "cpp",
+        "style": "cpp",
+        "style_parser": "cpp",
+        "plotter": "cpp"
     }
 }

@@ -48,6 +48,10 @@ class CheckIsoLeptonProcessor : public marlin::Processor {
   // And its histograms
   TH1F* h_n_isolated_muons_{};
   TH1F* h_n_isolated_electrons_{};
+  TH1F* h_mva_isolated_muon_{};
+  TH1F* h_mva_isolated_muon_possibly_z_{};
+  TH1F* h_mva_isolated_electron_{};
+  TH1F* h_mva_isolated_electron_possibly_z_{};
   TH2I* h_n_objects_per_type_{};
 };
 #endif
