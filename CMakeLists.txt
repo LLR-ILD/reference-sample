@@ -57,6 +57,8 @@ ADD_PROCESSOR( ./processors/draft )
 ADD_PROCESSOR( ./processors/mc_as_reconstructed )
 ADD_PROCESSOR( ./processors/skip_empty_events )
 ADD_PROCESSOR( ./processors/slcio_to_root )
+ADD_PROCESSOR( ./processors/split_off_z )
+ADD_PROCESSOR( ./processors/tau_cones )
 
 # Build the project library.
 ADD_SHARED_LIBRARY( ${PROJECT_NAME} ${project_cxx_srcs} )

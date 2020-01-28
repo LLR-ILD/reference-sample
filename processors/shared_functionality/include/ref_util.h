@@ -100,5 +100,10 @@ std::vector<double> energyLineupWrtSeedDistance(
 
 // True if any of the members of the (Monte Carlo) collection has this pdg code.
 bool pdgIsInMcCol(int pdg, EVENT::LCCollection* mc_col);
+bool rpEnergySort(EVENT::ReconstructedParticle* rp1,
+                  EVENT::ReconstructedParticle* rp2);{
+  return fabs(rp1->getEnergy()) > fabs(rp2->getEnergy());
+}
 }  // namespace ref_util
+
 #endif

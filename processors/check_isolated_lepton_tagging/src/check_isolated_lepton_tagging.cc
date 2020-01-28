@@ -40,7 +40,7 @@ CheckIsoLeptonProcessor::CheckIsoLeptonProcessor() :
     std::string("PandoraPFOs"));
 
   registerProcessorParameter(
-    "outputRootFile",
+    "OutputRootFile",
     "Name of the output root file.",
     out_root_filename_,
     std::string("check_iso_lepton_tagging"));
@@ -61,6 +61,21 @@ void CheckIsoLeptonProcessor::init() {
   h_n_isolated_electrons_ = new TH1F(
       "h_n_isolated_electrons_", "h_n_isolated_electrons_",
       10, -0.5, 9.5);
+
+  h_mva_isolated_muon_ = new TH1F(
+      "h_mva_isolated_muon_", "h_mva_isolated_muon_",
+      150, 0, 1.5);
+  h_mva_isolated_muon_possibly_z_ = new TH1F(
+      "h_mva_isolated_muon_possibly_z_", "h_mva_isolated_muon_possibly_z_",
+      150, 0, 1.5);
+  h_mva_isolated_electron_ = new TH1F(
+      "h_mva_isolated_electron_", "h_mva_isolated_electron_",
+      150, 0, 1.5);
+  h_mva_isolated_electron_possibly_z_ = new TH1F(
+      "h_mva_isolated_electron_possibly_z_",
+      "h_mva_isolated_electron_possibly_z_",
+      150, 0, 1.5);
+
   h_n_objects_per_type_ = new TH2I(
       "h_n_objects_per_type_", "h_n_objects_per_type_",
       ref_util::kPfoTypes, -.5, ref_util::kPfoTypes-0.5, 20, 0, 19);
@@ -123,8 +138,7 @@ void CheckIsoLeptonProcessor::processEvent(EVENT::LCEvent* event) {
   std::vector<RP*> isolated_electrons;
   EVENT::LCCollection* isolated_lepton_collection = nullptr;
   try {
-    EVENT::LCCollection* isolated_lepton_collection =
-        event->getCollection("ISOLeptons");
+    isolated_lepton_collection = event->getCollection("ISOLeptons");
   } catch (EVENT::DataNotAvailableException &) {
     streamlog_out(WARNING) << "Pfo collection '" << "ISOLeptons"
       << "' is not available!" << std::endl;
@@ -136,8 +150,11 @@ void CheckIsoLeptonProcessor::processEvent(EVENT::LCEvent* event) {
     << isolated_lepton_collection->getNumberOfElements() << "." << std::endl;
   if (isolated_lepton_collection->getNumberOfElements() > 0) {
     IntVec isolated_lepton_types;
-    isolated_lepton_collection->getParameters().getIntVals (
+    isolated_lepton_collection->getParameters().getIntVals(
         "ISOLepType", isolated_lepton_types);
+    FloatVec isolated_lepton_tags;
+    isolated_lepton_collection->getParameters().getFloatVals(
+        "ISOLepTagging", isolated_lepton_tags);
     for (int e = 0;
          e < isolated_lepton_collection->getNumberOfElements();
          ++e) {
@@ -148,18 +165,31 @@ void CheckIsoLeptonProcessor::processEvent(EVENT::LCEvent* event) {
           << "ISOLeptons" << "'" << std::endl;
         continue;
       }
-      if (abs(isolated_lepton_types[e]) == 11) {
-        isolated_muons.push_back(isolated_lepton);
-      } else if (abs(isolated_lepton_types[e]) == 13) {
-        isolated_electrons.push_back(isolated_lepton);
-      }
-      // Fill some histograms only with those IsoLeptons that are the primary Z
-      // decay remnants.
-      ////MCP* earliest_mc_parent = ref_util::getMcChainFromRp(
-      ////  isolated_lepton, relation_navigator).back();
+      // Fill some histograms only with those IsoLeptons that are possibly
+      // primary Z decay remnants.
+      bool might_be_from_z = true;
       for (auto mcp : ref_util::getMcChainFromRp(
           isolated_lepton, relation_navigator)) {
-        streamlog_out(DEBUG) << mcp->getPDG();
+        int mcp_pdg = fabs(mcp->getPDG());
+        if (mcp_pdg != 13 and mcp_pdg != 11 and mcp_pdg != 94 ) {
+            might_be_from_z = false;
+        }
+      }
+      if (might_be_from_z) {
+
+      }
+      if (abs(isolated_lepton_types[e]) == 13) {
+        isolated_muons.push_back(isolated_lepton);
+        h_mva_isolated_muon_->Fill(isolated_lepton_tags[e]);
+        if (might_be_from_z) {
+            h_mva_isolated_muon_possibly_z_->Fill(isolated_lepton_tags[e]);
+        }
+      } else if (abs(isolated_lepton_types[e]) == 11) {
+        isolated_electrons.push_back(isolated_lepton);
+        h_mva_isolated_electron_->Fill(isolated_lepton_tags[e]);
+        if (might_be_from_z) {
+            h_mva_isolated_electron_possibly_z_->Fill(isolated_lepton_tags[e]);
+        }
       }
     }
   }

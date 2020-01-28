@@ -23,7 +23,8 @@ marlin_run() {
     source $INIT_ILCSOFT
     export MARLIN_DLL=$MARLIN_DLL${PROJECT_DIR}/lib/libreference-sample.so:
     cd build; make install; cd ..
-    Marlin ./steering/mc_as_reconstructed.xml > log.txt 2>&1
+    #Marlin ./steering/mc_as_reconstructed.xml > log.txt 2>&1
+    Marlin ./steering/check_isolated_lepton_tagging.xml > log.txt 2>&1
     cd ${OLD_DIR}
 }
 
