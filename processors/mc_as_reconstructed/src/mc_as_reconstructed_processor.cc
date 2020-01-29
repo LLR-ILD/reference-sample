@@ -152,11 +152,6 @@ void McAsReconstructedProcessor::processEvent(EVENT::LCEvent* event) {
       std::string("ToType"),LCIO::MCPARTICLE);
   for (int i = 0; i < mc_in_collection->getNumberOfElements(); ++i) {
     MCP* mcp = static_cast<MCP*>(mc_in_collection->getElementAt(i));
-    if (mcp == nullptr) {
-      streamlog_out(ERROR) << "Wrong object type in collection '"
-        << mc_input_collection_name_ << "'" << std::endl;
-      continue;
-    }
 	// Only keep the stable MC particles.
 	if (mcp->getGeneratorStatus()!=1) continue;
 	// If not vetoed by the steering file, remove invisible particles

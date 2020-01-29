@@ -142,24 +142,49 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
     std::vector< std::vector<RP*> > plus_candidate_rps;
     std::vector< std::vector<RP*> > minus_candidate_rps;
     if (z_decay_channel_ == "ZDec_TAU") {
-      EVENT::LCCollection* lepton_collection = nullptr;
+      EVENT::LCCollection* tau_collection = nullptr;
       try {
-        lepton_collection = event->getCollection("TauJets");
+        tau_collection = event->getCollection("TauJets");
       } catch (DataNotAvailableException &e) {
         streamlog_out(ERROR) << "RP collection" << "TauJets"
           << " is not available! Remember calling the TauFinder Processor "
           "before this one." << std::endl;
         throw marlin::StopProcessingException(this);
       }
-      for (int e = 0; e < lepton_collection->getNumberOfElements(); ++e) {
+      UTIL::LCRelationNavigator* tau_navigator = nullptr;
+      EVENT::LCCollection* tau_relation_collection = nullptr;
+      try {
+        tau_relation_collection = event->getCollection("TauRelation");
+        tau_navigator = new UTIL::LCRelationNavigator(tau_relation_collection);
+      } catch (DataNotAvailableException &e) {
+        streamlog_out(ERROR) << "The relation collection " << "TauRelation"
+          << " is not available!" << std::endl;
+        throw marlin::StopProcessingException(this);
+      }
+      for (int e = 0; e < tau_collection->getNumberOfElements(); ++e) {
         RP* pfo_tau = static_cast<RP*>(
-            lepton_collection->getElementAt(e));
-        if (pfo_tau == nullptr) {
-          streamlog_out(ERROR) << "Wrong object type in collection '"
-            << "TauJets" << "'" << std::endl;
-          continue;
+            tau_collection->getElementAt(e));
+        if (pfo_tau->getCharge() > 0) {
+          plus_candidate_momenta.push_back(ref_util::getTlv(pfo_tau));
+          std::vector<RP*> candidate_vector;
+          for (auto tau_object : tau_navigator->getRelatedToObjects(pfo_tau)) {
+            RP* tau_part = static_cast<RP*>(tau_object);
+            candidate_vector.push_back(tau_part);
+          }
+          plus_candidate_rps.push_back (candidate_vector);
+        } else if (pfo_tau->getCharge() < 0) {
+          minus_candidate_momenta.push_back(ref_util::getTlv(pfo_tau));
+          std::vector<RP*> candidate_vector;
+          for (auto tau_object : tau_navigator->getRelatedToObjects(pfo_tau)) {
+            RP* tau_part = static_cast<RP*>(tau_object);
+            candidate_vector.push_back(tau_part);
+          }
+          minus_candidate_rps.push_back(candidate_vector);
         }
-        // TODO: Implement filling the candidate vectors for the tau, similar to the mu and electron case.
+        else {
+          streamlog_out(ERROR) << "Charge zero was not expected. How does an "
+          "isolated lepton object not have a charge??" << std::endl;
+        }
       }
     } else { // z_decay_channel_ == "ZDec_EL" or "ZDec_MU"
       EVENT::LCCollection* lepton_collection = nullptr;
@@ -180,11 +205,6 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
       for (int e = 0; e < lepton_collection->getNumberOfElements(); ++e) {
         RP* pfo_iso_lepton = static_cast<RP*>(
             lepton_collection->getElementAt(e));
-        if (pfo_iso_lepton == nullptr) {
-          streamlog_out(ERROR) << "Wrong object type in collection '"
-            << "ISOLeptons" << "'" << std::endl;
-          continue;
-        }
         // ISOtypes should always return positive number.
         // Must get the charge from a separate call.
         if (abs(tagged_lepton_types[e] == lepton_type)) {
@@ -201,7 +221,7 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
             minus_candidate_momenta.push_back(ref_util::getTlv(pfo_iso_lepton));
             std::vector<RP*> candidate_vector;
             candidate_vector.push_back(pfo_iso_lepton);
-            minus_candidate_rps.push_back (candidate_vector);
+            minus_candidate_rps.push_back(candidate_vector);
           }
           else {
             streamlog_out(ERROR) << "Charge zero was not expected. How does an "
@@ -284,11 +304,6 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
   overlay_vec  ->setSubset(true);
   for (int i = 0; i < full_collection->getNumberOfElements(); ++i) {
     RP* particle = static_cast<RP*>(full_collection->getElementAt(i));
-    if (particle == nullptr) {
-      streamlog_out(ERROR) << "Wrong object type in collection '"
-        << full_pfo_collection_name_ << "'" << std::endl;
-      continue;
-    }
     if (std::find(chosen_plus.begin(), chosen_plus.end(), particle)
         != chosen_plus.end()) {
       z_remnants_vec->addElement(particle);
