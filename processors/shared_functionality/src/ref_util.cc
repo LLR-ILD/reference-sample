@@ -2,6 +2,7 @@
 *    @author Jonas Kunath, LLR, CNRS, École Polytechnique, IPP.
 */
 // -- C++ STL headers.
+#include <cassert>
 #include <iomanip>  // Has std::setPrecision().
 #include <iostream>  // Has std::fixed.
 #include <string>  // Has std::to_string().
@@ -159,14 +160,14 @@ Tlv ref_util::getTlv(std::vector<RP*> rps) {
 }
 
 Tlv ref_util::getTlv(RP* rp) {
-  assert (rp);
+  assert(rp);
   Tlv four_vector = Tlv(rp->getMomentum()[0], rp->getMomentum()[1],
       rp->getMomentum()[2], rp->getEnergy());
   return four_vector;
 }
 
 Tlv ref_util::getTlv(MCP* mcp) {
-  assert (mcp);
+  assert(mcp);
   Tlv four_vector = Tlv(mcp->getMomentum()[0], mcp->getMomentum()[1],
       mcp->getMomentum()[2], mcp->getEnergy());
   return four_vector;
@@ -189,11 +190,6 @@ void ref_util::printFamilyTree(EVENT::LCCollection* collection) {
   std::vector<MCP*> printed_daughters;
   for (int i = 0; i < collection->getNumberOfElements(); ++i) {
     MCP* particle = static_cast<MCP*>(collection->getElementAt(i));
-    if (particle == nullptr) {
-      streamlog_out(ERROR) << "Wrong object type in collection. "
-        << "MCParticles are expected." << std::endl;
-      continue;
-    }
     // To avoid printing the same family branch multiple times:
     if (particle->getParents().size() == 0) {
       std::string indentation_level = "";
@@ -334,11 +330,6 @@ std::map<double, RP*> ref_util::seedDistance(
 bool ref_util::pdgIsInMcCol(int pdg, EVENT::LCCollection* mcCol) {
   for (int e = 0; e < mcCol->getNumberOfElements(); ++e) {
     MCP* mcp = static_cast<MCP*>(mcCol->getElementAt(e));
-    if (mcp == nullptr) {
-      streamlog_out(ERROR) << "Wrong object type in collection. "
-        << "Maybe it is not a MC Collection? " << std::endl;
-      continue;
-    }
     if (mcp->getPDG() == pdg) {
       return true;
     }

@@ -83,11 +83,6 @@ void ExampleProcessor::processEvent(EVENT::LCEvent* event) {
     // A cautious reading of a particle involves casting it with static_cast
     // (instead of dynamic_cast) and ensuring it is not a nullpointer.
     RP* particle = static_cast<RP*>(collection->getElementAt(e));
-    if (particle == nullptr) {
-      streamlog_out(ERROR) << "Wrong object type in collection '"
-        << pfo_collection_name_ << "'" << std::endl;
-      continue;
-    }
     // Start analysing your particle here! Enjoy!
     if (particle->getEnergy() < pfo_energy_cut_) {
       continue;

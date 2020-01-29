@@ -111,7 +111,7 @@ void CheckIsoLeptonProcessor::processEvent(EVENT::LCEvent* event) {
     relation_collection = event->getCollection("RecoMCTruthLink");
     relation_navigator = new UTIL::LCRelationNavigator(relation_collection);
   } catch (DataNotAvailableException &e) {
-    streamlog_out(ERROR) << "Linker collection " << "RecoMCTruthLink"
+    streamlog_out(ERROR) << "The relation collection " << "RecoMCTruthLink"
       << " is not available!" << std::endl;
     throw marlin::StopProcessingException(this);
   }
@@ -120,11 +120,6 @@ void CheckIsoLeptonProcessor::processEvent(EVENT::LCEvent* event) {
   std::vector<int> particles_per_type(ref_util::kPfoTypes);
   for (int e = 0; e < collection->getNumberOfElements(); ++e) {
     RP* particle = static_cast<RP*>(collection->getElementAt(e));
-    if (particle == nullptr) {
-      streamlog_out(ERROR) << "Wrong object type in collection '"
-        << pfo_collection_name_ << "'" << std::endl;
-      continue;
-    }
     int type_id = ref_util::particlePdgToName(abs(particle->getType()));
     particles_per_type[type_id]++;
   }
@@ -160,11 +155,6 @@ void CheckIsoLeptonProcessor::processEvent(EVENT::LCEvent* event) {
          ++e) {
       RP* isolated_lepton = static_cast<RP*>(
           isolated_lepton_collection->getElementAt(e));
-      if (isolated_lepton == nullptr) {
-        streamlog_out(ERROR) << "Wrong object type in collection '"
-          << "ISOLeptons" << "'" << std::endl;
-        continue;
-      }
       // Fill some histograms only with those IsoLeptons that are possibly
       // primary Z decay remnants.
       bool might_be_from_z = true;

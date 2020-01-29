@@ -59,13 +59,11 @@ class TauConesProcessor : public marlin::Processor {
   int n_wrong_track_number_{-1};
   int n_not_isolated_{-1};
   int n_tried_to_merge_{-1};
+  int n_taus_identified_{-1};
 
   int n_events_total_{-1};
   int n_runs_{-1};
-  int n_taus_found_{-1};
 
-  // Private helper functions
-  // TODO: Describe this function, rename the variables.
   // In each iteration of this function, build a new tau as a vector of RPs.
   // Any particle that is identified as part of the tau is removed from the
   // particle vector of its type (charged_rps or neutral_rps).

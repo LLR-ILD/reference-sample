@@ -96,17 +96,12 @@ void SlcioToRootProcessor::processEvent(EVENT::LCEvent* event) {
     relation_collection = event->getCollection("RecoMCTruthLink");
     relation_navigator = new UTIL::LCRelationNavigator(relation_collection);
   } catch (DataNotAvailableException &e) {
-    streamlog_out(ERROR) << "Linker collection " << "RecoMCTruthLink"
+    streamlog_out(ERROR) << "The relation collection " << "RecoMCTruthLink"
       << " is not available!" << std::endl;
     throw marlin::StopProcessingException(this);
   }
   for (int e = 0; e < rp_collection->getNumberOfElements(); ++e) {
     RP* particle = static_cast<RP*>(rp_collection->getElementAt(e));
-    if (particle == nullptr) {
-      streamlog_out(ERROR) << "Wrong object type in collection '"
-        << rp_collection_name_ << "'" << std::endl;
-      continue;
-    }
     // Now collect the actual information.
     EVENT::MCParticle* earliest_mc_parent = ref_util::getMcChainFromRp(
         particle, relation_navigator).back();
@@ -128,7 +123,7 @@ void SlcioToRootProcessor::processEvent(EVENT::LCEvent* event) {
 
 // ----------------------------------------------------------------------------
 void SlcioToRootProcessor::end() {
-  // Write the tree
+  // Fill the root file.
   root_file_->cd();
   tree_->Write();
   root_file_->Write(0);
@@ -138,7 +133,6 @@ void SlcioToRootProcessor::end() {
 
 //-----------------------------------------------------------------------------
 void SlcioToRootProcessor::initBranches(TTree* tree) {
-
   if (tree_ == 0) {
     streamlog_out(ERROR) << "::initBranches - Invalid tree pointer!"
       << std::endl;

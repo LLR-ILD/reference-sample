@@ -3,8 +3,7 @@
  *  a Higgs-boson part and an overlay part. The output of this processor
  *  are thus three ReconstructedParticle collections.
  *  TODO: A more detailed description.
- *  TODO: Add an option that allows changing the PID source (from IsoLep
- *  TODO:   tagging to MCTruthRelation, PandoraPID, ...).
+ *  TODO: Add an option that allows changing the PID source (from IsoLep tagging to MCTruthRelation, PandoraPID, ...).
  *
  *    @author Jonas Kunath, LLR, CNRS, École Polytechnique, IPP.
  */

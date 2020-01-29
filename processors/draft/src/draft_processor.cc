@@ -105,11 +105,6 @@ void DraftProcessor::printCollectionInfo(EVENT::LCEvent* event) {
   }
   for (int e = 0; e < pfo_collection->getNumberOfElements(); ++e) {
     RP* pf_particle = static_cast<RP*>(pfo_collection->getElementAt(e));
-    if (pf_particle == nullptr) {
-      streamlog_out(ERROR) << "Wrong object type in collection '"
-        << collection_name << "'" << std::endl;
-      continue;
-    }
     rpPrint(pf_particle);
     for (auto daughter_of_pf_particle : pf_particle->getParticles()) {
       RP* rp = static_cast<RP*>(daughter_of_pf_particle);
@@ -135,11 +130,6 @@ void DraftProcessor::printCollectionInfo(EVENT::LCEvent* event) {
   for (int e = 0; e < vertex_collection->getNumberOfElements(); ++e) {
     EVENT::Vertex* vertex_object =
       static_cast<EVENT::Vertex*>(vertex_collection->getElementAt(e));
-    if (vertex_object == nullptr) {
-      streamlog_out(ERROR) << "Wrong object type in collection '"
-        << vertex_collection_name << "'" << std::endl;
-      continue;
-    }
     streamlog_out(MESSAGE)
       << "  vertex_object->getPosition()          "
       <<    vertex_object->getPosition()[0] << ", "
@@ -246,9 +236,6 @@ void DraftProcessor::bbVertexPlayground(EVENT::LCEvent* event) {
   for (MyJet* jet : jet_list) {
     float jet_b_tag = jet->b_tag;
     // Next if-statement just to test my understanding of LCFIPLus.
-    if (jet_b_tag < 0 || jet_b_tag > 1) { // TODO: Remove.
-      streamlog_out(MESSAGE) << "jet_b_tag: " << jet_b_tag << std::endl;
-    }
     if (jet_b_tag > b_tag1) {
       b_tag2 = b_tag1;
       b_tag1 = jet_b_tag;
@@ -285,8 +272,8 @@ void DraftProcessor::bbVertexPlayground(EVENT::LCEvent* event) {
   for (MyJet* jet : jet_list) {
     float jet_c_tag = jet->c_tag;
     // Next if-statement just to test my understanding of LCFIPLus.
-    if (jet_c_tag < 0 || jet_c_tag > 1) { // TODO: Remove.
-      streamlog_out(MESSAGE) << "jet_c_tag: " << jet_c_tag << std::endl;
+    if (jet_c_tag < 0 || jet_c_tag > 1) { // Should never happen.
+      streamlog_out(ERROR) << "jet_c_tag: " << jet_c_tag << std::endl;
     }
     if (jet_c_tag > c_tag1) {
       c_tag2 = c_tag1;

@@ -5,13 +5,14 @@
  *
  *  As this is a collection of methods, there is no global explanation. Instead,
  *  each method should be explained individually, or be clear from its name.
+ *  It is advisable to check from time to time wether the methods described here
+ *  are still in use in the project.
  *
  *    @author Jonas Kunath, LLR, CNRS, École Polytechnique, IPP.
  */
 #ifndef _REF_UTIL_H_
 #define _REF_UTIL_H_
 // -- C++ STL headers.
-#include <cassert>
 #include <map>
 
 // -- ROOT headers.
@@ -33,7 +34,6 @@
 
 // -- Header for this processor and other project-specific headers.
 
-// TODO: Check which methods are actually in use in this project.
 namespace ref_util {
 
 enum PfoCodes {
@@ -101,7 +101,7 @@ std::vector<double> energyLineupWrtSeedDistance(
 // True if any of the members of the (Monte Carlo) collection has this pdg code.
 bool pdgIsInMcCol(int pdg, EVENT::LCCollection* mc_col);
 bool rpEnergySort(EVENT::ReconstructedParticle* rp1,
-                  EVENT::ReconstructedParticle* rp2);{
+                  EVENT::ReconstructedParticle* rp2){
   return fabs(rp1->getEnergy()) > fabs(rp2->getEnergy());
 }
 }  // namespace ref_util

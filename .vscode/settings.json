@@ -77,5 +77,13 @@
         "style": "cpp",
         "style_parser": "cpp",
         "plotter": "cpp"
-    }
+    },
+    "cSpell.words": [
+        "CNRS",
+        "LCIO",
+        "LCRELATION",
+        "Muennich",
+        "PFOs",
+        "XYZT"
+    ]
 }

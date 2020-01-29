@@ -103,10 +103,6 @@ void CheckRelationProcessor::processEvent(EVENT::LCEvent* event) {
   for (int e = 0; e < rp_collection->getNumberOfElements(); ++e) {
     // Information from relation when starting with Pfo/reconstructed particle.
     RP* pfo_particle = static_cast<RP*>(rp_collection->getElementAt(e));
-    if (pfo_particle == nullptr) {
-      streamlog_out(ERROR) << "Wrong object type in collection '"
-      << rp_collection << "'" << std::endl;
-    }
     if (relation_navigator->getRelatedToObjects(pfo_particle).size() > 1) {
       streamlog_out(MESSAGE) << "Reconstructed particle # " << e
         << ", Pandora PID: " << pfo_particle->getType() << std::endl;
