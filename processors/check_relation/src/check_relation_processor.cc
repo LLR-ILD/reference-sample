@@ -96,7 +96,7 @@ void CheckRelationProcessor::processEvent(EVENT::LCEvent* event) {
   try {
     rp_collection = event->getCollection(pfo_collection_name_);
   } catch (DataNotAvailableException &e) {
-    streamlog_out(ERROR) << "RP collection" << pfo_collection_name_
+    streamlog_out(ERROR) << "RP collection " << pfo_collection_name_
       << " is not available!" << std::endl;
     throw marlin::StopProcessingException(this);
   }

@@ -86,7 +86,7 @@ void SlcioToRootProcessor::processEvent(EVENT::LCEvent* event) {
   try {
     rp_collection = event->getCollection(rp_collection_name_);
   } catch (DataNotAvailableException &e) {
-    streamlog_out(ERROR) << "RP collection" << rp_collection_name_
+    streamlog_out(ERROR) << "RP collection " << rp_collection_name_
       << " is not available!" << std::endl;
     throw marlin::StopProcessingException(this);
   }

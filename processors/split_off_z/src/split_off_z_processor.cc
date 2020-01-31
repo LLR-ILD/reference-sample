@@ -78,7 +78,7 @@ SplitOffZProcessor::SplitOffZProcessor() :
     "OutputRootFile",
     "Name of the output root file.",
     out_root_filename_,
-    std::string("split_of_z"));
+    std::string("split_off_z"));
 }
 
 // ----------------------------------------------------------------------------
@@ -115,7 +115,7 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
   try {
     full_collection = event->getCollection(full_pfo_collection_name_);
   } catch (DataNotAvailableException &e) {
-    streamlog_out(ERROR) << "RP collection" << full_pfo_collection_name_
+    streamlog_out(ERROR) << "RP collection " << full_pfo_collection_name_
       << " is not available!" << std::endl;
     throw marlin::StopProcessingException(this);
   }
@@ -146,7 +146,7 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
       try {
         tau_collection = event->getCollection("TauJets");
       } catch (DataNotAvailableException &e) {
-        streamlog_out(ERROR) << "RP collection" << "TauJets"
+        streamlog_out(ERROR) << "RP collection " << "TauJets"
           << " is not available! Remember calling the TauFinder Processor "
           "before this one." << std::endl;
         throw marlin::StopProcessingException(this);
@@ -191,7 +191,7 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
       try {
         lepton_collection = event->getCollection("ISOLeptons");
       } catch (DataNotAvailableException &e) {
-        streamlog_out(ERROR) << "RP collection" << "ISOLeptons"
+        streamlog_out(ERROR) << "RP collection " << "ISOLeptons"
           << " is not available! Remember calling the IsoLeptonTagging "
           "Processor before this one." << std::endl;
         throw marlin::StopProcessingException(this);

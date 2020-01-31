@@ -31,7 +31,7 @@ using MCP = EVENT::MCParticle;
 using Tlv = ROOT::Math::XYZTVector;
 const int kMaxChargedTracks = 4;
 const int kMaxOverallTracks = 10; // TODO: maybe those two as processor parameters?
-const int kPrintInfoOfEventNumber = 5;
+const int kPrintInfoOfEventNumber = 2;
 const bool kAddUpCollectionNumbers = true;
 
 // This line allows to register your processor in marlin when calling
@@ -78,19 +78,19 @@ TauConesProcessor::TauConesProcessor() :
     "SearchConeAngle",
     "Opening angle of the search cone for the tau jet in rad.",
     search_cone_angle_,
-    0.05f);
+    0.1f);
 
   registerProcessorParameter(
     "IsolationConeAngle",
     "Outer isolation cone around the search cone of the tau jet in rad.",
     isolation_cone_angle_,
-    0.07f);
+    0.2f);
 
   registerProcessorParameter(
     "IsolationEnergy",
     "Maximal allowed energy within the isolation cone region.",
     max_isolation_energy_,
-    5.0f);
+    2.0f);
 
   registerProcessorParameter(
     "PtCut",
@@ -115,6 +115,12 @@ TauConesProcessor::TauConesProcessor() :
     "Upper limit on the invariant mass of the tau candidate.",
     max_m_invariant_,
     2.0f);
+
+  registerProcessorParameter(
+    "OutputRootFile",
+    "Name of the output root file.",
+    out_root_filename_,
+    std::string("tau_cones"));
 }
 
 // ----------------------------------------------------------------------------
@@ -127,14 +133,17 @@ void TauConesProcessor::init() {
   fnn += ".root";
   root_out_ = new TFile(fnn, "recreate");
   fail_reason_tuple_ = new TNtuple("fail_reason_tuple_","fail_reason_tuple_",
-      ":m_invariant_too_high:m_invariant_negative: wrong_track_number"
-        ":not_isolated:tried_to_merge:taus_identified");
+      "m_invariant_too_high:m_invariant_negative:wrong_track_number"
+        ":not_isolated:tried_to_merge:taus_identified"
+        ":background_suppressed_particles");
   n_m_invariant_too_high_ = 0;
   n_m_invariant_negative_ = 0;
   n_wrong_track_number_ = 0;
   n_not_isolated_ = 0;
   n_tried_to_merge_ = 0;
   n_taus_identified_ = 0;
+  n_background_suppressed_particles_ = 0;
+
   n_events_total_ = 0;
   n_runs_ = 0;
 }
@@ -151,12 +160,19 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
   streamlog_out(DEBUG) << "Processing event no " << event->getEventNumber()
     << " - run " << event->getEventNumber() << std::endl;
   ++n_events_total_;
+  n_m_invariant_too_high_per_event_ = 0;
+  n_m_invariant_negative_per_event_ = 0;
+  n_wrong_track_number_per_event_ = 0;
+  n_not_isolated_per_event_ = 0;
+  n_tried_to_merge_per_event_ = 0;
+  n_taus_identified_per_event_ = 0;
+  n_background_suppressed_particles_per_event_ = 0;
   // Prepare the input and output collections.
   EVENT::LCCollection* pfo_collection = nullptr;
   try {
     pfo_collection = event->getCollection(pfo_collection_name_);
   } catch (DataNotAvailableException &e) {
-    streamlog_out(ERROR) << "RP collection" << pfo_collection_name_
+    streamlog_out(ERROR) << "RP collection " << pfo_collection_name_
       << " is not available!" << std::endl;
     throw marlin::StopProcessingException(this);
   }
@@ -180,7 +196,7 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
   for (int e = 0; e < pfo_collection->getNumberOfElements(); ++e) {
     RP* particle = static_cast<RP*>(pfo_collection->getElementAt(e));
     Tlv tlv = ref_util::getTlv(particle);
-	if ((tlv.Pt() < p_t_cut_) && (cos(tlv.Theta()) > max_cos_theta_)) {
+	if ((tlv.Pt() > p_t_cut_) && (cos(tlv.Theta()) < max_cos_theta_)) {
         all_rps.push_back(particle);
         int charge = particle->getCharge();
         if (charge == 0) {
@@ -193,6 +209,9 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
             << std::endl;
           throw marlin::StopProcessingException(this);
         }
+    } else {
+        ++n_background_suppressed_particles_;
+        ++n_background_suppressed_particles_per_event_;
     }
   }
   // The algorithm depends on the order of the charged RPs (the possible seeds).
@@ -234,21 +253,26 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
       // rest collection and maybe print some information.
       if (tau_tlv.M() > max_m_invariant_) {
           ++n_m_invariant_too_high_;
+          ++n_m_invariant_too_high_per_event_;
       } else if (tau_tlv.M() < 0) {
         ++n_m_invariant_negative_;
+        ++n_m_invariant_negative_per_event_;
       } else {
         ++n_wrong_track_number_;
+        ++n_wrong_track_number_per_event_;
       }
       for (RP* part: tau_parts) {
         rest_collection->addElement(part);
       }
       if (n_events_total_== kPrintInfoOfEventNumber) {
-        streamlog_out(DEBUG) << "A tau candidate failed:"
+        streamlog_out(MESSAGE) << "A tau candidate failed:"
           << "  inv.Mass=" << tau_tlv.M() << ",  Pt=" << tau_tlv.Pt()
-          << ",  E="<<tau_tlv.E() << ",  charged tracks: "<< n_charged_tracks
-          << ",  particles: " << tau->getParticles().size()
+          << ",  E="<<tau_tlv.E() << std::endl << "  Charged tracks: "
+          << n_charged_tracks << ",  particles: " << tau->getParticles().size()
           << ",  phi=" << tau_tlv.Phi() << ",  theta=" << tau_tlv.Theta()
-          << std::endl;
+          << std::endl << " (Note: The candidate will not be considered any "
+            "further. This includes not being considered for the tau numbering "
+            "in the merger information." << std::endl;
 	  }
     } else {
       // These RPs are accepted as true taus.
@@ -269,17 +293,27 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
   // well as the RP vector itself). It is therefore performed in an additional
   // step later on.
   std::vector<std::vector<RPImpl*>::iterator> reject_as_taus;
-
+  // While the tau candidate that is merged into another tau is indeed rejected
+  // as a tau, its parts are not necessarily rejected as tau parts. Thus we will
+  // have to treat reject-by-merging differently and need an additional vector.
+  std::vector<std::vector<RPImpl*>::iterator> rejected_by_merging;
   // Sometimes the FindTau algorithm splits a tau. Improve the performance by
   // merging taus that are very close together.
   if (newly_formed_taus.size() > 1) {
     for (std::vector<RPImpl*>::iterator iter_tau1 = newly_formed_taus.begin();
-    // Two conditions: did not reach end yet and the tau was not already merged.
-    iter_tau1 < newly_formed_taus.end() && (std::find(reject_as_taus.begin(),
-        reject_as_taus.end(), iter_tau1) != reject_as_taus.end());
-    ++iter_tau1) {
+    iter_tau1 < newly_formed_taus.end(); ++iter_tau1) {
+      // Actually two conditions have to be satisfied: Did not reach end yet and
+      // the tau was not already merged.
+      if (std::find(reject_as_taus.begin(),reject_as_taus.end(), iter_tau1)
+      != reject_as_taus.end()) {
+          continue;
+      }
       for (std::vector<RPImpl*>::iterator iter_tau2 = iter_tau1 + 1;
       iter_tau2 < newly_formed_taus.end(); ++iter_tau2) {
+        if (std::find(reject_as_taus.begin(),reject_as_taus.end(), iter_tau2)
+        != reject_as_taus.end()) {
+            continue;
+        }
         RPImpl* tau1 = *iter_tau1;
         Tlv tau1_tlv = ref_util::getTlv(tau1);
         RPImpl* tau2 = *iter_tau2;
@@ -291,13 +325,18 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
         if (angle_between_taus > search_cone_angle_) continue;
         // Now let's merge.
         ++n_tried_to_merge_;
+        ++n_tried_to_merge_per_event_;
         tau1_tlv += tau2_tlv;
         tau1->setEnergy(tau1_tlv.E());
         double momentum[3];
         tau1_tlv.GetCoordinates(momentum);
         tau1->setMomentum(momentum);
 		tau1->setCharge(tau1->getCharge()+tau2->getCharge());
+        for (RP* tau2_part: tau2->getParticles()) {
+          tau1->addParticle(tau2_part);
+        }
         reject_as_taus.push_back(iter_tau2);
+        rejected_by_merging.push_back(iter_tau2);
         n_charged_tracks_per_tau[iter_tau1-newly_formed_taus.begin()]
             += n_charged_tracks_per_tau[iter_tau2-newly_formed_taus.begin()];
         if (n_events_total_== kPrintInfoOfEventNumber) {
@@ -305,18 +344,17 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
               iter_tau2-newly_formed_taus.begin()];
           int n_charged_tracks_tau1_only = n_charged_tracks_per_tau[
               iter_tau1-newly_formed_taus.begin()] - n_charged_tracks_tau2;
-          int n_neutral_particles_tau1_only = tau1->getParticles().size()
-              - tau2->getParticles().size();
-          streamlog_out(DEBUG) << "Tau Merging: "
-            << iter_tau1 - newly_formed_taus.begin() << " with "
-            << iter_tau2 - newly_formed_taus.begin() << "." << std::endl;
-          streamlog_out(DEBUG) << "Angle was: " << angle_between_taus
+          streamlog_out(MESSAGE) << "Tau Merging: "
+            << iter_tau1 - newly_formed_taus.begin() + 1 << " with "
+            << iter_tau2 - newly_formed_taus.begin() + 1 << "." << std::endl;
+          streamlog_out(MESSAGE) << "  Angle was: " << angle_between_taus
             << ". Combined kinematics: " << "E: " << tau1_tlv.E()
             << ", theta: " << tau1_tlv.Theta() << ", phi: " << tau1_tlv.Phi()
-            << ", charged tracks: " << n_charged_tracks_tau1_only << "+"
+            << "." << std::endl
+            << "  Charged tracks: " << n_charged_tracks_tau1_only << "+"
             << n_charged_tracks_tau2 << ", particles: "
-            << tau1->getParticles().size() << "+" << tau2->getParticles().size()
-            << std::endl;
+            << tau1->getParticles().size() << "+"
+            << tau2->getParticles().size() << std::endl;
         }
         // TODO: Simlar to merging conditions above. Consider writing a merge-function.
         int charged_tracks_in_merged = n_charged_tracks_per_tau[
@@ -327,95 +365,119 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
           reject_as_taus.push_back(iter_tau1);
           if (tau1_tlv.M() > max_m_invariant_) {
               ++n_m_invariant_too_high_;
+              ++n_m_invariant_too_high_per_event_;
           } else if (tau1_tlv.M() < 0) {
             ++n_m_invariant_negative_;
+            ++n_m_invariant_negative_per_event_;
           } else {
             ++n_wrong_track_number_;
+            ++n_wrong_track_number_per_event_;
           }
-        } else {  // The tau conditions are satisfied for the merged tau.
-          for (RP* tau2_part: tau2->getParticles()) {
-            tau1->addParticle(tau2_part);
-            ++n_taus_identified_;
+          if (n_events_total_== kPrintInfoOfEventNumber) {
+            streamlog_out(MESSAGE) << "The merged object does not qualify as a "
+              "tau anymore." << std::endl;
           }
         }
       }
     }
   }
-
   // A (final) candidate rejection based on Isolation (cone) and number of
   // remnants.
   for (std::vector<RPImpl*>::iterator iter_tau = newly_formed_taus.begin();
-  // Two conditions: did not reach end yet and the tau was not already merged.
-  iter_tau < newly_formed_taus.end() && (std::find(reject_as_taus.begin(),
-      reject_as_taus.end(), iter_tau) != reject_as_taus.end());
-  ++iter_tau) {
-    RPImpl* tau = *iter_tau;
-    Tlv tau_tlv = ref_util::getTlv(tau);
-    float isolation_energy{0.f};
-    int n_isolation_particles{0};
-    int n_charged_tracks = n_charged_tracks_per_tau[
-        iter_tau-newly_formed_taus.begin()];
-    // Make sure the number of particles is realistic for a tau decay.
-    if ((tau->getParticles().size() > kMaxOverallTracks)
-    ||  (n_charged_tracks > kMaxChargedTracks)) {
-      ++n_wrong_track_number_;
-      reject_as_taus.push_back(iter_tau);
-      continue; // Do not have to check for isolation as we already rejected.
-    }
-    // Now check for isolation.
-    for (RP* particle : all_rps) {
-        Tlv particle_tlv = ref_util::getTlv(particle);
-        double angle_to_tau = acos(ROOT::Math::VectorUtil::CosTheta(
-            tau_tlv, particle_tlv));
-        if (angle_to_tau > search_cone_angle_
-        && angle_to_tau < isolation_cone_angle_) {
-          ++n_isolation_particles;
-          isolation_energy += particle_tlv.E();
-        }
-    }
-    if (isolation_energy > max_isolation_energy_) {
-      ++n_not_isolated_;
-      reject_as_taus.push_back(iter_tau);
-      if (n_events_total_== kPrintInfoOfEventNumber) {
-        streamlog_out(DEBUG) << "Isolation failed:  tau E=" << tau_tlv.E()
-          << ", isolation E=" << isolation_energy << " from "
-          << n_isolation_particles << "particles." << std::endl;
-      }
-    }
-  }
-
-  // Put the  tau candidate particles in the right collections, depending on
-  // wether they ended up being rejected or not.
-  for (std::vector<RPImpl*>::iterator iter_tau = newly_formed_taus.begin();
   iter_tau < newly_formed_taus.end(); ++iter_tau) {
     RPImpl* tau = *iter_tau;
-    if (std::find(reject_as_taus.begin(), reject_as_taus.end(), iter_tau)
+    // If already rejected (since its the part that got merged into another)
+    // tau, there is no need to try to reject on top.
+    if (std::find(reject_as_taus.begin(),reject_as_taus.end(), iter_tau)
     == reject_as_taus.end()) {
-      // These are finally our tau candidates.
-      tau_collection->addElement(tau);
-      for (RP* tau_remnant: tau->getParticles()) {
-	    IMPL::LCRelationImpl* relation = new LCRelationImpl(tau, tau_remnant);
-	    tau_relation_collection->addElement(relation);
+      Tlv tau_tlv = ref_util::getTlv(tau);
+      float isolation_energy{0.f};
+      int n_isolation_particles{0};
+      int n_charged_tracks = n_charged_tracks_per_tau[
+          iter_tau-newly_formed_taus.begin()];
+      // Make sure the number of particles is realistic for a tau decay.
+      if ((tau->getParticles().size() > kMaxOverallTracks)
+      ||  (n_charged_tracks > kMaxChargedTracks)) {
+        ++n_wrong_track_number_;
+        ++n_wrong_track_number_per_event_;
+      } else {  // Do not have to check for isolation if we  already rejected.
+        for (RP* particle : all_rps) {
+          Tlv particle_tlv = ref_util::getTlv(particle);
+          double angle_to_tau = acos(ROOT::Math::VectorUtil::CosTheta(
+              tau_tlv, particle_tlv));
+          if (angle_to_tau > search_cone_angle_
+          && angle_to_tau < isolation_cone_angle_) {
+            ++n_isolation_particles;
+            isolation_energy += particle_tlv.E();
+          }
+        }
+        if (isolation_energy > max_isolation_energy_) {
+          ++n_not_isolated_;
+          ++n_not_isolated_per_event_;
+          if (n_events_total_== kPrintInfoOfEventNumber) {
+            streamlog_out(MESSAGE) << "Isolation failed:  tau E=" << tau_tlv.E()
+              << ", isolation E=" << isolation_energy << " from "
+              << n_isolation_particles << " particles." << std::endl;
+          }
+        } else {
+            continue;  // Exactly the non-rejected particles arrive in this case.
+        }
       }
-      if (n_events_total_== kPrintInfoOfEventNumber) {
-        Tlv tau_tlv = ref_util::getTlv(tau);
-        streamlog_out(DEBUG) << "Identified a tau: E=" << tau_tlv.E()
-          << ", charged tracks: "
-          << n_charged_tracks_per_tau[iter_tau-newly_formed_taus.begin()]
-          << ", particles: " << tau->getParticles().size() << std::endl;
-      }
-    } else {
+      reject_as_taus.push_back(iter_tau);
+    }
+    // Here we are left with exactly the particles that were rejected in any of
+    // the previous algorithms.
+    // If they were rejected-by-merge, they re not actually invalidated as taus.
+    bool is_merge_rejected = std::find(rejected_by_merging.begin(),
+        rejected_by_merging.end(), iter_tau) != rejected_by_merging.end();
+    if (not is_merge_rejected) {
       for (RP* not_tau_part: tau->getParticles()) {
         rest_collection->addElement(not_tau_part);
       }
     }
   }
 
+  // What was not rejected up to now will be considered part of a tau. Fill
+  // the two tau related collections.
+  for (std::vector<RPImpl*>::iterator iter_tau = newly_formed_taus.begin();
+  iter_tau < newly_formed_taus.end(); ++iter_tau) {
+    // This time we want those taus that were NOT rejected.
+    if (std::find(reject_as_taus.begin(),reject_as_taus.end(), iter_tau)
+    != reject_as_taus.end()) {
+      continue;
+    }
+    RPImpl* tau = *iter_tau;
+    // These are finally our tau candidates.
+    ++n_taus_identified_;
+    ++n_taus_identified_per_event_;
+    tau_collection->addElement(tau);
+    for (RP* tau_remnant: tau->getParticles()) {
+	  IMPL::LCRelationImpl* relation = new LCRelationImpl(tau, tau_remnant);
+	  tau_relation_collection->addElement(relation);
+    }
+    if (n_events_total_== kPrintInfoOfEventNumber) {
+      Tlv tau_tlv = ref_util::getTlv(tau);
+      streamlog_out(MESSAGE) << "Identified a tau: E=" << tau_tlv.E()
+        << ", charged tracks: "
+        << n_charged_tracks_per_tau[iter_tau-newly_formed_taus.begin()]
+        << ", particles: " << tau->getParticles().size() << "." << std::endl;
+    }
+  }
+
   // Wrapping up. Check that all particles found their place in the collections.
   if (kAddUpCollectionNumbers) {
+    streamlog_out(DEBUG) << "Collection member count: "
+      << pfo_collection->getNumberOfElements() << " ?= "
+      << rest_collection->getNumberOfElements()
+          + tau_relation_collection->getNumberOfElements()
+          + n_background_suppressed_particles_per_event_ << std::endl << "   = "
+      << rest_collection->getNumberOfElements() << " + "
+      << tau_relation_collection->getNumberOfElements() << " + "
+      << n_background_suppressed_particles_per_event_ << std::endl;
     assert(pfo_collection->getNumberOfElements()
         == rest_collection->getNumberOfElements()
-          + tau_relation_collection->getNumberOfElements());
+          + tau_relation_collection->getNumberOfElements()
+          + n_background_suppressed_particles_per_event_);
     std::vector<RP*> relation;
     UTIL::LCRelationNavigator* relation_navigator
         = new UTIL::LCRelationNavigator(tau_relation_collection);
@@ -426,6 +488,11 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
     }
     assert(n_relations_from == tau_relation_collection->getNumberOfElements());
   }
+  fail_reason_tuple_->Fill(n_m_invariant_too_high_per_event_,
+      n_m_invariant_negative_per_event_, n_wrong_track_number_per_event_,
+      n_not_isolated_per_event_, n_tried_to_merge_per_event_,
+      n_taus_identified_per_event_,
+      n_background_suppressed_particles_per_event_);
   event->addCollection(tau_collection, tau_collection_name_);
   event->addCollection(rest_collection, rest_collection_name_);
   event->addCollection(tau_relation_collection, tau_relation_collection_name_);
@@ -434,9 +501,6 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
 // ----------------------------------------------------------------------------
 void TauConesProcessor::end() {
   // Fill the root file.
-  fail_reason_tuple_->Fill(n_m_invariant_too_high_, n_m_invariant_negative_,
-      n_wrong_track_number_, n_not_isolated_, n_tried_to_merge_,
-      n_taus_identified_);
   root_out_->cd();
   fail_reason_tuple_->Write();
   root_out_->Write(0);
@@ -457,11 +521,14 @@ void TauConesProcessor::end() {
     << n_not_isolated_ << std::endl;
   streamlog_out(MESSAGE) << "  Tried to merge     :  "
     << n_tried_to_merge_ << std::endl;
+  streamlog_out(MESSAGE) << "  Particles that were not considered due to "
+  "background suppression:  "
+    << n_background_suppressed_particles_ << std::endl;
 }
 
 // ----------------------------------------------------------------------------
 bool TauConesProcessor::FindTau(std::vector<RP*> &charged_rps,
-    std::vector<RP*> &neutral_rps, std::vector<std::vector<RP*> > &taus) {
+    std::vector<RP*> &neutral_rps, std::vector<std::vector<RP*>> &taus) {
   std::vector<RP*>  tau;
   if (charged_rps.size() == 0) return false;  // Need charged p to seed the tau.
   double max_opening_angle = 0;
@@ -481,7 +548,7 @@ bool TauConesProcessor::FindTau(std::vector<RP*> &charged_rps,
   charged_rps.erase(seed_rp_ptr);
   Tlv seed_tlv = ref_util::getTlv(tau_seed);
   if (n_events_total_== kPrintInfoOfEventNumber) {  // Just for printing info.
-    streamlog_out(DEBUG) << "Seeding: " << tau_seed->getType() << "\t"
+    streamlog_out(MESSAGE) << "Seeding: " << tau_seed->getType() << "\t"
       << seed_tlv.E() << "\t" << seed_tlv.P() << "\t"
       << seed_tlv.Theta() << "\t" << seed_tlv.Phi() << std::endl;
   }
@@ -498,8 +565,8 @@ bool TauConesProcessor::FindTau(std::vector<RP*> &charged_rps,
       tau.push_back(track);
       charged_rps.erase(charged_rp_ptr);
       if (n_events_total_== kPrintInfoOfEventNumber) {// Just for printing info.
-        streamlog_out(DEBUG) << "Adding charged: " << track->getType() << "\t"
-          << charged_tlv.E() << "\t" << charged_tlv.P() << "\t"
+        streamlog_out(MESSAGE) << "  Adding charged: " << track->getType()
+          << "\t" << charged_tlv.E() << "\t" << charged_tlv.P() << "\t"
           << charged_tlv.Theta() << "\t" << charged_tlv.Phi() << std::endl;
 	  }
       if (angle_to_seed > max_opening_angle) max_opening_angle = angle_to_seed;
@@ -522,8 +589,8 @@ bool TauConesProcessor::FindTau(std::vector<RP*> &charged_rps,
       tau.push_back(deposit);
       neutral_rps.erase(neutral_rp_ptr);
       if (n_events_total_== kPrintInfoOfEventNumber) {// Just for printing info.
-        streamlog_out(DEBUG) << "Adding neutral: " << deposit->getType() << "\t"
-          << neutral_tlv.E() << "\t" << neutral_tlv.P() << "\t"
+        streamlog_out(MESSAGE) << "  Adding neutral: " << deposit->getType()
+          << "\t" << neutral_tlv.E() << "\t" << neutral_tlv.P() << "\t"
           << neutral_tlv.Theta() << "\t" << neutral_tlv.Phi() << std::endl;
 	  }
       if (angle_to_seed > max_opening_angle) max_opening_angle = angle_to_seed;
