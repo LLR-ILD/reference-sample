@@ -60,6 +60,15 @@ class TauConesProcessor : public marlin::Processor {
   int n_not_isolated_{-1};
   int n_tried_to_merge_{-1};
   int n_taus_identified_{-1};
+  int n_background_suppressed_particles_{-1};
+
+  int n_m_invariant_too_high_per_event_{-1};
+  int n_m_invariant_negative_per_event_{-1};
+  int n_wrong_track_number_per_event_{-1};
+  int n_not_isolated_per_event_{-1};
+  int n_tried_to_merge_per_event_{-1};
+  int n_taus_identified_per_event_{-1};
+  int n_background_suppressed_particles_per_event_{-1};
 
   int n_events_total_{-1};
   int n_runs_{-1};

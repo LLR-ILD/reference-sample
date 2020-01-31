@@ -337,3 +337,8 @@ bool ref_util::pdgIsInMcCol(int pdg, EVENT::LCCollection* mcCol) {
   // Went through all particles and none was of type pdg.
   return false;
 }
+
+bool ref_util::rpEnergySort(EVENT::ReconstructedParticle* rp1,
+                  EVENT::ReconstructedParticle* rp2){
+  return fabs(rp1->getEnergy()) > fabs(rp2->getEnergy());
+}
