@@ -1,7 +1,10 @@
 # Folders to ignore
 build/*
 lib/*
+*__pycache__*
+
 
 #
 log*
 *.root
+*.xml
