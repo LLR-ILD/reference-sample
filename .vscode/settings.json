@@ -76,7 +76,12 @@
         "back_area": "cpp",
         "style": "cpp",
         "style_parser": "cpp",
-        "plotter": "cpp"
+        "plotter": "cpp",
+        "vec2": "cpp",
+        "vec3": "cpp",
+        "event": "cpp",
+        "point": "cpp",
+        "*.src": "cpp"
     },
     "cSpell.words": [
         "CNRS",
