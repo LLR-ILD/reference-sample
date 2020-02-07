@@ -55,7 +55,7 @@ def write_jsons(type_prefix, processors_dict, descriptions_dict):
         json.dump(descriptions_dict, write_file, indent=4, sort_keys=True)
 
 # ------------------------------------------------------------------------------
-# Main exposing function for this folder.
+# Main exposing functions for this folder.
 def update_registered(
     confirm_ilcsoft_defaults=False,
     ilcsoft_path="/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02",
@@ -96,3 +96,15 @@ def update_registered(
         ilcsoft_processors, ilcsoft_descriptions = marlin_processors_dict(
             ilcsoft_files, return_descriptions=True, load_only=load_only)
         write_jsons("ilcsoft", ilcsoft_processors, ilcsoft_descriptions)
+
+def processors_dict_from_json():
+    """Load those processors dicts (with parameter dicts as values) previously
+    saved in the json files back into one python dict.
+    """
+    processors_dict = {}
+    read_jsons = [os.path.join(json_folder(), json_name(type_prefix))
+        for type_prefix in ["ilcsoft", "project"]]
+    for read_json in read_jsons:
+        with open(read_json, "r") as read_file:
+            processors_dict.update(json.load(read_file))
+    return processors_dict

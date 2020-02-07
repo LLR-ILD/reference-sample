@@ -52,7 +52,7 @@ def load_global_processor_defaults(
     ):
     """
 
-    : param ilcsoft_path [str]: There is some (weak) dependence on the ILCSoft
+    : param ilcsoft_path (str): There is some (weak) dependence on the ILCSoft
         version: The files and their defaults might have changed.
         The dependence is weak, as processors should be carried over from older
         versions anyways. Thus, as long as a recent ILCSoft version is chosen
