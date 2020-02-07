@@ -239,9 +239,9 @@ def marlin_processors_dict(look_at_list, return_descriptions=False,
     This per-parameter dict has information about the name of the parameter, its
     default value and, if applicable, its lcioIn/lcioOut collection type.
     The descriptions of the parameters can be returned in an additional dict.
-    : param look_at_list [list(string)]: The .cpp file locations.
-    : param return_descriptions [bool]: default=False.
-    : param load_only [None|list(str)]: If None, load all processors.
+    : param look_at_list (list[string]): The .cpp file locations.
+    : param return_descriptions (bool): default=False.
+    : param load_only (None|list[str]): If None, load all processors.
         Else, put only those processors into the dict that are inside this list.
     """
     param_dict = {}
