@@ -1,0 +1,30 @@
+# Singularity definition example with miniconda3.
+bootstrap: docker
+#from: scientificlinux/sl:6
+from: cern/slc6-base
+
+%files
+    environment.yml
+# This command assumes at least singularity 2.3
+%environment
+    PATH="/usr/local/miniconda3/bin:$PATH"
+%post
+    yum update -y
+    yum install -y freetype mesa-libGLU libSM wget
+    # Install Miniconda3.
+    if [ ! -d /usr/local/miniconda3 ]; then
+         wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+            -O miniconda3.sh && \
+         bash miniconda3.sh -b -p /usr/local/miniconda3 && \
+         rm miniconda3.sh
+    fi
+    # Set the conda path.
+    export PATH="/usr/local/miniconda3/bin:$PATH"
+    # Install my pyroot3 conda.
+    conda env create -f environment.yml
+    # Make /data and so we can mount it to access external resources.
+    #if [ ! -d /data ]; then mkdir /data; fi
+
+%runscript
+    source /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/init_ilcsoft.sh
+    exec /bin/bash

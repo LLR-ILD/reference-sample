@@ -3,7 +3,12 @@
 #  Class definition file for Pysteer.
 #
 ################################################################################
-from .marlin_global import MarlinGlobal
+from datetime import datetime
+import os
+from pathlib import Path
+import shutil
+import subprocess
+from .marlin_global import lcio_file_dict, MarlinGlobal
 from .marlin_xml import write_steering_file, xml_string
 from .write_processor_parameters import (
     update_registered, processors_dict_from_json)
@@ -11,9 +16,9 @@ from .write_processor_parameters import (
 class Pysteer(object):
     """Interface for the creation of Marlin steering files.
 
-    For now, just builds a dictionary file with info on the registered
-    parameters in the Marlin processors that are linked with the class.
-
+    It does not seem necessary to alter the defaults of `lcio_file_dict` in this
+    project, so this is not included in the interface. Ig needed, this could be
+    done explicitely by changing self.lcio_dict.
     : param change_parameter_defaults (dict[dict]): Dict of the same form of
         the processors dicts. Those processors specified will have the dicts
         of those parameters that are specified replaced by the given parameter
@@ -59,6 +64,7 @@ class Pysteer(object):
             self.marlin_global =  marlin_global
         self.ilcsoft_path = ilcsoft_path
         self.ilcsoft_processors = ilcsoft_processors
+        self.lcio_dict = lcio_file_dict()
         self.processors_dict = {}
         self.set_parameter_value = set_parameter_value
 
@@ -156,7 +162,57 @@ class Pysteer(object):
             self.execute_processors, global_dict, self.processors_dict)
 
     # --------------------------------------------------------------------------
-    def write(self, xml_name):
+    def run(self, batch_mode=True, debug_process="Pe3e3h", pols=None,
+        batch_processes=None):
+        """Actually to the analysis by calling Marlin on a steering file.
+        : param batch_mode (bool): If true (default), and if a batch sytsem is
+            found on the machine, the jobs are sent to the batch system.
+            Else, the job is directly run on the machine. In this case, only
+            the process `debug_process` is used.
+        : debug_process (str): The process that is used if no batch system is
+            used/found.
+        : param pols (list[str]): The default (None) uses all polarisations.
+            Else only the specified polarisations are used.
+        : param batch_processes (list[str]): By default (None), all process
+            files are used. To restrict the analysis to specific processes, fill
+            this list. This parameter is only used if batch_mode == True.
+        """
+        now = datetime.now()
+        run_dir = Path.home() / Path(now.strftime("%Y-%m-%d-%H:%M:%S"))
+        run_dir.mkdir()
+        def make_files(files, process_dir, process, cmd_template):
+            self.marlin_global.LCIOInputFiles = ("\n          ".join(files)
+                + "\n     ")
+            steer_name = process + ".xml"
+            log_name = "log_" + steer_name.rstrip(".xml") + ".txt"
+            self.write(process_dir / steer_name)
+            cmd = cmd_template.format(steer_name, log_name)
+            subprocess.call(cmd, cwd=process_dir, shell=True) # TODO: Get rid of securit-flawed shell=True
+
+        if batch_mode and shutil.which("bsub") is not None:
+            for pol, processes_dict in self.lcio_dict.items():
+                if pols and pol in pols:
+                    continue
+                for process, files in processes_dict.items():
+                    if batch_processes and process in batch_processes:
+                        continue
+                    process_dir = run_dir / pol / process
+                    process_dir.mkdir(parents=True, exist_ok=True)
+                    cmd_template = "bsub -q s 'Marlin {} &> {} 2>&1'"
+                    make_files(files, process_dir, process,
+                        cmd_template=cmd_template)
+        else:
+            if not pols:
+                pols = self.lcio_dict.keys()
+            files = [""]
+            for pol in pols:
+                if self.lcio_dict[pol].get(debug_process):
+                    files.extend(self.lcio_dict[pol].get(debug_process))
+            cmd_template = "Marlin {} &> {} 2>&1"
+            make_files(files, process_dir=run_dir, process=debug_process,
+                cmd_template=cmd_template)
+
+
 
 
 

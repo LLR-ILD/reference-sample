@@ -1,0 +1,10 @@
+name: pyroot3
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - root
+  - root_numpy
+  - root_pandas
+prefix: /home/kunath/miniconda3/envs/pyroot3
+

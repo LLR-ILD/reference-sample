@@ -8,3 +8,6 @@ lib/*
 log*
 *.root
 *.xml
+# Singularity images are too big to version control them. Also, we can easily
+# get them from bootstrapping.
+*.img
