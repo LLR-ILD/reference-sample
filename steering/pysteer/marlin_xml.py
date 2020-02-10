@@ -3,6 +3,8 @@
 #  Write the Marlin xml steering file from the collected information.
 #
 ################################################################################
+from datetime import datetime
+
 def xml_parameters(default_dict, changes_dict={}):
     param_strings = []
     for parameter_name, parameter_dict in sorted(default_dict.items()):
@@ -25,8 +27,9 @@ def xml_string(execute_processors, global_dict, project_defaults):
     """Same as `write_steering_file`, but returns the string instead of writing
     it to a file.
     """
-    header_comment = ("<!-- This steering file was produced via a python "
-      "script with pysteer.-->\n\n")
+    now = datetime.now()
+    header_comment = ("<!-- This steering file was produced via a python script"
+      " with pysteer {}.-->\n\n".format(now.strftime("%d/%m/%Y-%H:%M:%S")))
     xml_pieces = []
     xml_pieces.append(header_comment)
     xml_pieces.append("<marlin>\n\n  <execute>\n")

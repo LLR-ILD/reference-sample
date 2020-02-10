@@ -23,9 +23,8 @@ marlin_run() {
     source $INIT_ILCSOFT
     export MARLIN_DLL=$MARLIN_DLL${PROJECT_DIR}/lib/libreference-sample.so:
     cd build; make install; cd ..
-    #Marlin ./steering/mc_as_reconstructed.xml > log.txt 2>&1
-    python3 pysteer/make_html.py
-    Marlin ./steering.xml > log.txt 2>&1
+    python3 $PROJECT_DIR/steering/pytest.py
+    #Marlin ./steering.xml > log.txt 2>&1
     cd ${OLD_DIR}
 }
 
@@ -37,8 +36,8 @@ if [[  $1 == "run" ]]  ; then
 fi
 
 sl6_build() {
-    singularity exec -B /cvmfs  ~/ui_sl6.simg /bin/sh $PROJECT_DIR/.aliases build
+    singularity exec -B /cvmfs   $PROJECT_DIR/singularity/proj.img /bin/sh $PROJECT_DIR/.aliases build
 }
 sl6_run() {
-    singularity exec -B /cvmfs  ~/ui_sl6.simg /bin/sh $PROJECT_DIR/.aliases run
+    singularity exec -B /cvmfs -B ${PROJECT_DIR}  $PROJECT_DIR/singularity/proj.img /bin/sh $PROJECT_DIR/.aliases run
 }
