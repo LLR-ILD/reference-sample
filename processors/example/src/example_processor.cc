@@ -54,7 +54,7 @@ void ExampleProcessor::init() {
   // and histograms would be defined.
   ////TString fnn(out_root_filename_.c_str());
   ////fnn += ".root";
-  ////root_out_ = new TFile(fnn, "recreate");
+  ////root_out_ = new TFile(fnn, "update");
   ////h_example_hist_ = new TH1F("exampleHist", "exampleHist", 100, 0, 100);
 }
 

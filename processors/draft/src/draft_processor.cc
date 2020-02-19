@@ -42,7 +42,7 @@ void DraftProcessor::init() {
   // and histograms would be defined.
   out_root_filename_ = "drafter";
   TString fnn(out_root_filename_.c_str()); fnn+=".root";
-  root_out_ = new TFile(fnn,"recreate");
+  root_out_ = new TFile(fnn,"update");
 
   h_no_b_b_tags_2jets_  = new TH2F(
       "no_b_b_tags_2jets_", "no_b_b_tags_2jets_",

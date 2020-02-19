@@ -13,8 +13,7 @@
 
 // -- ROOT headers.
 #include "TFile.h"
-#include "TH1F.h"
-#include "TH2F.h"
+#include "TNtuple.h"
 #include "TMath.h"
 // The ROOT::Math vector functions need the GenVector component of root.
 // Make sure you have the following line in the CMakeLists.txt file:
@@ -65,7 +64,6 @@ class SplitOffZProcessor : public marlin::Processor {
   std::string out_root_filename_{};
   TFile* root_out_{};
   // And its histograms
-  TH1F* h_best_z_mass_{};
-  TH2F* h_two_best_z_masses_{};
+  TNtuple* z_mass_tuple_{};
 };
 #endif
