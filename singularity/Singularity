@@ -10,6 +10,7 @@ from: cern/slc6-base
     PATH="/usr/local/miniconda3/bin:$PATH"
 %post
     yum update -y
+    yum groupinstall -y 'Development Tools'
     yum install -y freetype mesa-libGLU libSM wget
     # Install Miniconda3.
     if [ ! -d /usr/local/miniconda3 ]; then

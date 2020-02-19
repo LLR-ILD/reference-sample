@@ -11,6 +11,7 @@
 #include "EVENT/LCCollection.h"
 #include "EVENT/MCParticle.h"
 #include "EVENT/ReconstructedParticle.h"
+#include "EVENT/Vertex.h"
 #include "IMPL/LCCollectionVec.h"
 #include "IMPL/LCRelationImpl.h"
 #include "IMPL/ReconstructedParticleImpl.h"
@@ -131,7 +132,7 @@ void TauConesProcessor::init() {
   // and histograms would be defined.
   TString fnn(out_root_filename_.c_str());
   fnn += ".root";
-  root_out_ = new TFile(fnn, "recreate");
+  root_out_ = new TFile(fnn, "update");
   fail_reason_tuple_ = new TNtuple("fail_reason_tuple_","fail_reason_tuple_",
       "m_invariant_too_high:m_invariant_negative:wrong_track_number"
         ":not_isolated:tried_to_merge:taus_identified"
@@ -237,7 +238,17 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
     int n_charged_tracks{0};
     int charge{0};
     Tlv tau_tlv = Tlv(0, 0, 0, 0);
+    ////std::cout << "new candidate" << std::endl;
     for (RP* part: tau_parts) {
+      ////if (part->getStartVertex() != 0) {
+      ////  std::cout << part->getStartVertex()->getPosition()[0] << ", ",
+      ////  std::cout << part->getStartVertex()->getPosition()[1] << ", ",
+      ////  std::cout << part->getStartVertex()->getPosition()[2] << ", ",
+      ////  std::cout << part->getStartVertex()->getPosition()[3] << std::endl;
+      ////}
+      ////else {
+      ////  std::cout << part->getCharge() << std::endl;
+      ////}
       Tlv part_tlv = ref_util::getTlv(part);
       tau_tlv += part_tlv;
       int partial_charge = part->getCharge();
@@ -280,6 +291,7 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
       if (charge < 0) tau_pdg = -15;
       // TODO: Maybe replace the 2 lines above by int tau_pdg = charge*15. For this we would first have to investigate which charge values are actually taken by our constructed taus.
       tau->setType(tau_pdg);
+      tau->setCharge(charge);
       tau->setEnergy(tau_tlv.E());
       double momentum[3];
       tau_tlv.GetCoordinates(momentum);
@@ -332,6 +344,10 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
         tau1_tlv.GetCoordinates(momentum);
         tau1->setMomentum(momentum);
 		tau1->setCharge(tau1->getCharge()+tau2->getCharge());
+        int tau1_pdg = 15;
+        if (tau1->getCharge() < 0) tau1_pdg = -15;
+        // TODO: Maybe replace the 2 lines above by int tau_pdg = charge*15. For this we would first have to investigate which charge values are actually taken by our constructed taus.
+        tau1->setType(tau1_pdg);
         for (RP* tau2_part: tau2->getParticles()) {
           tau1->addParticle(tau2_part);
         }
