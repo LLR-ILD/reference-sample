@@ -33,11 +33,11 @@ ExampleProcessor::ExampleProcessor() :
   _description = "An example processor for ILD analysis. ";
 
   registerInputCollection(
-    LCIO::RECONSTRUCTEDPARTICLE,  // The collection type.
-    "PfoCollection",  // Parameter name in the steering file.
-    "The Pandora PFO collection name.",  // A parameter description. Please fill this correctly.
-    pfo_collection_name_,  // Your variable to store the result after steering file parsing.
-    std::string("PandoraPFOs"));  // Default parameter value.
+    LCIO::RECONSTRUCTEDPARTICLE,
+    "PfoCollection",
+    "The Pandora PFO collection name.",
+    pfo_collection_name_,
+    std::string("PandoraPFOs"));
 
   registerProcessorParameter(
     "PfoEnergyCut",
