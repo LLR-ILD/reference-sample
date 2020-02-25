@@ -81,7 +81,18 @@
         "vec3": "cpp",
         "event": "cpp",
         "point": "cpp",
-        "*.src": "cpp"
+        "*.src": "cpp",
+        "columns": "cpp",
+        "tree": "cpp",
+        "_tess": "cpp",
+        "_switch": "cpp",
+        "base_camera": "cpp",
+        "matrix": "cpp",
+        "node": "cpp",
+        "noderef": "cpp",
+        "plots": "cpp",
+        "separator": "cpp",
+        "named": "cpp"
     },
     "cSpell.words": [
         "CNRS",
@@ -89,6 +100,10 @@
         "LCRELATION",
         "Muennich",
         "PFOs",
-        "XYZT"
+        "XYZT",
+        "link",
+        "mc",
+        "reco",
+        "truth"
     ]
 }

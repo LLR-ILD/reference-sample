@@ -11,7 +11,6 @@
 #include "EVENT/LCCollection.h"
 #include "EVENT/MCParticle.h"
 #include "EVENT/ReconstructedParticle.h"
-#include "EVENT/Vertex.h"
 #include "IMPL/LCCollectionVec.h"
 #include "IMPL/LCRelationImpl.h"
 #include "IMPL/ReconstructedParticleImpl.h"
@@ -238,17 +237,7 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
     int n_charged_tracks{0};
     int charge{0};
     Tlv tau_tlv = Tlv(0, 0, 0, 0);
-    ////std::cout << "new candidate" << std::endl;
     for (RP* part: tau_parts) {
-      ////if (part->getStartVertex() != 0) {
-      ////  std::cout << part->getStartVertex()->getPosition()[0] << ", ",
-      ////  std::cout << part->getStartVertex()->getPosition()[1] << ", ",
-      ////  std::cout << part->getStartVertex()->getPosition()[2] << ", ",
-      ////  std::cout << part->getStartVertex()->getPosition()[3] << std::endl;
-      ////}
-      ////else {
-      ////  std::cout << part->getCharge() << std::endl;
-      ////}
       Tlv part_tlv = ref_util::getTlv(part);
       tau_tlv += part_tlv;
       int partial_charge = part->getCharge();
