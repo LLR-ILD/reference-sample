@@ -92,7 +92,10 @@
         "noderef": "cpp",
         "plots": "cpp",
         "separator": "cpp",
-        "named": "cpp"
+        "named": "cpp",
+        "qq250_v02_p01_c0_bdt.class.C": "cpp",
+        "begend": "cpp",
+        "member_writer": "cpp"
     },
     "cSpell.words": [
         "CNRS",

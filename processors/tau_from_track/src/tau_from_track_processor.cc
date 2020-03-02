@@ -1,6 +1,6 @@
 /**
-*    @author Jonas Kunath, LLR, CNRS, École Polytechnique, IPP.
-*/
+ *    @author Jonas Kunath, LLR, CNRS, École Polytechnique, IPP.
+ */
 // -- C++ STL headers.
 #include <cassert>
 
@@ -121,17 +121,19 @@ void TauFromTrackProcessor::processEvent(EVENT::LCEvent* event) {
       << " is not available!" << std::endl;
     throw marlin::StopProcessingException(this);
   }
+  std::cout << std::endl << event->getEventNumber() << std::endl;
   for (int e = 0; e < collection->getNumberOfElements(); ++e) {
     // A cautious reading of a particle involves casting it with static_cast
     // (instead of dynamic_cast) and ensuring it is not a nullpointer.
     RP* particle = static_cast<RP*>(collection->getElementAt(e));
-    if (false) {
+    if (true) {
       // Let's only look at tau remnants for a bit.
       int primary_pdg = ref_util::getPrimaryPdg(particle, relation_navigator);
-      std::cout << primary_pdg;
-      if (primary_pdg != 15 and primary_pdg != -15) continue;
+      ////std::cout << primary_pdg;
+      if (primary_pdg != 15) continue;
     }
     Tlv tlv = ref_util::getTlv(particle);
+    std::cout << "  " << tlv.Pt(); continue;
     if (tlv.Pt() < 5) {
         continue;
     }

@@ -104,7 +104,7 @@ bool rpEnergySort(EVENT::ReconstructedParticle* rp1,
                   EVENT::ReconstructedParticle* rp2);
 
 // Check from the MC collection of the event wether the events is a Higgs event
-// with the HIggs boson decaying invisibly (into ZZ-> 4 neutrinos).
+// with the Higgs boson decaying invisibly (into ZZ-> 4 neutrinos).
 // If the collection name is wrong, will return False.
 bool isHiggsInvisibleEvent(EVENT::LCEvent* event,
     const std::string &mc_collection_name);
