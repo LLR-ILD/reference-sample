@@ -55,7 +55,7 @@ class SlcioToRootProcessor : public marlin::Processor {
   // -- The root file
   TFile* root_file_{};
   std::string root_file_name_ = {""};
-  TTree*      tree_ = {};
+  TTree* tree_ = {};
   std::string tree_name_ = {""};
 
   // Private helper functions
