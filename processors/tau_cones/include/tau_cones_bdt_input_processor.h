@@ -36,6 +36,7 @@ class TauConesBDTInputProcessor : public marlin::Processor {
       delete;
 
   void init();
+  void processRunHeader(EVENT::LCRunHeader* run);
   void processEvent(EVENT::LCEvent* event);
   void end();
 
@@ -43,6 +44,8 @@ class TauConesBDTInputProcessor : public marlin::Processor {
   // -- Parameters registered in steering file.
   // Collections
   std::string pfo_collection_name{""};
+  std::string mc_collection_name{""};
+  std::string relation_collection_name{""};
 
   typedef tau_cones_util::CandidateDefinition CandidateDefinition;
   CandidateDefinition cd{};
@@ -70,9 +73,13 @@ class TauConesBDTInputProcessor : public marlin::Processor {
   bool APartFromTau(TauCandidate tau_candidate,
     UTIL::LCRelationNavigator* relation_navigator);
 
+  std::vector<ReconstructedParticle*> TauPMSeed(EVENT::LCEvent* event,
+    std::string mc_col_name, std::string relation_col_name);
+
   // -- The root file
   std::string bdt_inputs_name{};
   TFile* bdt_inputs{};
   TNtuple* tau_parameters{};
+  TNtuple* quality_control{};
 };
 #endif

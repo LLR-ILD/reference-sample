@@ -73,8 +73,12 @@ void DraftProcessor::processEvent(EVENT::LCEvent* event) {
     << " - run " << event->getEventNumber() << std::endl;
   // The function calls below are independent an can be toggled as needed.
   // Each function is a draft on its own.
-  printCollectionInfo(event);
+  //printCollectionInfo(event);
   ////bbVertexPlayground(event);
+
+  std::string mc_col_name = "MCParticlesSkimmed";
+  EVENT::LCCollection* mc_collection = event->getCollection(mc_col_name);
+  ref_util::printFamilyTree(mc_collection);
 }
 
 // ----------------------------------------------------------------------------

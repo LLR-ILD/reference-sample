@@ -279,12 +279,12 @@ void TauConesProcessor::end() {
     << "  Particles that were not considered due to background suppression:  "
       << total_count.n_background_suppressed << std::endl;
 
- std::cout
- << tau_cut.m_invariant  << std::endl
- << tau_cut.isolation_energy  << std::endl
- << tau_cut.n_charged << std::endl
- << tau_cut.n_in_isolation << std::endl
- << tau_cut.n_remnants << std::endl;
+ ////std::cout
+ ////<< tau_cut.m_invariant  << std::endl
+ ////<< tau_cut.isolation_energy  << std::endl
+ ////<< tau_cut.n_charged << std::endl
+ ////<< tau_cut.n_in_isolation << std::endl
+ ////<< tau_cut.n_remnants << std::endl;
 }
 // ----------------------------------------------------------------------------
 
