@@ -10,7 +10,6 @@ marlin_build() {
     mkdir -p build
     cd build
     cmake -C $ILCSOFT/ILCSoft.cmake ..
-    echo "oh well "
     make install
 
     cd ${OLD_DIR}
@@ -28,16 +27,42 @@ marlin_run() {
     cd ${OLD_DIR}
 }
 
-if [[  $1 == "build" ]]  ; then
+marlin_dst_viewer() {
+    # First event display window.
+    source $INIT_ILCSOFT
+    # Who knows why: Last line in the init_ilcsoft.sh script sets an environment
+    # variable that is meant to solve issues in SL6. For me, this variable leads
+    # to an GLXBadContext error on SL6. Thus it will be unset.
+    unset LIBGL_ALWAYS_INDIRECT
+    glced &
+    # Then running marlin and feed it with events.
+    Marlin $PROJECT_DIR/steering/examples/MarlinStdRecoViewerDST.xml \
+    # --global.GearXMLFile=gear_ILD_l5_o1_v02.xml \
+    # --global.LCIOInputFiles=your_file_DST.slcio
+}
+
+if [[  $1 == "build" ]] ; then
     marlin_build
 fi
-if [[  $1 == "run" ]]  ; then
+if [[  $1 == "run" ]] ; then
     marlin_run
+fi
+if [[  $1 == "dst_viewer" ]] ; then
+    marlin_dst_viewer
 fi
 
 sl6_build() {
-    singularity exec -B /cvmfs   $PROJECT_DIR/singularity/proj.img /bin/sh $PROJECT_DIR/.aliases build
+    singularity exec -B /cvmfs $PROJECT_DIR/singularity/proj.img /bin/sh $PROJECT_DIR/.aliases build
 }
 sl6_run() {
     singularity exec -B /cvmfs -B ${PROJECT_DIR}  $PROJECT_DIR/singularity/proj.img /bin/sh $PROJECT_DIR/.aliases run
 }
+sl6_dst() {
+    singularity exec -B /cvmfs $PROJECT_DIR/singularity/proj.img /bin/sh $PROJECT_DIR/.aliases dst_viewer
+}
+
+sl6() {
+    ln -s $INIT_ILCSOFT INIT_ILCSOFT
+    singularity shell -B /cvmfs $PROJECT_DIR/singularity/proj.img
+}
+

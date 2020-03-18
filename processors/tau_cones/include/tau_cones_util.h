@@ -88,6 +88,7 @@ struct TauCandidate {
     this->n_charged = dummy.n_charged;
     return *this;
   }
+  //~TauCandidate() {delete this->rp_impl;};
 };
 
 struct EventVector {

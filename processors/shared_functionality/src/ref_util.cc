@@ -259,6 +259,9 @@ std::vector<MCP*> ref_util::getMcChainFromRp(
     RP* rp, UTIL::LCRelationNavigator* relation_navigator) {
   std::vector<MCP*> mc_chain;
   if (relation_navigator->getRelatedToObjects(rp).size() == 0) {
+      std::cout << "There is a ReconstructedParticle that is not realted to any"
+        << " MonteCarlo particle. Maybe the relation collection is faulty?"
+        << std::endl;
       return mc_chain;
   }
   MCP* mcp = static_cast<MCP*>(relation_navigator->getRelatedToObjects(rp)[0]);
@@ -344,7 +347,9 @@ bool ref_util::pdgIsInMcCol(int pdg, EVENT::LCCollection* mcCol) {
 
 bool ref_util::rpEnergySort(EVENT::ReconstructedParticle* rp1,
                   EVENT::ReconstructedParticle* rp2){
-  return fabs(rp1->getEnergy()) > fabs(rp2->getEnergy());
+  return pow(rp1->getMomentum()[0], 2) + pow(rp1->getMomentum()[1], 2)
+       > pow(rp2->getMomentum()[0], 2) + pow(rp2->getMomentum()[1], 2);
+  /////return fabs(rp1->getEnergy()) > fabs(rp2->getEnergy());
 }
 
 // ----------------------------------------------------------------------------

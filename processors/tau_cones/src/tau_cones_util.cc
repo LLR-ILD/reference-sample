@@ -58,13 +58,50 @@ tau_cones_util::TauCandidate tau_cones_util::TauFromParts(
   return tau;
 }
 // ----------------------------------------------------------------------------
+namespace {
+
+// Assign the neutral particles to the tau candidate.
+void add_neutral(tau_cones_util::EventVector &rpv,
+    std::vector<RP*>  &tau_parts, Tlv seed_tlv,
+    double min_p_t_seed, double search_cone_angle,
+    bool print_info) {
+  std::vector<RP*>::iterator neutral_rp_ptr=rpv.neutral.begin();
+  while (neutral_rp_ptr != rpv.neutral.end()) {
+    RP* deposit = *neutral_rp_ptr;  // Track would be a lie for a neutral p.
+    Tlv neutral_tlv = ref_util::getTlv(deposit);
+    double angle_to_seed = acos(ROOT::Math::VectorUtil::CosTheta(
+        seed_tlv, neutral_tlv));
+    // The only condition for being part of the tau: Be inside the search cone.
+    if (angle_to_seed < search_cone_angle) {
+      tau_parts.push_back(deposit);
+      rpv.neutral.erase(neutral_rp_ptr);
+      if (print_info) {// Just for printing info.
+        streamlog_out(MESSAGE) << "  Adding neutral: " << deposit->getType()
+          << "\t" << neutral_tlv.E() << "\t" << neutral_tlv.P() << "\t"
+          << neutral_tlv.Theta() << "\t" << neutral_tlv.Phi() << std::endl;
+	  }
+	  // Since we erased the element at position neutral_rp_ptr, the pointer
+      // already points to a new element. We should not invoke ++neutral_rp_ptr.
+	} else {  // This particle was to far away from the seed. Try the next.
+      ++neutral_rp_ptr;
+    }
+  }
+}
+
+bool Find1ProngTau(tau_cones_util::EventVector &rpv,
+  double min_p_t_seed, double search_cone_angle,
+  bool print_info) {
+  //// We successfully reconstructed a tau.
+  //rpv.taus.push_front(tau_cones_util::TauFromParts(tau_parts, tau_seed));
+  return true;
+}
+}  // namespace
 
 bool tau_cones_util::FindATau(tau_cones_util::EventVector &rpv,
     double min_p_t_seed, double search_cone_angle,
     bool print_info) {
   std::vector<RP*>  tau_parts;
   if (rpv.charged.size() == 0) return false;  // Need charged p to seed the tau.
-  double max_opening_angle = 0;
  // Look for a seed.
   RP* tau_seed = nullptr;
   std::vector<RP*>::iterator seed_rp_ptr = rpv.charged.begin();
@@ -72,7 +109,8 @@ bool tau_cones_util::FindATau(tau_cones_util::EventVector &rpv,
     tau_seed = *seed_rp_ptr;
     double p_t = sqrt(pow(tau_seed->getMomentum()[0], 2)
                     + pow(tau_seed->getMomentum()[1], 2));
-    if (p_t > min_p_t_seed) break; // We found our tau_seed.
+    ////if (p_t > min_p_t_seed) break; // We found our tau_seed.
+    if (p_t > min_p_t_seed && abs(tau_seed->getType()) == 211) break; // We found our tau_seed.
 	++seed_rp_ptr;
 	tau_seed = nullptr; // This particle was no good seed. Try a new one.
   }
@@ -102,7 +140,6 @@ bool tau_cones_util::FindATau(tau_cones_util::EventVector &rpv,
           << "\t" << charged_tlv.E() << "\t" << charged_tlv.P() << "\t"
           << charged_tlv.Theta() << "\t" << charged_tlv.Phi() << std::endl;
 	  }
-      if (angle_to_seed > max_opening_angle) max_opening_angle = angle_to_seed;
 	  // Since we erased the element at position charged_rp_ptr, the pointer
       // already points to a new element. We should not invoke ++charged_rp_ptr.
 	} else {  // This particle was to far away from the seed. Try the next.
@@ -110,29 +147,7 @@ bool tau_cones_util::FindATau(tau_cones_util::EventVector &rpv,
     }
   }
 
- // Assign the neutral particles to the tau candidate.
-  std::vector<RP*>::iterator neutral_rp_ptr=rpv.neutral.begin();
-  while (neutral_rp_ptr != rpv.neutral.end()) {
-    RP* deposit = *neutral_rp_ptr;  // Track would be a lie for a neutral p.
-    Tlv neutral_tlv = ref_util::getTlv(deposit);
-    double angle_to_seed = acos(ROOT::Math::VectorUtil::CosTheta(
-        seed_tlv, neutral_tlv));
-    // The only condition for being part of the tau: Be inside the search cone.
-    if (angle_to_seed < search_cone_angle) {
-      tau_parts.push_back(deposit);
-      rpv.neutral.erase(neutral_rp_ptr);
-      if (print_info) {// Just for printing info.
-        streamlog_out(MESSAGE) << "  Adding neutral: " << deposit->getType()
-          << "\t" << neutral_tlv.E() << "\t" << neutral_tlv.P() << "\t"
-          << neutral_tlv.Theta() << "\t" << neutral_tlv.Phi() << std::endl;
-	  }
-      if (angle_to_seed > max_opening_angle) max_opening_angle = angle_to_seed;
-	  // Since we erased the element at position neutral_rp_ptr, the pointer
-      // already points to a new element. We should not invoke ++neutral_rp_ptr.
-	} else {  // This particle was to far away from the seed. Try the next.
-      ++neutral_rp_ptr;
-    }
-  }
+
 
  // We successfully reconstructed a tau.
   rpv.taus.push_front(tau_cones_util::TauFromParts(tau_parts, tau_seed));
@@ -165,7 +180,7 @@ int tau_cones_util::MergeCloseByTaus(tau_cones_util::EventVector &rpv,
     bool print_info) {
   int n_merged = 0;
   std::vector<TauCandidate> tc_to_remove;
-  if (not rpv.taus.empty()) {
+  if (! rpv.taus.empty()) {
     for (auto iter1 = rpv.taus.begin(); iter1 != rpv.taus.end(); iter1++) {
       TauCandidate tau1 = *iter1;
       for (auto iter2 = std::next(iter1); iter2 != rpv.taus.end(); iter2++) {
