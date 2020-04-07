@@ -154,7 +154,7 @@ void TauConesProcessor::init() {
 
 void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
   streamlog_out(DEBUG) << "Processing event no " << event->getEventNumber()
-    << " - run " << event->getEventNumber() << std::endl;
+    << " - run " << event->getRunNumber() << std::endl;
   ++n_events_total;
   CandidateCounts event_count;
 
