@@ -76,6 +76,8 @@ class TauConesBDTInputProcessor : public marlin::Processor {
   std::vector<ReconstructedParticle*> TauPMSeed(EVENT::LCEvent* event,
     std::string mc_col_name, std::string relation_col_name);
 
+  void TrackCheck(EVENT::LCEvent* event);
+
   // -- The root file
   std::string bdt_inputs_name{};
   TFile* bdt_inputs{};

@@ -160,8 +160,8 @@ void TauConesBDTInputProcessor::processEvent(EVENT::LCEvent* event) {
   EventVector rpv = EventVector(pfo_collection, cd);
 
  // Fill the vector of tau candidates (each candidate being a vector of RPs).
-  FindAllTaus(rpv, cd.min_p_t_seed, cd.search_cone_angle);
-  MergeCloseByTaus(rpv, cd.search_cone_angle);
+  ////FindAllTaus(rpv, cd.min_p_t_seed, cd.search_cone_angle);
+  ////MergeCloseByTaus(rpv, cd.search_cone_angle);
 
  // Fill the bdt parameters.
   int n_tau_p = 0, n_tau_m = 0, n_tau = 0, n_not_tau = 0, n_charge_mixed_up = 0;
@@ -216,6 +216,8 @@ void TauConesBDTInputProcessor::processEvent(EVENT::LCEvent* event) {
     std::cout << "At least one seed is provided by TauPMSeed, but only "
       << n_tau << " result in a is_tau flag." << std::endl;
   }
+
+  TrackCheck(event);
 }
 // ----------------------------------------------------------------------------
 
@@ -256,7 +258,7 @@ std::vector<RP*> TauConesBDTInputProcessor::TauPMSeed(EVENT::LCEvent* event,
       << " is not available!" << std::endl;
     throw marlin::StopProcessingException(this);
   }
-ref_util::printFamilyTree(mc_collection);
+  ref_util::printFamilyTree(mc_collection);
  // Find the three (starting) MCParticles of interest: 25, 15, -15.
   MCP *tau_p = nullptr, *tau_m = nullptr, *higgs = nullptr;
   for(UTIL::LCIterator<MCP> it(mc_collection); MCP* mcp = it.next();) {
@@ -352,5 +354,24 @@ ref_util::printFamilyTree(mc_collection);
   }
 
   return tau_seeds_pm;
+
+}
+// ----------------------------------------------------------------------------
+
+// Use the tracks directly.
+void TauConesBDTInputProcessor::TrackCheck(EVENT::LCEvent* event) {
+  std::string track_collection_name = "MarlinTrkTracks";
+  EVENT::LCCollection* track_collection = nullptr;
+  try {
+    track_collection = event->getCollection(track_collection_name);
+  } catch (DataNotAvailableException &e) {
+    streamlog_out(ERROR) << "RP collection " << track_collection_name
+      << " is not available!" << std::endl;
+    throw marlin::StopProcessingException(this);
+  }
+  for (int e = 0; e < track_collection->getNumberOfElements(); ++e) {
+    EVENT::Track* track = static_cast<EVENT::Track*>(
+      track_collection->getElementAt(e));
+  }
 
 }

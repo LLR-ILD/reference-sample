@@ -104,7 +104,7 @@ struct EventVector {
 
   EventVector() {all = {}; charged = {}; neutral = {}; taus = {};
     n_background_suppressed = 0;};
-  EventVector(EVENT::LCCollection* pfo_collection, CandidateDefinition cd) ;
+  EventVector(EVENT::LCCollection* pfo_collection, CandidateDefinition cd);
 };
 
 // In each iteration of this function, build a new tau as a vector of RPs.

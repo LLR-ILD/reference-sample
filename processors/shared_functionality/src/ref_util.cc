@@ -11,10 +11,10 @@
 // -- ROOT headers.
 
 // -- LCIO headers.
+#include "UTIL/LCIterator.h"
 
 // -- Marlin headers.
 #include "marlin/Exceptions.h"
-#include "UTIL/LCIterator.h"
 
 // -- Header for this processor and other project-specific headers.
 #include "ref_util.h"
