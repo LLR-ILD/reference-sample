@@ -60,6 +60,12 @@ class TauConesProcessor : public marlin::Processor {
   int n_events_total{-1};
 
   // Proper definition in tau_cones_utils.h.
+  bool HasStrictTau(EventVector &rpv, CandidateDefinition cad,
+      EVENT::LCEvent* event) {
+    return tau_cones_util::HasStrictTau(rpv, cad, event);
+  };
+
+  // Proper definition in tau_cones_utils.h.
   bool FindAllTaus(EventVector &rpv,
                 double min_p_t_seed, double search_cone_angle,
                 bool print_info=false) {

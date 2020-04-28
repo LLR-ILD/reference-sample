@@ -284,6 +284,22 @@ int ref_util::getPrimaryPdg(
   return primaryPDG;
 }
 
+int ref_util::getPrimaryPdg(RP* rp, EVENT::LCEvent* event) {
+  std::string link_col_name = "RecoMCTruthLink";
+  EVENT::LCCollection* relation_collection = nullptr;
+  UTIL::LCRelationNavigator* relation_navigator = nullptr;
+  try {
+    relation_collection = event->getCollection(link_col_name);
+    relation_navigator = new UTIL::LCRelationNavigator(relation_collection);
+  } catch (DataNotAvailableException &e) {
+    streamlog_out(ERROR) << "The relation collection " << link_col_name
+      << " is not available!"
+      << "Particle code 0 is returned for this search." << std::endl;
+    return 0;
+  }
+  return ref_util::getPrimaryPdg(rp, relation_navigator);
+}
+
 // ----------------------------------------------------------------------------
 void ref_util::thetaToRpAndVector(EVENT::LCCollection* rp_collection,
     std::map<double, RP*> &theta_to_rp, std::map<double, Tlv> &theta_to_tlv) {
@@ -346,10 +362,14 @@ bool ref_util::pdgIsInMcCol(int pdg, EVENT::LCCollection* mcCol) {
 }
 
 bool ref_util::rpEnergySort(EVENT::ReconstructedParticle* rp1,
-                  EVENT::ReconstructedParticle* rp2){
+                            EVENT::ReconstructedParticle* rp2) {
+  return fabs(rp1->getEnergy()) > fabs(rp2->getEnergy());
+}
+
+bool ref_util::rpPtSort(EVENT::ReconstructedParticle* rp1,
+                        EVENT::ReconstructedParticle* rp2) {
   return pow(rp1->getMomentum()[0], 2) + pow(rp1->getMomentum()[1], 2)
        > pow(rp2->getMomentum()[0], 2) + pow(rp2->getMomentum()[1], 2);
-  /////return fabs(rp1->getEnergy()) > fabs(rp2->getEnergy());
 }
 
 // ----------------------------------------------------------------------------

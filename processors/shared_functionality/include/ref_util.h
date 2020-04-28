@@ -26,6 +26,7 @@
 
 // -- LCIO headers.
 #include "EVENT/LCCollection.h"
+#include "EVENT/LCEvent.h"
 #include "EVENT/MCParticle.h"
 #include "EVENT/ReconstructedParticle.h"
 #include "UTIL/LCRelationNavigator.h"
@@ -79,6 +80,8 @@ std::vector<EVENT::MCParticle*> getMcChainFromRp(
 // produced by getMcChainFromRp.
 int getPrimaryPdg(EVENT::ReconstructedParticle* rp,
     UTIL::LCRelationNavigator* relation_navigator);
+// Convenience wrapper hiding the relation navigator handeling.
+int getPrimaryPdg(EVENT::ReconstructedParticle* rp, EVENT::LCEvent* event);
 
 // Should be passed by reference two maps,which are then populated:
 // A map from the theta values of the particles in an events reconstructed
@@ -100,8 +103,11 @@ std::vector<double> energyLineupWrtSeedDistance(
 
 // True if any of the members of the (Monte Carlo) collection has this pdg code.
 bool pdgIsInMcCol(int pdg, EVENT::LCCollection* mc_col);
+
 bool rpEnergySort(EVENT::ReconstructedParticle* rp1,
                   EVENT::ReconstructedParticle* rp2);
+bool rpPtSort(EVENT::ReconstructedParticle* rp1,
+              EVENT::ReconstructedParticle* rp2);
 
 // Check from the MC collection of the event wether the events is a Higgs event
 // with the Higgs boson decaying invisibly (into ZZ-> 4 neutrinos).

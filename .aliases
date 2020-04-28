@@ -34,7 +34,7 @@ marlin_dst_viewer() {
     ## Replace the iLCSoft CEDViewer lib with our custom extension.
     #export MARLIN_DLL=`echo $MARLIN_DLL | tr ":" "\n" | grep -v "CEDViewer" | tr "\n" ":"| sed 's/:$//'`
     #export MARLIN_DLL=/home/kunath/scratch/Jonas-CEDViewer/lib/libCEDViewer.so:$MARLIN_DLL
-    # More extreme approach: Link only the necessar libraries.
+    # More extreme approach: Link only the necessary libraries.
     export MARLIN_DLL=/home/kunath/scratch/Jonas-CEDViewer/lib/libCEDViewer.so:/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/MarlinDD4hep/v00-06/lib/libMarlinDD4hep.so
 
     # Who knows why: Last line in the init_ilcsoft.sh script sets an environment

@@ -54,6 +54,14 @@ class TauConesBDTInputProcessor : public marlin::Processor {
 
   typedef tau_cones_util::EventVector EventVector;
   typedef tau_cones_util::TauCandidate TauCandidate;
+  int tau_flag_ = -1;
+
+  // Proper definition in tau_cones_utils.h.
+  bool HasStrictTau(EventVector &rpv, CandidateDefinition cad,
+      EVENT::LCEvent* event) {
+    return tau_cones_util::HasStrictTau(rpv, cad, event);
+  };
+  int n_strict_tau_events_ = 0;
 
   // Proper definition in tau_cones_utils.h.
   bool FindAllTaus(EventVector &rpv,
@@ -73,7 +81,7 @@ class TauConesBDTInputProcessor : public marlin::Processor {
   bool APartFromTau(TauCandidate tau_candidate,
     UTIL::LCRelationNavigator* relation_navigator);
 
-  std::vector<ReconstructedParticle*> TauPMSeed(EVENT::LCEvent* event,
+  std::vector<EVENT::ReconstructedParticle*> TauPMSeed(EVENT::LCEvent* event,
     std::string mc_col_name, std::string relation_col_name);
 
   void TrackCheck(EVENT::LCEvent* event);

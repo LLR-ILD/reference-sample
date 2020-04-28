@@ -60,10 +60,14 @@ class SplitOffZProcessor : public marlin::Processor {
       const std::vector<ROOT::Math::XYZTVector> &minus_candidate_momenta,
       IntVec &plus_minus_indices, FloatVec &second_best_z_mass);
 
+  float recoilToZ(ROOT::Math::XYZTVector plus_mom,
+                                      ROOT::Math::XYZTVector minus_mom);
+
   // -- The root file
   std::string out_root_filename_{};
   TFile* root_out_{};
   // And its histograms
   TNtuple* z_mass_tuple_{};
+  TNtuple* z_momenta_tuple_{};
 };
 #endif
