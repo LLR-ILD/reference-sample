@@ -128,7 +128,7 @@ void SlcioToRootProcessor::end() {
   tree_->Write();
   root_file_->Write(0);
   root_file_->Close();
-  streamlog_out(MESSAGE) << "end" << std::endl;
+  streamlog_out(MESSAGE) << "end()." << std::endl;
 }
 
 //-----------------------------------------------------------------------------

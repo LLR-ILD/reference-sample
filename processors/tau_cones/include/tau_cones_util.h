@@ -14,6 +14,7 @@
 // -- ROOT headers.
 
 // -- LCIO headers.
+#include "EVENT/LCEvent.h"
 #include "EVENT/ReconstructedParticle.h"
 #include "IMPL/ReconstructedParticleImpl.h"
 
@@ -40,6 +41,7 @@ struct TauParameters {
 };
 
 struct CandidateCounts {
+  int n_no_strict_tau = 0;
   int n_m_invariant_too_high = 0;
   int n_m_invariant_negative = 0;
   int n_wrong_track_number = 0;
@@ -49,6 +51,7 @@ struct CandidateCounts {
   int n_background_suppressed = 0;
 
   CandidateCounts& operator+=(const CandidateCounts& rhs) {
+    this->n_no_strict_tau += rhs.n_no_strict_tau;
     this->n_m_invariant_too_high += rhs.n_m_invariant_too_high;
     this->n_m_invariant_negative += rhs.n_m_invariant_negative;
     this->n_wrong_track_number += rhs.n_wrong_track_number;
@@ -92,9 +95,9 @@ struct TauCandidate {
 };
 
 struct EventVector {
+  /////EVENT::ReconstructedParticle* strict_seed = nullptr;
   int n_background_suppressed = 0;
   // Combines charged and neutral.
-  std::vector<EVENT::ReconstructedParticle*> all{};
   std::vector<EVENT::ReconstructedParticle*> charged{};
   std::vector<EVENT::ReconstructedParticle*> neutral{};
   // Particles can be moved out of the above vectors into one of the taus.
@@ -102,10 +105,16 @@ struct EventVector {
   // container, forward_list is more appropriate than vector.
   std::forward_list<TauCandidate> taus{};
 
-  EventVector() {all = {}; charged = {}; neutral = {}; taus = {};
-    n_background_suppressed = 0;};
+  EventVector() {charged = {}; neutral = {}; taus = {};
+    n_background_suppressed = 0; ////strict_seed = nullptr;
+    };
   EventVector(EVENT::LCCollection* pfo_collection, CandidateDefinition cd);
+  std::vector<EVENT::ReconstructedParticle*> chargedAndNeutral();
 };
+
+// TODO: [WIP] try accepting only events where a strict candidate was found.
+bool HasStrictTau(EventVector &rpv, CandidateDefinition cd,
+    EVENT::LCEvent* event);
 
 // In each iteration of this function, build a new tau as a vector of RPs.
 // Any particle that is identified as part of the tau is removed from the

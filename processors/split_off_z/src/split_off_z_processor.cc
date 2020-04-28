@@ -94,7 +94,13 @@ void SplitOffZProcessor::init() {
   z_mass_tuple_ = new TNtuple(
       ("z_mass_tuple_" + z_decay_channel_).c_str(),
       ("z_mass_tuple_" + z_decay_channel_).c_str(),
-      "best_Z_mass:second_best_Z_mass:plus_candidates:minus_candidates");
+      "best_Z_mass:recoil_mass:second_best_Z_mass:"
+        "plus_candidates:minus_candidates");
+  z_momenta_tuple_ = new TNtuple(
+    ("z_momenta_tuple_" + z_decay_channel_).c_str(),
+    ("z_momenta_tuple_" + z_decay_channel_).c_str(),
+    "px1:py1:pz1:E1:"
+    "px2:py2:pz2:E2");
 }
 
 // ----------------------------------------------------------------------------
@@ -128,7 +134,7 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
   if (z_decay_channel_ == "ZDec_NU") {
     streamlog_out(DEBUG) << z_decay_channel_ << ", Z -> nu nu_bar"
       << event->getEventNumber() << std::endl;
-    z_mass_tuple_->Fill(-1, -1, 0, 0);
+    z_mass_tuple_->Fill(-1, -1, -1, 0, 0);
   } else if ((z_decay_channel_ == "ZDec_EL") || z_decay_channel_ == "ZDec_MU"
            || z_decay_channel_ == "ZDec_TAU") {
     // Common steps for all charged lepton channels.
@@ -272,15 +278,23 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
     // The actual Z mass calculation step. Applied to all 3 charged leptons.
     best_z_mass = identifyZ(plus_candidate_momenta, minus_candidate_momenta,
         plus_minus_indices, second_best_z_mass);
+    float recoil_mass = -1;
     // In case that there is no lepton pair identified, the plus_minus_indices
     // variable takes the value (-1, -1). This happens if the decay mode into
     // neutrinos is specified, or if just no candidate could be found.
     if (plus_minus_indices[0] != -1) {
       chosen_plus = plus_candidate_rps[plus_minus_indices[0]];
       chosen_minus = minus_candidate_rps[plus_minus_indices[1]];
+      Tlv p_plus = plus_candidate_momenta[plus_minus_indices[0]];
+      Tlv p_minus = minus_candidate_momenta[plus_minus_indices[1]];
+      recoil_mass = recoilToZ(p_plus, p_minus);
+      z_momenta_tuple_->Fill(
+         p_plus.Px(),  p_plus.Py(),  p_plus.Pz(),  p_plus.E(),
+        p_minus.Px(), p_minus.Py(), p_minus.Pz(), p_minus.E()
+      );
     }
   // Populate the tuple.
-  z_mass_tuple_->Fill(best_z_mass, second_best_z_mass[0],
+  z_mass_tuple_->Fill(best_z_mass, recoil_mass, second_best_z_mass[0],
       plus_candidate_momenta.size(), minus_candidate_momenta.size());
   } else {
     streamlog_out(ERROR) << "The specified decay mode '"
@@ -370,4 +384,12 @@ float SplitOffZProcessor::identifyZ(
     }
   }
   return best_z_mass;
+}
+
+
+float SplitOffZProcessor::recoilToZ(Tlv plus_mom, Tlv minus_mom) {
+  Tlv event_mom = Tlv(0, 0, 0, 250.);
+  Tlv z_boson_mom = plus_mom + minus_mom;
+  Tlv recoil_mom = (event_mom - z_boson_mom);
+  return recoil_mom.M();
 }

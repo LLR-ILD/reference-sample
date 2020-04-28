@@ -118,6 +118,12 @@ TauConesBDTInputProcessor::TauConesBDTInputProcessor() :
     "Name of the output root file.",
     bdt_inputs_name,
     std::string("tau_cones_bdt_input"));
+
+  registerProcessorParameter(
+    "TauFlag",
+    "Flag indicating properties that the reconstructed tau must have.",
+    tau_flag_,
+    0);
 }
 // ----------------------------------------------------------------------------
 
@@ -131,9 +137,11 @@ void TauConesBDTInputProcessor::init() {
   tau_parameters = new TNtuple("tau_parameters","tau_parameters",
       "n_charged:n_remnants:isolation_energy:n_in_isolation:m_invariant:"
       "is_tau");
+  ////quality_control = new TNtuple("quality_control","quality_control",
+  ////    "tau_p_in_event:tau_m_in_event:taus_per_event:not_tau_in_event:"
+  ////    "total_in_event:charge_mixed_up");
   quality_control = new TNtuple("quality_control","quality_control",
-      "tau_p_in_event:tau_m_in_event:taus_per_event:not_tau_in_event:"
-      "total_in_event:charge_mixed_up");
+      "n_strict_taus");
 }
 // ----------------------------------------------------------------------------
 
@@ -156,12 +164,21 @@ void TauConesBDTInputProcessor::processEvent(EVENT::LCEvent* event) {
   }
 
  // Create dedicated vectors for charged and neutral RPs. Discard particles
-  // outside of the acceptance volume.
+ // outside of the acceptance volume.
   EventVector rpv = EventVector(pfo_collection, cd);
+  if (HasStrictTau(rpv, cd, event)) {
+    ++n_strict_tau_events_;
+    quality_control->Fill(1);
+    streamlog_out(DEBUG) << "--> Has strict tau! (Might be bkg)" << std::endl;
+  } else {
+    streamlog_out(DEBUG) << "xxx No strict candidate." << std::endl;
+    quality_control->Fill(0);
+  }
+  throw marlin::SkipEventException(this);
 
  // Fill the vector of tau candidates (each candidate being a vector of RPs).
-  ////FindAllTaus(rpv, cd.min_p_t_seed, cd.search_cone_angle);
-  ////MergeCloseByTaus(rpv, cd.search_cone_angle);
+  FindAllTaus(rpv, cd.min_p_t_seed, cd.search_cone_angle);
+  MergeCloseByTaus(rpv, cd.search_cone_angle);
 
  // Fill the bdt parameters.
   int n_tau_p = 0, n_tau_m = 0, n_tau = 0, n_not_tau = 0, n_charge_mixed_up = 0;
@@ -173,8 +190,29 @@ void TauConesBDTInputProcessor::processEvent(EVENT::LCEvent* event) {
     tau_bdt.n_charged = tau.n_charged;
     tau_bdt.n_remnants = tau.parts.size();
     tau_bdt.m_invariant = tau.tlv.M();
+
+    // TODO: Remove the tau_flag_ idea!
+    // Require a photon being present.
+    if ((tau_flag_ / 1 % 2) && (tau_bdt.n_remnants - tau_bdt.n_charged < 1)) continue;
+    // Require the mass to be below 2 GeV.
+    if ((tau_flag_ / 2 % 2) && (tau_bdt.m_invariant > 2)) continue;
+    // Restrict the number of charged tracks to 3.
+    if ((tau_flag_ / 4 % 2) && (tau_bdt.n_charged > 3)) continue;
+    // Restrict the number of charged tracks to 1.
+    if ((tau_flag_ / 8 % 2) && (tau_bdt.n_charged > 1)) continue;
+    // Require all charged being pions.
+    if (tau_flag_ / 16 % 2) {
+      bool ignore_tau = false;
+      for (RP* rp : tau.parts) {
+        if (rp->getCharge() != 0) {
+          if (abs(rp->getType()) != 211) ignore_tau = true;
+        }
+      }
+      if (ignore_tau) continue;
+    }
+
    // Isolation.
-    for (RP* particle : rpv.all) {
+    for (RP* particle : rpv.chargedAndNeutral()) {
       Tlv particle_tlv = ref_util::getTlv(particle);
       double angle_to_tau = acos(ROOT::Math::VectorUtil::CosTheta(
           tau.tlv, particle_tlv));
@@ -222,6 +260,8 @@ void TauConesBDTInputProcessor::processEvent(EVENT::LCEvent* event) {
 // ----------------------------------------------------------------------------
 
 void TauConesBDTInputProcessor::end() {
+  streamlog_out(MESSAGE) << n_strict_tau_events_ << " events with strict taus "
+    << "were observed." << std::endl;
   bdt_inputs->cd();
   tau_parameters->Write();
   quality_control->Write();
@@ -360,6 +400,7 @@ std::vector<RP*> TauConesBDTInputProcessor::TauPMSeed(EVENT::LCEvent* event,
 
 // Use the tracks directly.
 void TauConesBDTInputProcessor::TrackCheck(EVENT::LCEvent* event) {
+  // TODO: Continue, or remove this function.
   std::string track_collection_name = "MarlinTrkTracks";
   EVENT::LCCollection* track_collection = nullptr;
   try {
@@ -369,9 +410,9 @@ void TauConesBDTInputProcessor::TrackCheck(EVENT::LCEvent* event) {
       << " is not available!" << std::endl;
     throw marlin::StopProcessingException(this);
   }
-  for (int e = 0; e < track_collection->getNumberOfElements(); ++e) {
-    EVENT::Track* track = static_cast<EVENT::Track*>(
-      track_collection->getElementAt(e));
-  }
+  ////for (int e = 0; e < track_collection->getNumberOfElements(); ++e) {
+  ////  EVENT::Track* track = static_cast<EVENT::Track*>(
+  ////    track_collection->getElementAt(e));
+  ////}
 
 }

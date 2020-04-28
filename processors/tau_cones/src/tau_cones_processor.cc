@@ -145,6 +145,7 @@ void TauConesProcessor::init() {
   printParameters();
   root_out_ = new TFile((out_root_filename_+".root").c_str(), "update");
   fail_reason_tuple_ = new TNtuple("fail_reason_tuple_","fail_reason_tuple_",
+      "n_no_strict_tau:"
       "m_invariant_too_high:m_invariant_negative:wrong_track_number"
         ":not_isolated:tried_to_merge:taus_identified"
         ":background_suppressed");
@@ -180,27 +181,29 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
   // outside of the acceptance volume.
   EventVector rpv = EventVector(pfo_collection, cd);
   event_count.n_background_suppressed = rpv.n_background_suppressed;
-
- // Fill the vector of tau candidates (each candidate being a vector of RPs).
-  FindAllTaus(rpv, cd.min_p_t_seed, cd.search_cone_angle,
-      kPrintInfoOfEventNumber == n_events_total); // Verbose output for one ev.
-  for (RP* particle: rpv.all) rest_collection->addElement(particle);
-
+  if (!HasStrictTau(rpv, cd, event)) {
+    ++event_count.n_no_strict_tau;
+    streamlog_out(DEBUG) << "xxx No strict candidate." << std::endl;
+  } else {
+    streamlog_out(DEBUG) << "--> Has strict tau! (Might be bkg)" << std::endl;
+   // Fill the vector of tau candidates (each candidate being a vector of RPs).
+    FindAllTaus(rpv, cd.min_p_t_seed, cd.search_cone_angle,
+        kPrintInfoOfEventNumber == n_events_total);  // Verbose output for 1 ev.
+  }
+  for (RP* particle: rpv.chargedAndNeutral()) {
+    rest_collection->addElement(particle);
+  }
  // Refine the candidate selection.
   MassTracksRejection(rpv, event_count, rest_collection);
-
   int n_merged = MergeCloseByTaus(rpv, cd.search_cone_angle,
       n_events_total== kPrintInfoOfEventNumber);
   event_count.n_tried_to_merge += n_merged;
-
   int add_reject = MassTracksRejection(rpv, event_count, rest_collection);
   if (n_events_total== kPrintInfoOfEventNumber and add_reject > 0) {
     streamlog_out(MESSAGE) << "Some merged object does not qualify as a "
       "tau anymore." << std::endl;
-    }
-
+  }
   Isolation(rpv, event_count, rest_collection);
-
   // What was not rejected up to now will be considered part of a tau. Fill
   // the two tau related collections.
   for (TauCandidate tau_struct : rpv.taus) {
@@ -209,8 +212,8 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
     ++event_count.n_taus_identified;
     tau_collection->addElement(tau);
     for (RP* tau_remnant: tau->getParticles()) {
-	  IMPL::LCRelationImpl* relation = new LCRelationImpl(tau, tau_remnant);
-	  tau_relation_collection->addElement(relation);
+    IMPL::LCRelationImpl* relation = new LCRelationImpl(tau, tau_remnant);
+    tau_relation_collection->addElement(relation);
     }
     if (n_events_total== kPrintInfoOfEventNumber) {
       Tlv tau_tlv = ref_util::getTlv(tau);
@@ -246,6 +249,7 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
     assert(n_relations_from == tau_relation_collection->getNumberOfElements());
   }
   fail_reason_tuple_->Fill(
+      event_count.n_no_strict_tau,
       event_count.n_m_invariant_too_high,
       event_count.n_m_invariant_negative,
       event_count.n_wrong_track_number,
@@ -269,6 +273,7 @@ void TauConesProcessor::end() {
   // Print the tuple's information.
   streamlog_out(MESSAGE) << "end().  " << name() << " processed "
     << n_events_total << " events." << std::endl
+    << "Events where no strict tau was found:  " << total_count.n_no_strict_tau << std::endl
     << "Number of found tau candidates:  " << total_count.n_taus_identified << std::endl
     << "Reasons for failure:  " <<std::endl
     << "  High invariant mass:  " << total_count.n_m_invariant_too_high << std::endl
@@ -344,7 +349,7 @@ int TauConesProcessor::Isolation(EventVector &rpv,
   for (TauCandidate tau : rpv.taus) {
     float isolation_energy = 0.f;
     int n_isolation_particles = 0;
-    for (RP* particle : rpv.all) {
+    for (RP* particle : rpv.chargedAndNeutral()) {
       Tlv particle_tlv = ref_util::getTlv(particle);
       double angle_to_tau = acos(ROOT::Math::VectorUtil::CosTheta(
           tau.tlv, particle_tlv));
