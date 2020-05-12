@@ -58,7 +58,7 @@ class DraftProcessor : public marlin::Processor {
   // Private draft functions
   void printCollectionInfo(EVENT::LCEvent* event);
   // Requires LCFIPlus to be run first. Investigates its flavor tagging output.
-  // Might be useful for checking wether the LCFIPlus weights have to be
+  // Might be useful for checking whether the LCFIPlus weights have to be
   // retrained for our usecase.
   void bbVertexPlayground(EVENT::LCEvent* event);
 

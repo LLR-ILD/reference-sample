@@ -33,11 +33,11 @@ ExampleProcessor::ExampleProcessor() :
   _description = "An example processor for ILD analysis. ";
 
   registerInputCollection(
-    LCIO::RECONSTRUCTEDPARTICLE,  // The collection type.
-    "PfoCollection",  // Parameter name in the steering file.
-    "The Pandora PFO collection name.",  // A parameter description. Please fill this correctly.
-    pfo_collection_name_,  // Your variable to store the result after steering file parsing.
-    std::string("PandoraPFOs"));  // Default parameter value.
+    LCIO::RECONSTRUCTEDPARTICLE,
+    "PfoCollection",
+    "The Pandora PFO collection name.",
+    pfo_collection_name_,
+    std::string("PandoraPFOs"));
 
   registerProcessorParameter(
     "PfoEnergyCut",
@@ -54,7 +54,7 @@ void ExampleProcessor::init() {
   // and histograms would be defined.
   ////TString fnn(out_root_filename_.c_str());
   ////fnn += ".root";
-  ////root_out_ = new TFile(fnn, "recreate");
+  ////root_out_ = new TFile(fnn, "update");
   ////h_example_hist_ = new TH1F("exampleHist", "exampleHist", 100, 0, 100);
 }
 

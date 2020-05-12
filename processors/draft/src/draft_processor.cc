@@ -42,7 +42,7 @@ void DraftProcessor::init() {
   // and histograms would be defined.
   out_root_filename_ = "drafter";
   TString fnn(out_root_filename_.c_str()); fnn+=".root";
-  root_out_ = new TFile(fnn,"recreate");
+  root_out_ = new TFile(fnn,"update");
 
   h_no_b_b_tags_2jets_  = new TH2F(
       "no_b_b_tags_2jets_", "no_b_b_tags_2jets_",
@@ -73,8 +73,12 @@ void DraftProcessor::processEvent(EVENT::LCEvent* event) {
     << " - run " << event->getEventNumber() << std::endl;
   // The function calls below are independent an can be toggled as needed.
   // Each function is a draft on its own.
-  printCollectionInfo(event);
+  //printCollectionInfo(event);
   ////bbVertexPlayground(event);
+
+  std::string mc_col_name = "MCParticlesSkimmed";
+  EVENT::LCCollection* mc_collection = event->getCollection(mc_col_name);
+  ref_util::printFamilyTree(mc_collection);
 }
 
 // ----------------------------------------------------------------------------

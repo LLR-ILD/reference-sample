@@ -22,6 +22,7 @@
 using RP = EVENT::ReconstructedParticle;
 using Tlv = ROOT::Math::XYZTVector;
 const float kMZ = 91.19;
+const float kMTau = 1.777;
 
 // This line allows to register your processor in marlin when calling
 // "Marlin steering_file.xml".
@@ -88,16 +89,18 @@ void SplitOffZProcessor::init() {
   // This is also the place where a root file would be opened
   // and histograms would be defined.
   TString fnn(out_root_filename_.c_str());
-  fnn += ".root";
-  root_out_ = new TFile(fnn, "recreate");
-  h_best_z_mass_ = new TH1F(
-      ("h_best_z_mass_"+z_decay_channel_).c_str(),
-      ("h_best_z_mass_"+z_decay_channel_).c_str(),
-      140, 0, 140);
-  h_two_best_z_masses_ = new TH2F(
-      ("h_two_best_z_masses_"+z_decay_channel_).c_str(),
-      ("h_two_best_z_masses_"+z_decay_channel_).c_str(),
-      140, 0, 140, 140, 0, 140);
+  fnn += z_decay_channel_ + ".root";
+  root_out_ = new TFile(fnn, "update");
+  z_mass_tuple_ = new TNtuple(
+      ("z_mass_tuple_" + z_decay_channel_).c_str(),
+      ("z_mass_tuple_" + z_decay_channel_).c_str(),
+      "best_Z_mass:recoil_mass:second_best_Z_mass:"
+        "plus_candidates:minus_candidates");
+  z_momenta_tuple_ = new TNtuple(
+    ("z_momenta_tuple_" + z_decay_channel_).c_str(),
+    ("z_momenta_tuple_" + z_decay_channel_).c_str(),
+    "px1:py1:pz1:E1:"
+    "px2:py2:pz2:E2");
 }
 
 // ----------------------------------------------------------------------------
@@ -131,6 +134,7 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
   if (z_decay_channel_ == "ZDec_NU") {
     streamlog_out(DEBUG) << z_decay_channel_ << ", Z -> nu nu_bar"
       << event->getEventNumber() << std::endl;
+    z_mass_tuple_->Fill(-1, -1, -1, 0, 0);
   } else if ((z_decay_channel_ == "ZDec_EL") || z_decay_channel_ == "ZDec_MU"
            || z_decay_channel_ == "ZDec_TAU") {
     // Common steps for all charged lepton channels.
@@ -144,9 +148,9 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
     if (z_decay_channel_ == "ZDec_TAU") {
       EVENT::LCCollection* tau_collection = nullptr;
       try {
-        tau_collection = event->getCollection("TauJets");
+        tau_collection = event->getCollection("TauPFOs");
       } catch (DataNotAvailableException &e) {
-        streamlog_out(ERROR) << "RP collection " << "TauJets"
+        streamlog_out(ERROR) << "RP collection " << "TauPFOs"
           << " is not available! Remember calling the TauFinder Processor "
           "before this one." << std::endl;
         throw marlin::StopProcessingException(this);
@@ -164,7 +168,7 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
       for (int e = 0; e < tau_collection->getNumberOfElements(); ++e) {
         RP* pfo_tau = static_cast<RP*>(
             tau_collection->getElementAt(e));
-        if (pfo_tau->getCharge() > 0) {
+        if (pfo_tau->getType() == 15) {
           plus_candidate_momenta.push_back(ref_util::getTlv(pfo_tau));
           std::vector<RP*> candidate_vector;
           for (auto tau_object : tau_navigator->getRelatedToObjects(pfo_tau)) {
@@ -172,7 +176,7 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
             candidate_vector.push_back(tau_part);
           }
           plus_candidate_rps.push_back (candidate_vector);
-        } else if (pfo_tau->getCharge() < 0) {
+        } else if (pfo_tau->getType() == -15) {
           minus_candidate_momenta.push_back(ref_util::getTlv(pfo_tau));
           std::vector<RP*> candidate_vector;
           for (auto tau_object : tau_navigator->getRelatedToObjects(pfo_tau)) {
@@ -182,8 +186,9 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
           minus_candidate_rps.push_back(candidate_vector);
         }
         else {
-          streamlog_out(ERROR) << "Charge zero was not expected. How does an "
-          "isolated lepton object not have a charge??" << std::endl;
+          streamlog_out(ERROR) << "This object comes from what is supposed to "
+            "be a tau collection, so its type should be +-15. We found: "
+            << pfo_tau->getType() << std::endl;
         }
       }
     } else { // z_decay_channel_ == "ZDec_EL" or "ZDec_MU"
@@ -269,27 +274,33 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
           }
         }
       }
-      // The actual Z mass calculation step.
-      best_z_mass = identifyZ(plus_candidate_momenta, minus_candidate_momenta,
-          plus_minus_indices, second_best_z_mass);
-      // In case that there is no lepton pair identified, the plus_minus_indices
-      // variable takes the value (-1, -1). This happens if the decay mode into
-      // neutrinos is specified, or if just no candidate could be found.
-      if (plus_minus_indices[0] != -1) {
-        chosen_plus = plus_candidate_rps[plus_minus_indices[0]];
-        chosen_minus = minus_candidate_rps[plus_minus_indices[1]];
-      }
     }
+    // The actual Z mass calculation step. Applied to all 3 charged leptons.
+    best_z_mass = identifyZ(plus_candidate_momenta, minus_candidate_momenta,
+        plus_minus_indices, second_best_z_mass);
+    float recoil_mass = -1;
+    // In case that there is no lepton pair identified, the plus_minus_indices
+    // variable takes the value (-1, -1). This happens if the decay mode into
+    // neutrinos is specified, or if just no candidate could be found.
+    if (plus_minus_indices[0] != -1) {
+      chosen_plus = plus_candidate_rps[plus_minus_indices[0]];
+      chosen_minus = minus_candidate_rps[plus_minus_indices[1]];
+      Tlv p_plus = plus_candidate_momenta[plus_minus_indices[0]];
+      Tlv p_minus = minus_candidate_momenta[plus_minus_indices[1]];
+      recoil_mass = recoilToZ(p_plus, p_minus);
+      z_momenta_tuple_->Fill(
+         p_plus.Px(),  p_plus.Py(),  p_plus.Pz(),  p_plus.E(),
+        p_minus.Px(), p_minus.Py(), p_minus.Pz(), p_minus.E()
+      );
+    }
+  // Populate the tuple.
+  z_mass_tuple_->Fill(best_z_mass, recoil_mass, second_best_z_mass[0],
+      plus_candidate_momenta.size(), minus_candidate_momenta.size());
   } else {
     streamlog_out(ERROR) << "The specified decay mode '"
     << z_decay_channel_ << "' is not foreseen as input. Please change it to "
      "ZDec_EL, ZDec_MU, ZDec_TAU or ZDec_NU."  << std::endl;
     throw marlin::StopProcessingException(this);
-  }
-  // Populate the histograms.
-  h_best_z_mass_->Fill(best_z_mass);
-  if (second_best_z_mass[0] > 0) {
-    h_two_best_z_masses_->Fill(best_z_mass, second_best_z_mass[0]);
   }
 
   // Fill the new (sub-)collections.
@@ -301,7 +312,7 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
       LCIO::RECONSTRUCTEDPARTICLE);
   z_remnants_vec->setSubset(true);
   higgs_remnants_vec->setSubset(true);
-  overlay_vec  ->setSubset(true);
+  overlay_vec ->setSubset(true);
   for (int i = 0; i < full_collection->getNumberOfElements(); ++i) {
     RP* particle = static_cast<RP*>(full_collection->getElementAt(i));
     if (std::find(chosen_plus.begin(), chosen_plus.end(), particle)
@@ -342,6 +353,7 @@ float SplitOffZProcessor::identifyZ(
     IntVec &plus_minus_indices, FloatVec &second_best_z_mass) {
   // Variable preparations.
   float smallest_diff_to_z = 1000.;
+  float second_smallest_diff_to_z = 1000.;
   float best_z_mass = -1;
   ////second_best_z_mass.resize(1);
   ////second_best_z_mass[0] = -1;
@@ -353,14 +365,31 @@ float SplitOffZProcessor::identifyZ(
     for (size_t i_min = 0; i_min < minus_candidate_momenta.size(); ++i_min) {
       float candidate_z_mass = (
           plus_candidate_momenta[i_pl] + minus_candidate_momenta[i_min]).M();
-      if ((abs(candidate_z_mass - kMZ) < smallest_diff_to_z)
-          || (smallest_diff_to_z < 0)) {
-        smallest_diff_to_z = abs(candidate_z_mass-kMZ);
-        second_best_z_mass[0] = best_z_mass;
-        best_z_mass = candidate_z_mass;
-        plus_minus_indices[0] = i_pl; plus_minus_indices[1] = i_min;
+      ////float candidate_z_mass = (
+      ////    plus_candidate_momenta[i_pl] * kMTau / plus_candidate_momenta[i_pl].M()
+      ////    + minus_candidate_momenta[i_min] * kMTau / minus_candidate_momenta[i_min].M()
+      ////    ).M();
+      if (abs(candidate_z_mass - kMZ) < second_smallest_diff_to_z) {
+        if (abs(candidate_z_mass - kMZ) < smallest_diff_to_z) {
+          second_smallest_diff_to_z = smallest_diff_to_z;
+          smallest_diff_to_z = abs(candidate_z_mass-kMZ);
+          second_best_z_mass[0] = best_z_mass;
+          best_z_mass = candidate_z_mass;
+          plus_minus_indices[0] = i_pl; plus_minus_indices[1] = i_min;
+        } else {
+          second_smallest_diff_to_z =  abs(candidate_z_mass-kMZ);
+          second_best_z_mass[0] = candidate_z_mass;
+        }
       }
     }
   }
   return best_z_mass;
+}
+
+
+float SplitOffZProcessor::recoilToZ(Tlv plus_mom, Tlv minus_mom) {
+  Tlv event_mom = Tlv(0, 0, 0, 250.);
+  Tlv z_boson_mom = plus_mom + minus_mom;
+  Tlv recoil_mom = (event_mom - z_boson_mom);
+  return recoil_mom.M();
 }

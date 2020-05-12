@@ -11,6 +11,7 @@
 // -- ROOT headers.
 
 // -- LCIO headers.
+#include "UTIL/LCIterator.h"
 
 // -- Marlin headers.
 #include "marlin/Exceptions.h"
@@ -257,6 +258,12 @@ std::vector<RP*> ref_util::getRpsFromMcParticle(
 std::vector<MCP*> ref_util::getMcChainFromRp(
     RP* rp, UTIL::LCRelationNavigator* relation_navigator) {
   std::vector<MCP*> mc_chain;
+  if (relation_navigator->getRelatedToObjects(rp).size() == 0) {
+      std::cout << "There is a ReconstructedParticle that is not realted to any"
+        << " MonteCarlo particle. Maybe the relation collection is faulty?"
+        << std::endl;
+      return mc_chain;
+  }
   MCP* mcp = static_cast<MCP*>(relation_navigator->getRelatedToObjects(rp)[0]);
   mc_chain.push_back(mcp);
   while (mcp->getParents().size()) {
@@ -275,6 +282,22 @@ int ref_util::getPrimaryPdg(
     primaryPDG = mc_chain.back()->getPDG();
   }
   return primaryPDG;
+}
+
+int ref_util::getPrimaryPdg(RP* rp, EVENT::LCEvent* event) {
+  std::string link_col_name = "RecoMCTruthLink";
+  EVENT::LCCollection* relation_collection = nullptr;
+  UTIL::LCRelationNavigator* relation_navigator = nullptr;
+  try {
+    relation_collection = event->getCollection(link_col_name);
+    relation_navigator = new UTIL::LCRelationNavigator(relation_collection);
+  } catch (DataNotAvailableException &e) {
+    streamlog_out(ERROR) << "The relation collection " << link_col_name
+      << " is not available!"
+      << "Particle code 0 is returned for this search." << std::endl;
+    return 0;
+  }
+  return ref_util::getPrimaryPdg(rp, relation_navigator);
 }
 
 // ----------------------------------------------------------------------------
@@ -339,6 +362,65 @@ bool ref_util::pdgIsInMcCol(int pdg, EVENT::LCCollection* mcCol) {
 }
 
 bool ref_util::rpEnergySort(EVENT::ReconstructedParticle* rp1,
-                  EVENT::ReconstructedParticle* rp2){
+                            EVENT::ReconstructedParticle* rp2) {
   return fabs(rp1->getEnergy()) > fabs(rp2->getEnergy());
+}
+
+bool ref_util::rpPtSort(EVENT::ReconstructedParticle* rp1,
+                        EVENT::ReconstructedParticle* rp2) {
+  return pow(rp1->getMomentum()[0], 2) + pow(rp1->getMomentum()[1], 2)
+       > pow(rp2->getMomentum()[0], 2) + pow(rp2->getMomentum()[1], 2);
+}
+
+// ----------------------------------------------------------------------------
+// Mainly copied from the ZH python project's invisibleHDecaysFiles.py.
+// If there would be multiple Higgs in the event, true would mean that at least
+// one of them decayed invisibly.
+bool ref_util::isHiggsInvisibleEvent(EVENT::LCEvent* event,
+    const std::string &mc_collection_name) {
+  for (UTIL::LCIterator<MCP> it(event, mc_collection_name);
+  MCP* mcp = it.next(); ) {
+    if (mcp->getPDG() == 25) {
+      std::vector<MCP*> daughters = mcp->getDaughters();
+      // Take care of cases where the Higgs is intermediate (hadronization?).
+      if (daughters[0]->getPDG() == 25) continue;
+      if (daughters.size() != 2) {
+        streamlog_out(ERROR) << "The number of Higgs daughters was not two:";
+        for (MCP* daughter : daughters) {
+          streamlog_out(ERROR) << " " << daughter->getPDG();
+        }
+        streamlog_out(ERROR) << "." << std::endl;
+      }
+      while (daughters.size() != 0) {
+        // Advantage of using last daughter instead of first: We follow down the
+        // whole decay chain of one particle instead of building the whole decay
+        // chain. If this one particle does not decay into neutrinos, we do not
+        // have to consider any other particles.
+        MCP* last_daughter = daughters[daughters.size()-1];
+        if (last_daughter->getGeneratorStatus() != 1) { // == 1 -> stable.
+          // Replace the (unstable) first daughter by its daughters.
+          // Reserve for performance only.
+          std::vector<MCP*> daughter_daughters = last_daughter->getDaughters();
+          daughters.erase(daughters.end()-1); // Remove the last element.
+          daughters.reserve(daughters.size() + daughter_daughters.size());
+          daughters.insert(daughters.end(), daughter_daughters.begin(),
+              daughter_daughters.end());
+        } else { // Stable.
+          int stable_pdg = abs(last_daughter->getPDG());
+          daughters.erase(daughters.end()-1);
+          if (stable_pdg != 12 and stable_pdg != 14 and stable_pdg != 16) {
+            break; // Can stop when we found a visible
+            // stable remnant from the Higgs decay.
+          }
+        }
+      }
+      if (daughters.size() != 0) {
+        return false; // If there are still particles in the daughters list
+        // there must have been stable non-neutrinos.
+      } else {
+        return true;
+      }
+    }
+  }
+  return false;
 }

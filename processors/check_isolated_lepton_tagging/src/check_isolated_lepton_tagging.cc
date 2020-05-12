@@ -53,7 +53,7 @@ void CheckIsoLeptonProcessor::init() {
   // This is also the place where a root file would be opened:
   TString fnn(out_root_filename_.c_str());
   fnn += ".root";
-  root_out_ = new TFile(fnn, "recreate");
+  root_out_ = new TFile(fnn, "update");
   // and histograms would be defined.
   h_n_isolated_muons_ = new TH1F(
       "h_n_isolated_muons_", "h_n_isolated_muons_",

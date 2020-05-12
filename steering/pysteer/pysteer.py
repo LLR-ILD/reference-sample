@@ -164,8 +164,9 @@ class Pysteer(object):
     # --------------------------------------------------------------------------
     def run(self, batch_mode=True, debug_process="Pe3e3h", pols=None,
         batch_processes=None):
-        """Actually to the analysis by calling Marlin on a steering file.
-        : param batch_mode (bool): If true (default), and if a batch sytsem is
+        """Actually do the analysis by calling Marlin on a steering file.
+
+        : param batch_mode (bool): If true (default), and if a batch system is
             found on the machine, the jobs are sent to the batch system.
             Else, the job is directly run on the machine. In this case, only
             the process `debug_process` is used.
@@ -178,7 +179,7 @@ class Pysteer(object):
             this list. This parameter is only used if batch_mode == True.
         """
         now = datetime.now()
-        run_dir = Path.home() / Path(now.strftime("%Y-%m-%d-%H:%M:%S"))
+        run_dir = Path.home() / Path(now.strftime("%Y-%m-%d-%H%M%S"))
         run_dir.mkdir()
         def make_files(files, process_dir, process, cmd_template):
             self.marlin_global.LCIOInputFiles = ("\n          ".join(files)
@@ -187,9 +188,13 @@ class Pysteer(object):
             log_name = "log_" + steer_name.rstrip(".xml") + ".txt"
             self.write(process_dir / steer_name)
             cmd = cmd_template.format(steer_name, log_name)
-            subprocess.call(cmd, cwd=process_dir, shell=True) # TODO: Get rid of securit-flawed shell=True
+            subprocess.call(cmd, cwd=process_dir, shell=True) # TODO: Get rid of securit-flawed shell=True.
 
-        if batch_mode and shutil.which("bsub") is not None:
+        if batch_mode:
+            if shutil.which("bsub") is not None:
+                cmd_template = "bsub -q s 'Marlin {} &> {} 2>&1'"
+            else:
+                cmd_template = "Marlin {} &> {} 2>&1"
             for pol, processes_dict in self.lcio_dict.items():
                 if pols and pol in pols:
                     continue
@@ -198,17 +203,16 @@ class Pysteer(object):
                         continue
                     process_dir = run_dir / pol / process
                     process_dir.mkdir(parents=True, exist_ok=True)
-                    cmd_template = "bsub -q s 'Marlin {} &> {} 2>&1'"
                     make_files(files, process_dir, process,
                         cmd_template=cmd_template)
         else:
+            cmd_template = "Marlin {} &> {} 2>&1"
             if not pols:
                 pols = self.lcio_dict.keys()
             files = [""]
             for pol in pols:
                 if self.lcio_dict[pol].get(debug_process):
                     files.extend(self.lcio_dict[pol].get(debug_process))
-            cmd_template = "Marlin {} &> {} 2>&1"
             make_files(files, process_dir=run_dir, process=debug_process,
                 cmd_template=cmd_template)
 

@@ -63,7 +63,7 @@ void SlcioToRootProcessor::init() {
   // This is also the place where a root file would be opened
   // and histograms would be defined.
   TString fnn(root_file_name_.c_str()); fnn+=".root";
-  root_file_ = new TFile(fnn,"recreate");
+  root_file_ = new TFile(fnn,"update");
 
   tree_ = new TTree(tree_name_.c_str(), "Tree with some data from "
     "reconstructed particle collections in .slcio files.");
@@ -128,7 +128,7 @@ void SlcioToRootProcessor::end() {
   tree_->Write();
   root_file_->Write(0);
   root_file_->Close();
-  streamlog_out(MESSAGE) << "end" << std::endl;
+  streamlog_out(MESSAGE) << "end()." << std::endl;
 }
 
 //-----------------------------------------------------------------------------

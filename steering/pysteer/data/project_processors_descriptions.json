@@ -41,11 +41,26 @@
         "ZDecayChannel": "Can be ZDec_EL, ZDec_MU, ZDec_TAU or ZDec_NU.",
         "photonRecombinationCos": "Cosine of the angle up to which photons should be recombined with an \"\n      \"isolated lepton for the Z reconstruction."
     },
+    "TauConesBDTInputProcessor": {
+        "IsolationConeAngle": "Outer isolation cone around the search cone of the tau jet in rad.",
+        "MCParticleCollection": "This MCParticle collection should link to the specified .\"\n      \"ReconstructedParticle collection.",
+        "MaxCosTheta": "Cut on the cosine of theta to suppress background.",
+        "MinPtSeed": "Minimum tranverse momentum of tau seed.",
+        "OutputRootFile": "Name of the output root file.",
+        "PfoCollection": "The Pandora PFO collection name.",
+        "PtCut": "Cut on Pt to suppress background.",
+        "RelationCollection": "Collection of relations that link the Monte Carlo particles with the \"\n    \"reconstructed particles.",
+        "SearchConeAngle": "Opening angle of the search cone for the tau jet in rad.",
+        "TauFlag": "Flag indicating properties that the reconstructed tau must have."
+    },
     "TauConesProcessor": {
         "IsolationConeAngle": "Outer isolation cone around the search cone of the tau jet in rad.",
         "IsolationEnergy": "Maximal allowed energy within the isolation cone region.",
+        "MaxChargedRemnants": "Upper limit on the number of charged tracks that can belong to a tau \"\n    \"candidate.",
         "MaxCosTheta": "Cut on the cosine of theta to suppress background.",
         "MaxInvariantMass": "Upper limit on the invariant mass of the tau candidate.",
+        "MaxIsoParticles": "Upper limit on the number of particles in the isolation cone (without tau \"\n    \"cone).",
+        "MaxRemnants": "Upper limit on the number of remanants of a tau candidate.",
         "MinPtSeed": "Minimum tranverse momentum of tau seed.",
         "OutputRootFile": "Name of the output root file.",
         "PfoCollection": "The Pandora PFO collection name.",
@@ -54,5 +69,8 @@
         "TauCollection": "Name of the new PFO collection of tau candidates.",
         "TauRelationCollection": "Name of the relation collection linking the tau candidates to their \"\n    \"counterparts in the ReconstructedParticle collection.",
         "TauRestCollection": "Name of the new PFO collection containing all those particles that are \"\n      \"not part of a tau candidate."
+    },
+    "TauFromTrackProcessor": {
+        "PfoCollection": "The Pandora PFO collection name."
     }
 }
