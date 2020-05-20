@@ -1,9 +1,11 @@
-PROJECT_DIR=$HOME/reference-sample
+PROJECTS_DIR=$HOME/iLCSoft/projects
+REFERENCE_SAMPLE_DIR=${PROJECTS_DIR}/reference-sample
+SL6_IMG=$REFERENCE_SAMPLE_DIR/singularity/proj.img
 INIT_ILCSOFT=/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/init_ilcsoft.sh
 
 marlin_build() {
     OLD_DIR=$PWD
-    cd $PROJECT_DIR
+    cd $REFERENCE_SAMPLE_DIR
     unset MARLIN_DLL
     source $INIT_ILCSOFT
 
@@ -17,12 +19,12 @@ marlin_build() {
 
 marlin_run() {
     OLD_DIR=$PWD
-    cd $PROJECT_DIR
+    cd $REFERENCE_SAMPLE_DIR
     unset MARLIN_DLL
     source $INIT_ILCSOFT
-    export MARLIN_DLL=$MARLIN_DLL${PROJECT_DIR}/lib/libreference-sample.so:
+    export MARLIN_DLL=$MARLIN_DLL${REFERENCE_SAMPLE_DIR}/lib/libreference-sample.so:
     cd build; make install; cd ..
-    python3 $PROJECT_DIR/steering/pytest.py
+    python3 $REFERENCE_SAMPLE_DIR/steering/pytest.py
     #Marlin ./steering.xml > log.txt 2>&1
     cd ${OLD_DIR}
 }
@@ -33,9 +35,9 @@ marlin_dst_viewer() {
     source $INIT_ILCSOFT
     ## Replace the iLCSoft CEDViewer lib with our custom extension.
     #export MARLIN_DLL=`echo $MARLIN_DLL | tr ":" "\n" | grep -v "CEDViewer" | tr "\n" ":"| sed 's/:$//'`
-    #export MARLIN_DLL=/home/kunath/scratch/Jonas-CEDViewer/lib/libCEDViewer.so:$MARLIN_DLL
+    #export MARLIN_DLL=$PROJECTS_DIR/Jonas-CEDViewer/lib/libCEDViewer.so:$MARLIN_DLL
     # More extreme approach: Link only the necessary libraries.
-    export MARLIN_DLL=/home/kunath/scratch/Jonas-CEDViewer/lib/libCEDViewer.so:/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/MarlinDD4hep/v00-06/lib/libMarlinDD4hep.so
+    export MARLIN_DLL=$PROJECTS_DIR/Jonas-CEDViewer/lib/libCEDViewer.so:/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/MarlinDD4hep/v00-06/lib/libMarlinDD4hep.so
 
     # Who knows why: Last line in the init_ilcsoft.sh script sets an environment
     # variable that is meant to solve issues in SL6. For me, this variable leads
@@ -43,15 +45,15 @@ marlin_dst_viewer() {
     unset LIBGL_ALWAYS_INDIRECT
     glced &
     # Then running marlin and feed it with events.
-    Marlin $PROJECT_DIR/steering/examples/DDDSTViewer.xml
-    #Marlin $PROJECT_DIR/steering/examples/MarlinStdRecoViewerDST.xml \
+    Marlin $REFERENCE_SAMPLE_DIR/steering/examples/DDDSTViewer.xml
+    #Marlin $REFERENCE_SAMPLE_DIR/steering/examples/MarlinStdRecoViewerDST.xml \
     # --global.GearXMLFile=gear_ILD_l5_o1_v02.xml \
     # --global.LCIOInputFiles=your_file_DST.slcio
 }
 
 marlin_make_dst() {
     OLD_DIR=$PWD
-    cd /home/kunath/scratch/Jonas-CEDViewer
+    cd $PROJECTS_DIR/Jonas-CEDViewer
     unset MARLIN_DLL
     source $INIT_ILCSOFT
 
@@ -77,20 +79,20 @@ if [[  $1 == "make_dst" ]] ; then
 fi
 
 sl6_build() {
-    singularity exec -B /cvmfs $PROJECT_DIR/singularity/proj.img /bin/sh $PROJECT_DIR/.aliases build
+    singularity exec -B /cvmfs $SL6_IMG /bin/sh $REFERENCE_SAMPLE_DIR/.aliases build
 }
 sl6_run() {
-    singularity exec -B /cvmfs -B ${PROJECT_DIR}  $PROJECT_DIR/singularity/proj.img /bin/sh $PROJECT_DIR/.aliases run
+    singularity exec -B /cvmfs -B ${REFERENCE_SAMPLE_DIR}  $SL6_IMG /bin/sh $REFERENCE_SAMPLE_DIR/.aliases run
 }
 sl6_dst() {
-    singularity exec -B /cvmfs $PROJECT_DIR/singularity/proj.img /bin/sh $PROJECT_DIR/.aliases dst_viewer
+    singularity exec -B /cvmfs $SL6_IMG /bin/sh $REFERENCE_SAMPLE_DIR/.aliases dst_viewer
 }
 sl6_make_dst() {
-    singularity exec -B /cvmfs $PROJECT_DIR/singularity/proj.img /bin/sh $PROJECT_DIR/.aliases make_dst
+    singularity exec -B /cvmfs $SL6_IMG /bin/sh $REFERENCE_SAMPLE_DIR/.aliases make_dst
 }
 
 sl6() {
     ln -s $INIT_ILCSOFT INIT_ILCSOFT
-    singularity shell -B /cvmfs $PROJECT_DIR/singularity/proj.img
+    singularity shell -B /cvmfs $SL6_IMG
 }
 
