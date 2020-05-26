@@ -88,9 +88,9 @@ void SplitOffZProcessor::init() {
   printParameters(); // method from marlin::Processor.
   // This is also the place where a root file would be opened
   // and histograms would be defined.
-  TString fnn(out_root_filename_.c_str());
-  fnn += z_decay_channel_ + ".root";
-  root_out_ = new TFile(fnn, "update");
+  ////TString fnn(out_root_filename_.c_str());
+  ////fnn += z_decay_channel_ + ".root";
+  ////root_out_ = new TFile(fnn, "update");
   z_mass_tuple_ = new TNtuple(
       ("z_mass_tuple_" + z_decay_channel_).c_str(),
       ("z_mass_tuple_" + z_decay_channel_).c_str(),
@@ -212,7 +212,7 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
             lepton_collection->getElementAt(e));
         // ISOtypes should always return positive number.
         // Must get the charge from a separate call.
-        if (abs(tagged_lepton_types[e] == lepton_type)) {
+        if (abs(tagged_lepton_types[e]) == lepton_type) {
           if (pfo_iso_lepton->getCharge() > 0) {
             plus_candidate_momenta.push_back(ref_util::getTlv(pfo_iso_lepton));
             // Has to be wrapped in this form for 2 reasons: We might later want
@@ -337,8 +337,16 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
 // ----------------------------------------------------------------------------
 void SplitOffZProcessor::end() {
   // Write the histograms.
+  TString fnn(out_root_filename_.c_str());
+  fnn += z_decay_channel_ + ".root";
+  root_out_ = new TFile(fnn, "update");
+
   root_out_->cd();
-  root_out_->Write(0);
+  TTree* mass_tree_clone =   z_mass_tuple_->CloneTree();
+  mass_tree_clone->Write();
+  TTree* mom_tree_clone =   z_momenta_tuple_->CloneTree();
+  mom_tree_clone->Write();
+  root_out_->Write();
   root_out_->Close();
   streamlog_out(MESSAGE) << "end" << std::endl;
 }

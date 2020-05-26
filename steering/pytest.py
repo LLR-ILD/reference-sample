@@ -3,6 +3,9 @@ from pysteer import Pysteer
 # ------------------------------------------------------------------------------
 # Parameter defaults in this project.
 cpd = {"IsolatedLeptonTaggingProcessor": {
+    "IsSelectingOneIsoLep": {"value": "false"},
+    "CutOnTheISOElectronMVA": {"value": "0.3"},
+    "CutOnTheISOMuonMVA": {"value": "0.4"},
     "DirOfISOElectronWeights": {"value":
         "/cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/MarlinReco/v01-25/Analysis/IsolatedLeptonTagging/weights/e1e1h_gg_qqqq_250"},
     "DirOfISOMuonWeights": {"value":
@@ -56,16 +59,46 @@ def tauChain(steerer):
     })
     return steerer
 
+def masterThesis(steerer):
+    steerer.add("IsolatedLeptonTaggingProcessor")
+    steerer.add("TauConesProcessor", {
+        "IsolationConeAngle": dict(value="0.30"),
+        "SearchConeAngle": dict(value="0.13"),
+        "MaxCosTheta": dict(value="1.1"),
+        "MinPtSeed": dict(value="3.0"),
+        "PtCut": dict(value="1.0"),
+    })
+
+    for dec_channel in [
+            "ZDec_EL",
+            "ZDec_MU",
+            "ZDec_TAU",
+            "ZDec_NU"
+        ]:
+        steerer.add("SplitOffZProcessor", {
+            "ZDecayChannel": dict(value=dec_channel),
+            "HiggsCollection": dict(value="HRemnantsPFOs_{}".format(dec_channel)),
+            "ZCollection": dict(value="ZRemnantsPFOs_{}".format(dec_channel)),
+            "OverlayCollection": dict(value="OverlayPFOs_{}".format(dec_channel)),
+    })
+        steerer.add("MasterThesisRootProcessor", {
+            "ZDecayChannel": dict(value=dec_channel),
+            "HiggsCollection": dict(value="HRemnantsPFOs_{}".format(dec_channel)),
+            "ZCollection": dict(value="ZRemnantsPFOs_{}".format(dec_channel)),
+    })
+    return steerer
+
 # ------------------------------------------------------------------------------
 # Some basic test/use examples for pysteer.
 if __name__ == "__main__":
     steerer = Pysteer(change_parameter_defaults=cpd,
         set_parameter_value={"EncodingStringParameterName": "stringper"})
-    steerer.marlin_global.Verbosity = "DEBUG"
+    steerer.marlin_global.Verbosity = "ERROR"
     steerer.marlin_global.MaxRecordNumber = -1#2000 #000
 
     #testFlags(steerer)
-    tauChain(steerer)
+    #tauChain(steerer)
+    masterThesis(steerer)
 
     #steerer.write(xml_name="steer.xml")
     #print(steerer)

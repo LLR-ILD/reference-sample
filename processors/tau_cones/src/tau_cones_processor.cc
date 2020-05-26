@@ -143,7 +143,7 @@ TauConesProcessor::TauConesProcessor() :
 
 void TauConesProcessor::init() {
   printParameters();
-  root_out_ = new TFile((out_root_filename_+".root").c_str(), "update");
+  ////root_out_ = new TFile((out_root_filename_+".root").c_str(), "update");
   fail_reason_tuple_ = new TNtuple("fail_reason_tuple_","fail_reason_tuple_",
       "n_no_strict_tau:"
       "m_invariant_too_high:m_invariant_negative:wrong_track_number"
@@ -266,8 +266,11 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
 
 void TauConesProcessor::end() {
   // Fill the root file.
+
+  root_out_ = new TFile((out_root_filename_+".root").c_str(), "update");
   root_out_->cd();
-  fail_reason_tuple_->Write();
+  TTree* tree_in_write_file = fail_reason_tuple_->CloneTree();
+  tree_in_write_file->Write();
   root_out_->Write(0);
   root_out_->Close();
   // Print the tuple's information.
