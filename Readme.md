@@ -2,6 +2,10 @@
 
 TODO: Proper Readme! So far just copy-pasted.
 
+## Steering
+
+Steering functionality was outsourced into its own project, [`pySteer`](https://github.com/kunathj/pySteer).
+
 ## Processors
 
 Some key phrases can tell what the processor is written for:
