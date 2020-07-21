@@ -24,7 +24,9 @@ marlin_run() {
     source $INIT_ILCSOFT
     export MARLIN_DLL=$MARLIN_DLL${REFERENCE_SAMPLE_DIR}/lib/libreference-sample.so:
     cd build; make install; cd ..
-    python3 $REFERENCE_SAMPLE_DIR/steering/pytest.py
+    ln -s $HOME/iLCSoft/myLCSoft/pySteer/pysteer pysteer
+    python3 $REFERENCE_SAMPLE_DIR/test-processors.py
+    unlink pysteer
     #Marlin ./steering.xml > log.txt 2>&1
     cd ${OLD_DIR}
 }
@@ -95,4 +97,3 @@ sl6() {
     ln -s $INIT_ILCSOFT INIT_ILCSOFT
     singularity shell -B /cvmfs $SL6_IMG
 }
-
