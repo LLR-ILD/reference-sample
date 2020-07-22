@@ -132,8 +132,6 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
 
   // Find the Z boson remants, dependent on the chosen Z decay mode.
   if (z_decay_channel_ == "ZDec_NU") {
-    streamlog_out(DEBUG) << z_decay_channel_ << ", Z -> nu nu_bar"
-      << event->getEventNumber() << std::endl;
     z_mass_tuple_->Fill(-1, -1, -1, 0, 0);
   } else if ((z_decay_channel_ == "ZDec_EL") || z_decay_channel_ == "ZDec_MU"
            || z_decay_channel_ == "ZDec_TAU") {

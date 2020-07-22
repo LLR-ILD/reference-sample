@@ -138,14 +138,16 @@ void MasterThesisRootProcessor::processEvent(EVENT::LCEvent* event) {
       tv.n_muons += 1;
     } else if (abs_pdg == 211 || abs_pdg == 321 || abs_pdg == 2212) {
       tv.n_ch_hadrons += 1;
-    } else if (abs_pdg == 130 || abs_pdg == 310 || abs_pdg == 2112) {
+    } else if (abs_pdg == 130 || abs_pdg == 310 || abs_pdg == 2112 ||
+               abs_pdg == 3122) {
       tv.n_n_hadrons += 1;
     } else {
       streamlog_out(WARNING) << "An unexpected PDG was found: " << abs_pdg
         << "." << std::endl;
     }
   }
-  std::cout << z_tlv.mass() << std::endl;
+  setIsoLeptonNumbers(event, higgs_collection);
+
   tv.m_z = z_tlv.mass();
   tv.m_recoil = (Tlv(0, 0, 0, 250) - z_tlv).mass();
   tv.m_vis = (z_tlv + higgs_tlv).mass();
@@ -157,4 +159,62 @@ void MasterThesisRootProcessor::processEvent(EVENT::LCEvent* event) {
   tv.cos_theta_miss = cos((z_tlv +  higgs_tlv).theta());
 
   tree_->Fill();
+}
+
+void MasterThesisRootProcessor::setIsoLeptonNumbers(
+    EVENT::LCEvent* event, EVENT::LCCollection* higgs_collection
+  ) {
+  EVENT::LCCollection* lepton_collection = nullptr;
+  try {
+    lepton_collection = event->getCollection("ISOLeptons");
+  } catch (DataNotAvailableException &e) {
+    streamlog_out(ERROR) << "RP collection " << "ISOLeptons"
+      << " is not available! Remember calling the IsoLeptonTagging "
+      "Processor before this one." << std::endl;
+    throw marlin::StopProcessingException(this);
+  }
+  // principleThrustAxis.x(), .y(), .z(), majorThrustAxis, minorThrustAxis
+  FloatVec principle_thrust_axis;
+  higgs_collection->getParameters().getFloatVals(
+      "principleThrustAxis", principle_thrust_axis);
+  tv.principle_thrust_z = principle_thrust_axis[2];
+  tv.principle_thrust = higgs_collection->getParameters().getFloatVal("principleThrustValue");
+  tv.major_thrust = higgs_collection->getParameters().getFloatVal("majorThrustValue");
+  tv.minor_thrust = higgs_collection->getParameters().getFloatVal("minorThrustValue");
+  tv.oblateness = higgs_collection->getParameters().getFloatVal("Oblateness");
+
+  IntVec tagged_lepton_types;
+  lepton_collection->getParameters().getIntVals(
+      "ISOLepType", tagged_lepton_types);
+
+  RP* highest_e_iso_lepton = nullptr;
+  double highest_e = 0;
+  for (int e = 0; e < lepton_collection->getNumberOfElements(); ++e) {
+    RP* pfo_iso_lepton = static_cast<RP*>(lepton_collection->getElementAt(e));
+    double pfo_e = pfo_iso_lepton->getEnergy();
+    for (int h = 0; h < higgs_collection->getNumberOfElements(); ++h) {
+      RP* higgs_remnant = static_cast<RP*>(higgs_collection->getElementAt(h));
+      if (pfo_e == higgs_remnant->getEnergy()) {
+        if (tagged_lepton_types[e] == 11) {
+          tv.n_iso_electrons++;
+        } else if (tagged_lepton_types[e] == 13) {
+          tv.n_iso_muons++;
+        } else {
+          streamlog_out(ERROR) << "Unexpected ISOLepType"
+            << tagged_lepton_types[e] << std::endl;
+        }
+        if (pfo_e > highest_e) {
+          highest_e = pfo_iso_lepton->getEnergy();
+          highest_e_iso_lepton = pfo_iso_lepton;
+        }
+        break;
+      }
+    }
+  }
+  if (highest_e > 0) {
+    tv.e_highest_iso_lep = highest_e;
+    double cos_theta = cos(ref_util::getTlv(highest_e_iso_lepton).theta());
+    tv.cos_theta_iso_lep = cos_theta;
+    tv.cos_signed_iso_lep = cos_theta * highest_e_iso_lepton->getCharge();
+  }
 }
