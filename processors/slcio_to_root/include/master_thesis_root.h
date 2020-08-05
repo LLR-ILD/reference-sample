@@ -60,21 +60,21 @@ class MasterThesisRootProcessor : public marlin::Processor {
     double cos_theta_z = -1;
     double cos_theta_miss = -1;
     double cos_theta_iso_lep = -1;
-    double cos_signed_iso_lep = -1;
     double e_highest_iso_lep = -1;
     double principle_thrust_z = -1;
     double principle_thrust = -1;
     double major_thrust = -1;
     double minor_thrust = -1;
     double oblateness = -1;
+    double sphericity = -1;
+    double aplanarity = -1;
 
     int n_ch_hadrons = -1;
     int n_n_hadrons = -1;
     int n_gamma = -1;
     int n_electrons = -1;
     int n_muons = -1;
-    int n_iso_electrons = -1;
-    int n_iso_muons = -1;
+    int n_iso_leptons = -1;
 
     void initBranches(TTree* tree) {
       tree->Branch(("mZ"), &m_z, ("mZ/D"));
@@ -86,20 +86,20 @@ class MasterThesisRootProcessor : public marlin::Processor {
       tree->Branch(("cosTZ"), &cos_theta_z, ("cosTZ/D"));
       tree->Branch(("cosTMiss"), &cos_theta_miss, ("cosTMiss/D"));
       tree->Branch(("cosTIsoLep"), &cos_theta_iso_lep, ("cosTIsoLep/D"));
-      tree->Branch(("cosSignedIsoLep"), &cos_signed_iso_lep, ("cosSignedIsoLep/D"));
+      tree->Branch(("eHighestIsoLep"), &e_highest_iso_lep, ("eHighestIsoLep/D"));
       tree->Branch(("principleThrustZ"), &principle_thrust_z, ("principleThrustZ/D"));
       tree->Branch(("principleThrust"), &principle_thrust, ("principleThrust/D"));
       tree->Branch(("majorThrust"), &major_thrust, ("majorThrust/D"));
       tree->Branch(("minorThrust"), &minor_thrust, ("minorThrust/D"));
-      tree->Branch(("oblateness"), &oblateness, ("oblateness/D"));
+      tree->Branch(("sphericity"), &sphericity, ("sphericity/D"));
+      tree->Branch(("aplanarity"), &aplanarity, ("aplanarity/D"));
 
       tree->Branch(("nChargedHadrons"), &n_ch_hadrons, ("nChargedHadrons/I"));
       tree->Branch(("nNeutralHadrons"), &n_n_hadrons, ("nNeutralHadrons/I"));
       tree->Branch(("nGamma"), &n_gamma, ("nGamma/I"));
       tree->Branch(("nElectrons"), &n_electrons, ("nElectrons/I"));
       tree->Branch(("nMuons"), &n_muons, ("nMuons/I"));
-      tree->Branch(("nIsoElectrons"), &n_iso_electrons, ("nIsoElectrons/I"));
-      tree->Branch(("nIsoMuons"), &n_iso_muons, ("nIsoMuons/I"));
+      tree->Branch(("nIsoLeptons"), &n_iso_leptons, ("nIsoLeptons/I"));
     }
 
     void resetValues() {
@@ -112,20 +112,21 @@ class MasterThesisRootProcessor : public marlin::Processor {
       cos_theta_z = 0;
       cos_theta_miss = 0;
       cos_theta_iso_lep = -2;
-      cos_signed_iso_lep = -2;
+      e_highest_iso_lep = 0;
       principle_thrust_z = 0;
       principle_thrust = 0;
       major_thrust = 0;
       minor_thrust = 0;
       oblateness = 0;
+      sphericity = 0;
+      aplanarity = 0;
 
       n_ch_hadrons = 0;
       n_n_hadrons = 0;
       n_gamma = 0;
       n_electrons = 0;
       n_muons = 0;
-      n_iso_electrons = 0;
-      n_iso_muons = 0;
+      n_iso_leptons = 0;
     }
   };
   TreeVars tv{};

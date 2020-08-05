@@ -183,6 +183,9 @@ void MasterThesisRootProcessor::setIsoLeptonNumbers(
   tv.minor_thrust = higgs_collection->getParameters().getFloatVal("minorThrustValue");
   tv.oblateness = higgs_collection->getParameters().getFloatVal("Oblateness");
 
+  tv.sphericity = higgs_collection->getParameters().getFloatVal("sphericity");
+  tv.aplanarity = higgs_collection->getParameters().getFloatVal("aplanarity");
+
   IntVec tagged_lepton_types;
   lepton_collection->getParameters().getIntVals(
       "ISOLepType", tagged_lepton_types);
@@ -195,18 +198,19 @@ void MasterThesisRootProcessor::setIsoLeptonNumbers(
     for (int h = 0; h < higgs_collection->getNumberOfElements(); ++h) {
       RP* higgs_remnant = static_cast<RP*>(higgs_collection->getElementAt(h));
       if (pfo_e == higgs_remnant->getEnergy()) {
-        if (tagged_lepton_types[e] == 11) {
-          tv.n_iso_electrons++;
-        } else if (tagged_lepton_types[e] == 13) {
-          tv.n_iso_muons++;
-        } else {
-          streamlog_out(ERROR) << "Unexpected ISOLepType"
-            << tagged_lepton_types[e] << std::endl;
-        }
+        // if (tagged_lepton_types[e] == 11) {
+        //   tv.n_iso_electrons++;
+        // } else if (tagged_lepton_types[e] == 13) {
+        //   tv.n_iso_muons++;
+        // } else {
+        //   streamlog_out(ERROR) << "Unexpected ISOLepType"
+        //     << tagged_lepton_types[e] << std::endl;
+        // }
         if (pfo_e > highest_e) {
           highest_e = pfo_iso_lepton->getEnergy();
           highest_e_iso_lepton = pfo_iso_lepton;
         }
+        tv.n_iso_leptons++;
         break;
       }
     }
@@ -215,6 +219,5 @@ void MasterThesisRootProcessor::setIsoLeptonNumbers(
     tv.e_highest_iso_lep = highest_e;
     double cos_theta = cos(ref_util::getTlv(highest_e_iso_lepton).theta());
     tv.cos_theta_iso_lep = cos_theta;
-    tv.cos_signed_iso_lep = cos_theta * highest_e_iso_lepton->getCharge();
   }
 }
