@@ -43,6 +43,7 @@ class MasterThesisRootProcessor : public marlin::Processor {
   // Collections
   std::string higgs_only_collection_name_{""};
   std::string z_only_collection_name_{""};
+  std::string mc_collection_name{""};
 
   // -- The root file
   TFile* root_file_{};
@@ -50,7 +51,17 @@ class MasterThesisRootProcessor : public marlin::Processor {
   std::string z_decay_channel_ = {""};
   TTree* tree_ = {};
 
+  bool missing_mc_collection = false;
+  struct HiggsTruth {
+    bool decays_invisible = false;
+    int decay_mode = -1;
+  };
+  HiggsTruth getHiggsTruth(EVENT::LCEvent* event);
+
   struct TreeVars {
+    TreeVars() {higgs_truth = HiggsTruth();};
+    ~TreeVars() {};
+
     double m_z = -1;
     double m_recoil = -1;
     double m_vis = -1;
@@ -76,6 +87,8 @@ class MasterThesisRootProcessor : public marlin::Processor {
     int n_muons = -1;
     int n_iso_leptons = -1;
 
+    HiggsTruth higgs_truth{};
+
     void initBranches(TTree* tree) {
       tree->Branch(("mZ"), &m_z, ("mZ/D"));
       tree->Branch(("mRecoil"), &m_recoil, ("mRecoil/D"));
@@ -100,6 +113,9 @@ class MasterThesisRootProcessor : public marlin::Processor {
       tree->Branch(("nElectrons"), &n_electrons, ("nElectrons/I"));
       tree->Branch(("nMuons"), &n_muons, ("nMuons/I"));
       tree->Branch(("nIsoLeptons"), &n_iso_leptons, ("nIsoLeptons/I"));
+
+      tree->Branch(("hInvisible"), &higgs_truth.decays_invisible, ("hInvisible/I"));
+      tree->Branch(("hDecay"), &higgs_truth.decay_mode, ("hDecay/I"));
     }
 
     void resetValues() {
@@ -127,6 +143,8 @@ class MasterThesisRootProcessor : public marlin::Processor {
       n_electrons = 0;
       n_muons = 0;
       n_iso_leptons = 0;
+
+      higgs_truth = HiggsTruth();
     }
   };
   TreeVars tv{};

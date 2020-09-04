@@ -20,6 +20,7 @@
 
 // -- Using-declarations and global constants.
 // Only in .cc files, never in .h header files!
+using MCP = EVENT::MCParticle;
 using RP = EVENT::ReconstructedParticle;
 using Tlv = ROOT::Math::XYZTVector;
 
@@ -46,6 +47,14 @@ MasterThesisRootProcessor::MasterThesisRootProcessor() :
     "Name of the new PFO collection with (only) the Z decay remnants.",
     z_only_collection_name_,
     std::string("ZRemnantsPFOs"));
+
+
+  registerInputCollection(
+    LCIO::MCPARTICLE,
+    "MCParticleCollection",
+    "MCParticle collection for Higgs decay truth information.",
+    mc_collection_name,
+    std::string("MCParticlesSkimmed"));
 
   registerProcessorParameter(
     "ZDecayChannel",
@@ -94,6 +103,10 @@ void MasterThesisRootProcessor::init() {
 
 void MasterThesisRootProcessor::end() {
   endRoot();
+  if (missing_mc_collection) {
+    streamlog_out(ERROR) << "At least one event did not provide "
+      << "a MC Collection named " << mc_collection_name << ". " << std::endl;
+  }
 }
 
 // ----------------------------------------------------------------------------
@@ -158,6 +171,7 @@ void MasterThesisRootProcessor::processEvent(EVENT::LCEvent* event) {
   tv.cos_theta_z = cos(z_tlv.theta());
   tv.cos_theta_miss = cos((z_tlv +  higgs_tlv).theta());
 
+  tv.higgs_truth = getHiggsTruth(event);
   tree_->Fill();
 }
 
@@ -220,4 +234,72 @@ void MasterThesisRootProcessor::setIsoLeptonNumbers(
     double cos_theta = cos(ref_util::getTlv(highest_e_iso_lepton).theta());
     tv.cos_theta_iso_lep = cos_theta;
   }
+}
+
+
+bool isHiggsToSameParticlePair(std::vector<MCP*> remnants) {
+  if (remnants.size() != 2) return false;
+  return fabs(remnants[0]->getPDG()) == fabs(remnants[1]->getPDG());
+}
+
+bool isHiggsToZGamma(std::vector<MCP*> r) {
+  if (r.size() != 2) return false;
+  if ((fabs(r[0]->getPDG()) == 22)  & (fabs(r[1]->getPDG()) == 23)) return true;
+  if ((fabs(r[0]->getPDG()) == 23)  & (fabs(r[1]->getPDG()) == 22)) return true;
+  return false;
+}
+
+MasterThesisRootProcessor::HiggsTruth MasterThesisRootProcessor::getHiggsTruth(
+    EVENT::LCEvent* event
+  ) {
+  HiggsTruth higgs_info;
+  EVENT::LCCollection* mc_collection = nullptr;
+  try {
+    mc_collection = event->getCollection(mc_collection_name);
+  } catch (DataNotAvailableException &e) {
+    missing_mc_collection = true;
+    return higgs_info;
+  }
+  for (int i = 0; i < mc_collection->getNumberOfElements(); ++i) {
+    MCP* mcp = static_cast<MCP*>(mc_collection->getElementAt(i));
+    if (mcp->getPDG() != 25) continue;
+
+    std::vector<MCP*> remnants = mcp->getDaughters();
+    // A Higgs can appear as 'intermediate' decay product (hadronization?).
+    if (remnants[0]->getPDG() == 25) continue;
+
+    if (isHiggsToSameParticlePair(remnants)) {
+      higgs_info.decay_mode = fabs(remnants[0]->getPDG());
+    } else if (isHiggsToZGamma(remnants)) {
+      higgs_info.decay_mode = 20;
+    } else {
+      streamlog_out(ERROR) << "An unforeseen Higgs decay occurred. "
+        << "The decay prodcuts are: ";
+      for (auto r : remnants) streamlog_out(ERROR) << r->getPDG() << ", ";
+      streamlog_out(ERROR) << "." << std::endl;
+    }
+
+    // Check wether the decay is invisible.
+    std::vector<MCP*> stable_higgs_remnants;
+    while (!remnants.empty()) {
+      MCP* decay_product = remnants.back();
+      remnants.pop_back();
+      if (decay_product->getGeneratorStatus() == 1) {
+        stable_higgs_remnants.push_back(decay_product);
+      } else {
+        for (auto daughter : decay_product->getDaughters()) {
+          remnants.push_back(daughter);
+        }
+      }
+    }
+    higgs_info.decays_invisible = true;
+    for (auto stable_mcp : stable_higgs_remnants) {
+      int abs_pdg = fabs(stable_mcp->getPDG());
+      if ((abs_pdg != 12) & (abs_pdg != 14) & (abs_pdg != 16)) {
+        higgs_info.decays_invisible = false;
+        break;
+      }
+    }
+  }
+  return higgs_info;
 }
