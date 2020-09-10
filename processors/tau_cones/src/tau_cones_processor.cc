@@ -143,7 +143,6 @@ TauConesProcessor::TauConesProcessor() :
 
 void TauConesProcessor::init() {
   printParameters();
-  ////root_out_ = new TFile((out_root_filename_+".root").c_str(), "update");
   fail_reason_tuple_ = new TNtuple("fail_reason_tuple_","fail_reason_tuple_",
       "n_no_strict_tau:"
       "m_invariant_too_high:m_invariant_negative:wrong_track_number"
@@ -154,6 +153,9 @@ void TauConesProcessor::init() {
 // ----------------------------------------------------------------------------
 
 void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
+  // TODO: Remove. Only here to reproduce Taurus.
+  //// if (getHiggsTruth(event) != 15) throw marlin::SkipEventException(this);
+
   streamlog_out(DEBUG) << "Processing event no " << event->getEventNumber()
     << " - run " << event->getRunNumber() << std::endl;
   ++n_events_total;
@@ -181,23 +183,24 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
   // outside of the acceptance volume.
   EventVector rpv = EventVector(pfo_collection, cd);
   event_count.n_background_suppressed = rpv.n_background_suppressed;
-  if (!HasStrictTau(rpv, cd, event)) {
-    ++event_count.n_no_strict_tau;
-    streamlog_out(DEBUG) << "xxx No strict candidate." << std::endl;
-  } else {
-    streamlog_out(DEBUG) << "--> Has strict tau! (Might be bkg)" << std::endl;
-   // Fill the vector of tau candidates (each candidate being a vector of RPs).
-    FindAllTaus(rpv, cd.min_p_t_seed, cd.search_cone_angle,
-        kPrintInfoOfEventNumber == n_events_total);  // Verbose output for 1 ev.
-  }
+  // TODO Invoke strict tau condition again after Taurus completion.
+  // if (!HasStrictTau(rpv, cd, event)) {
+  //   ++event_count.n_no_strict_tau;
+  //   streamlog_out(DEBUG) << "xxx No strict candidate." << std::endl;
+  // } else {
+  //   streamlog_out(DEBUG) << "--> Has strict tau! (Might be bkg)" << std::endl;
+  //  // Fill the vector of tau candidates (each candidate being a vector of RPs).
+  FindAllTaus(rpv, cd.min_p_t_seed, cd.search_cone_angle,
+      kPrintInfoOfEventNumber == n_events_total);  // Verbose output for 1 ev.
+  // }
   for (RP* particle: rpv.chargedAndNeutral()) {
     rest_collection->addElement(particle);
   }
  // Refine the candidate selection.
-  MassTracksRejection(rpv, event_count, rest_collection);
-  int n_merged = MergeCloseByTaus(rpv, cd.search_cone_angle,
-      n_events_total== kPrintInfoOfEventNumber);
-  event_count.n_tried_to_merge += n_merged;
+  // MassTracksRejection(rpv, event_count, rest_collection); // TODO start merging again.
+  // int n_merged = MergeCloseByTaus(rpv, cd.search_cone_angle, // TODO start merging again.
+  //     n_events_total== kPrintInfoOfEventNumber);
+  // event_count.n_tried_to_merge += n_merged;
   int add_reject = MassTracksRejection(rpv, event_count, rest_collection);
   if (n_events_total== kPrintInfoOfEventNumber and add_reject > 0) {
     streamlog_out(MESSAGE) << "Some merged object does not qualify as a "
@@ -206,6 +209,7 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
   Isolation(rpv, event_count, rest_collection);
   // What was not rejected up to now will be considered part of a tau. Fill
   // the two tau related collections.
+  std::cout << "III" << rpv.taus.empty() << std::endl;
   for (TauCandidate tau_struct : rpv.taus) {
     // These are finally our tau candidates.
     RPImpl* tau = tau_struct.rp_impl;
@@ -222,6 +226,9 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
         << tau_struct.n_charged
         << ", particles: " << tau->getParticles().size() << "." << std::endl;
     }
+  }
+  for (auto tau : rpv.taus) {
+    if (ref_util::getPrimaryPdg(tau.seed, event) == 15) event_count.n_no_strict_tau++; // TODO temporary proxy for this being a true tau seed.
   }
 
   // Wrapping up. Check that all particles found their place in the collections.
@@ -307,7 +314,8 @@ int TauConesProcessor::MassTracksRejection(EventVector &rpv,
     TauCandidate tau_c = *iter;
     if ((tau_c.tlv.M() > tau_cut.m_invariant)
     || (tau_c.tlv.M() < 0)
-    || (tau_c.rp_impl->getParticles().size() > size_t(tau_cut.n_remnants))
+    // || (tau_c.rp_impl->getParticles().size() > size_t(tau_cut.n_remnants)) // TODO: Use this again
+    || (tau_c.rp_impl->getParticles().size() - tau_c.n_charged > size_t(tau_cut.n_remnants))
     || (tau_c.n_charged > tau_cut.n_charged)
     || (tau_c.n_charged == 0)
     ) {
@@ -362,7 +370,8 @@ int TauConesProcessor::Isolation(EventVector &rpv,
         isolation_energy += particle_tlv.E();
       }
     }
-    if (isolation_energy > tau_cut.isolation_energy) {
+    // if (isolation_energy > tau_cut.isolation_energy) { // TODO: After Taurus, get this line back.
+    if (tau.tlv.E() / (tau.tlv.E() + isolation_energy) < tau_cut.isolation_energy) { // .isolation_enegry proxy = 0.92 proxy.
       ++event_count.n_not_isolated;
       ++n_rejected;
       if (n_events_total== kPrintInfoOfEventNumber) {
@@ -371,6 +380,7 @@ int TauConesProcessor::Isolation(EventVector &rpv,
           << n_isolation_particles << " particles." << std::endl;
       }
     } else {
+      std::cout << "yes" << std::endl;
       continue;  // Exactly the non-rejected particles arrive in this case.
     }
     for (RP* part: tau.parts) {
@@ -380,4 +390,46 @@ int TauConesProcessor::Isolation(EventVector &rpv,
   }
   for (auto tc : tc_to_remove) rpv.taus.remove(tc);
   return n_rejected;
+}
+
+//TODO: Remove everything below after Taurus
+using MCP = EVENT::MCParticle;
+bool isHiggsToSameParticlePair2(std::vector<MCP*> remnants) {
+  if (remnants.size() != 2) return false;
+  return fabs(remnants[0]->getPDG()) == fabs(remnants[1]->getPDG());
+}
+
+bool isHiggsToZGamma2(std::vector<MCP*> r) {
+  if (r.size() != 2) return false;
+  if ((fabs(r[0]->getPDG()) == 22)  & (fabs(r[1]->getPDG()) == 23)) return true;
+  if ((fabs(r[0]->getPDG()) == 23)  & (fabs(r[1]->getPDG()) == 22)) return true;
+  return false;
+}
+
+int TauConesProcessor::getHiggsTruth(
+    EVENT::LCEvent* event
+  ) {
+  EVENT::LCCollection* mc_collection = event->getCollection("MCParticlesSkimmed");
+  int decay_mode = 0;
+  for (int i = 0; i < mc_collection->getNumberOfElements(); ++i) {
+    MCP* mcp = static_cast<MCP*>(mc_collection->getElementAt(i));
+    if (mcp->getPDG() != 25) continue;
+
+    std::vector<MCP*> remnants = mcp->getDaughters();
+    // A Higgs can appear as 'intermediate' decay product (hadronization?).
+    if (remnants[0]->getPDG() == 25) continue;
+
+    if (isHiggsToSameParticlePair2(remnants)) {
+      decay_mode = fabs(remnants[0]->getPDG());
+    } else if (isHiggsToZGamma2(remnants)) {
+      decay_mode = 20;
+    } else {
+      streamlog_out(ERROR) << "An unforeseen Higgs decay occurred. "
+        << "The decay prodcuts are: ";
+      for (auto r : remnants) streamlog_out(ERROR) << r->getPDG() << ", ";
+      streamlog_out(ERROR) << "." << std::endl;
+
+    }
+  }
+  return decay_mode;
 }

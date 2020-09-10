@@ -203,6 +203,7 @@ bool tau_cones_util::HasStrictTau(tau_cones_util::EventVector &rpv,
   return false;
 }
 
+
 bool tau_cones_util::FindATau(tau_cones_util::EventVector &rpv,
     double min_p_t_seed, double search_cone_angle,
     bool print_info) {
@@ -213,9 +214,10 @@ bool tau_cones_util::FindATau(tau_cones_util::EventVector &rpv,
   std::vector<RP*>::iterator seed_rp_ptr = rpv.charged.begin();
   while (seed_rp_ptr != rpv.charged.end()) {
     tau_seed = *seed_rp_ptr;
-    double p_t = sqrt(pow(tau_seed->getMomentum()[0], 2)
-                    + pow(tau_seed->getMomentum()[1], 2));
-    if (p_t > min_p_t_seed) break; // We found our tau_seed.
+    // double p_t = sqrt(pow(tau_seed->getMomentum()[0], 2) // TODO: Maybe use pT again
+    //                 + pow(tau_seed->getMomentum()[1], 2));
+    // if (p_t > min_p_t_seed) break; // We found our tau_seed.
+    if (tau_seed->getEnergy() > min_p_t_seed) break;  // We found our tau_seed.
     ////if (p_t > min_p_t_seed && abs(tau_seed->getType()) == 211) break; // We found our tau_seed.
     ++seed_rp_ptr;
     tau_seed = nullptr; // This particle was no good seed. Try a new one.

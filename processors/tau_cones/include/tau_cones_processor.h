@@ -88,6 +88,7 @@ class TauConesProcessor : public marlin::Processor {
   int Isolation(EventVector &rpv,
     CandidateCounts &event_count, IMPL::LCCollectionVec* rest_collection);
 
+  int getHiggsTruth(EVENT::LCEvent* event);
   // -- The root file
   std::string out_root_filename_{};
   TFile* root_out_{};

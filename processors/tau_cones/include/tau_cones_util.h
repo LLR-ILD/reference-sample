@@ -126,6 +126,8 @@ bool HasStrictTau(EventVector &rpv, CandidateDefinition cd,
 bool FindATau(EventVector &rpv,
     double min_p_t_seed_, double search_cone_angle_,
     bool print_info=false);
+// TODO only temporrary to validate Taurus claims.
+bool FindATaurusQQ(EventVector &rpv);
 
 // True if at least one tau candidate was found. Fills the taus vectors in rpv
 // with RPs that are removed from the charged and neutral vectors.
