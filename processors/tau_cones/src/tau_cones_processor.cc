@@ -6,6 +6,7 @@
 #include <cassert>
 
 // -- ROOT headers.
+#include "Math/VectorUtil.h"
 
 // -- LCIO headers.
 #include "EVENT/LCCollection.h"
@@ -147,6 +148,7 @@ void TauConesProcessor::init() {
       "n_no_strict_tau:"
       "m_invariant_too_high:m_invariant_negative:wrong_track_number"
         ":not_isolated:tried_to_merge:taus_identified"
+        ":n_linked_to_mc_tau:n_linked_to_mc_tau_cepc"
         ":background_suppressed");
   n_events_total = 0;
 }
@@ -209,7 +211,6 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
   Isolation(rpv, event_count, rest_collection);
   // What was not rejected up to now will be considered part of a tau. Fill
   // the two tau related collections.
-  std::cout << "III" << rpv.taus.empty() << std::endl;
   for (TauCandidate tau_struct : rpv.taus) {
     // These are finally our tau candidates.
     RPImpl* tau = tau_struct.rp_impl;
@@ -227,8 +228,11 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
         << ", particles: " << tau->getParticles().size() << "." << std::endl;
     }
   }
-  for (auto tau : rpv.taus) {
-    if (ref_util::getPrimaryPdg(tau.seed, event) == 15) event_count.n_no_strict_tau++; // TODO temporary proxy for this being a true tau seed.
+  for (auto tau : rpv.taus) { // TODO only for Taurus
+    if (ref_util::getPrimaryPdg(tau.seed, event) == 15) {
+      event_count.n_linked_to_mc_tau++;
+    }
+    if (isCEPCTrueTau(tau, event)) event_count.n_linked_to_mc_tau_cepc++;
   }
 
   // Wrapping up. Check that all particles found their place in the collections.
@@ -263,6 +267,8 @@ void TauConesProcessor::processEvent(EVENT::LCEvent* event) {
       event_count.n_not_isolated,
       event_count.n_tried_to_merge,
       event_count.n_taus_identified,
+      event_count.n_linked_to_mc_tau
+      event_count.n_linked_to_mc_tau_cepc
       event_count.n_background_suppressed);
   total_count += event_count;
   event->addCollection(tau_collection, tau_collection_name_);
@@ -312,12 +318,20 @@ int TauConesProcessor::MassTracksRejection(EventVector &rpv,
   std::vector<TauCandidate> tc_to_remove;
   for (auto iter = rpv.taus.begin(); iter != rpv.taus.end(); iter++) {
     TauCandidate tau_c = *iter;
+
+    int n_tauc_neutral = tau_c.rp_impl->getParticles().size() - tau_c.n_charged;
+    bool taurus_valid_multiplicity = (
+      (tau_c.n_charged < 6 && n_tauc_neutral < 5 && tau_c.n_charged + n_tauc_neutral < 8)
+      && ((tau_c.n_charged == 1 && n_tauc_neutral == 0 && tau_c.rp_impl->getEnergy() > 10)
+          || (tau_c.n_charged + n_tauc_neutral > 1))
+    );
     if ((tau_c.tlv.M() > tau_cut.m_invariant)
     || (tau_c.tlv.M() < 0)
-    // || (tau_c.rp_impl->getParticles().size() > size_t(tau_cut.n_remnants)) // TODO: Use this again
-    || (tau_c.rp_impl->getParticles().size() - tau_c.n_charged > size_t(tau_cut.n_remnants))
-    || (tau_c.n_charged > tau_cut.n_charged)
-    || (tau_c.n_charged == 0)
+    || (!taurus_valid_multiplicity)
+    // // || (tau_c.rp_impl->getParticles().size() > size_t(tau_cut.n_remnants)) // TODO: Use this again
+    // || (tau_c.rp_impl->getParticles().size() - tau_c.n_charged > size_t(tau_cut.n_remnants))
+    // || (tau_c.n_charged > tau_cut.n_charged)
+    // || (tau_c.n_charged == 0)
     ) {
       // Reject these events. Add the rejection reason, move the RPs into the
       // rest collection and maybe print some information.
@@ -380,7 +394,6 @@ int TauConesProcessor::Isolation(EventVector &rpv,
           << n_isolation_particles << " particles." << std::endl;
       }
     } else {
-      std::cout << "yes" << std::endl;
       continue;  // Exactly the non-rejected particles arrive in this case.
     }
     for (RP* part: tau.parts) {
@@ -432,4 +445,25 @@ int TauConesProcessor::getHiggsTruth(
     }
   }
   return decay_mode;
+}
+
+bool TauConesProcessor::isCEPCTrueTau(TauCandidate tau, EVENT::LCEvent* event) {
+  int reco_charge = tau.rp_impl->getCharge();
+  double reco_e = tau.rp_impl->getEnergy();
+  Tlv reco_tlv = tau.tlv;
+
+  EVENT::LCCollection* mc_collection = event->getCollection("MCParticlesSkimmed");
+  for (int i = 0; i < mc_collection->getNumberOfElements(); ++i) {
+    MCP* mcp = static_cast<MCP*>(mc_collection->getElementAt(i));
+    if (reco_charge * mcp->getPDG() != -15) continue;
+
+    Tlv mc_tlv = ref_util::getTlv(mcp);
+    if (ROOT::Math::VectorUtil::Angle(mc_tlv, reco_tlv) > 0.5) continue;
+
+    double mc_e = mcp->getEnergy();
+    if (abs(mc_e - reco_e) / (mc_e + reco_e) > 0.8) continue;
+
+    return true;
+  }
+  return false;
 }

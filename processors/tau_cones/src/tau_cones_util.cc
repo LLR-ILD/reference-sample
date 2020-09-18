@@ -46,7 +46,7 @@ tau_cones_util::TauCandidate tau_cones_util::TauFromParts(
   }
   // Set the global parameters of the tau RP.
   int tau_pdg = 15;
-  if (charge < 0) tau_pdg = -15;
+  if (charge > 0) tau_pdg = -15;
   // TODO: Maybe replace the 2 lines above by int tau_pdg = charge*15. For this we would first have to investigate which charge values are actually taken by our constructed taus.
   rp_impl->setType(tau_pdg);
   rp_impl->setCharge(charge);

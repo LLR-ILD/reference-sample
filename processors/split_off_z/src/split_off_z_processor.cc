@@ -88,14 +88,12 @@ void SplitOffZProcessor::init() {
   printParameters(); // method from marlin::Processor.
   // This is also the place where a root file would be opened
   // and histograms would be defined.
-  ////TString fnn(out_root_filename_.c_str());
-  ////fnn += z_decay_channel_ + ".root";
-  ////root_out_ = new TFile(fnn, "update");
   z_mass_tuple_ = new TNtuple(
       ("z_mass_tuple_" + z_decay_channel_).c_str(),
       ("z_mass_tuple_" + z_decay_channel_).c_str(),
       "best_Z_mass:recoil_mass:second_best_Z_mass:"
-        "plus_candidates:minus_candidates");
+        "plus_candidates:minus_candidates:"
+        "Z_mass_seeds:recoil_mass_seeds");  // For Z -> ee / mumu: Without photon recombination.
   z_momenta_tuple_ = new TNtuple(
     ("z_momenta_tuple_" + z_decay_channel_).c_str(),
     ("z_momenta_tuple_" + z_decay_channel_).c_str(),
@@ -211,7 +209,7 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
         // ISOtypes should always return positive number.
         // Must get the charge from a separate call.
         if (abs(tagged_lepton_types[e]) == lepton_type) {
-          if (pfo_iso_lepton->getCharge() > 0) {
+          if (pfo_iso_lepton->getCharge() < 0) {  // Convention: e- has charge +1.
             plus_candidate_momenta.push_back(ref_util::getTlv(pfo_iso_lepton));
             // Has to be wrapped in this form for 2 reasons: We might later want
             // to recombine the lepton with a nearby photon, and the tau case
@@ -220,7 +218,7 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
             std::vector<RP*> candidate_vector;
             candidate_vector.push_back(pfo_iso_lepton);
             plus_candidate_rps.push_back (candidate_vector);
-          } else if (pfo_iso_lepton->getCharge() < 0) {
+          } else if (pfo_iso_lepton->getCharge() > 0) {
             minus_candidate_momenta.push_back(ref_util::getTlv(pfo_iso_lepton));
             std::vector<RP*> candidate_vector;
             candidate_vector.push_back(pfo_iso_lepton);
@@ -277,6 +275,8 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
     best_z_mass = identifyZ(plus_candidate_momenta, minus_candidate_momenta,
         plus_minus_indices, second_best_z_mass);
     float recoil_mass = -1;
+    float z_mass_seeds = -1;
+    float recoil_mass_seeds = -1;
     // In case that there is no lepton pair identified, the plus_minus_indices
     // variable takes the value (-1, -1). This happens if the decay mode into
     // neutrinos is specified, or if just no candidate could be found.
@@ -290,10 +290,16 @@ void SplitOffZProcessor::processEvent(EVENT::LCEvent* event) {
          p_plus.Px(),  p_plus.Py(),  p_plus.Pz(),  p_plus.E(),
         p_minus.Px(), p_minus.Py(), p_minus.Pz(), p_minus.E()
       );
+
+      Tlv plus_seed_tlv = ref_util::getTlv(chosen_plus[0]);
+      Tlv minus_seed_tlv = ref_util::getTlv(chosen_minus[0]);
+      z_mass_seeds = (plus_seed_tlv + minus_seed_tlv).M();
+      recoil_mass_seeds = recoilToZ(plus_seed_tlv, minus_seed_tlv);
     }
   // Populate the tuple.
   z_mass_tuple_->Fill(best_z_mass, recoil_mass, second_best_z_mass[0],
-      plus_candidate_momenta.size(), minus_candidate_momenta.size());
+      plus_candidate_momenta.size(), minus_candidate_momenta.size(),
+      z_mass_seeds, recoil_mass_seeds);
   } else {
     streamlog_out(ERROR) << "The specified decay mode '"
     << z_decay_channel_ << "' is not foreseen as input. Please change it to "

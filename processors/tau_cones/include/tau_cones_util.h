@@ -49,6 +49,8 @@ struct CandidateCounts {
   int n_tried_to_merge = 0;
   int n_taus_identified = 0;
   int n_background_suppressed = 0;
+  int n_linked_to_mc_tau = 0;  // For taurus comparison.
+  int n_linked_to_mc_tau_cepc= 0;  // For taurus comparison.
 
   CandidateCounts& operator+=(const CandidateCounts& rhs) {
     this->n_no_strict_tau += rhs.n_no_strict_tau;
@@ -60,6 +62,8 @@ struct CandidateCounts {
     this->n_taus_identified += rhs.n_taus_identified;
     this->n_background_suppressed
         += rhs.n_background_suppressed;
+    this->n_linked_to_mc_tau += rhs.n_linked_to_mc_tau;
+    this->n_linked_to_mc_tau_cepc += rhs.n_linked_to_mc_tau_cepc;
     return *this;
   }
 };

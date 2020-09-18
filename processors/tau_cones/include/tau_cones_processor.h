@@ -89,6 +89,7 @@ class TauConesProcessor : public marlin::Processor {
     CandidateCounts &event_count, IMPL::LCCollectionVec* rest_collection);
 
   int getHiggsTruth(EVENT::LCEvent* event);
+  bool isCEPCTrueTau(TauCandidate tau, EVENT::LCEvent* event); // TODO: For taurus comparison only.
   // -- The root file
   std::string out_root_filename_{};
   TFile* root_out_{};
